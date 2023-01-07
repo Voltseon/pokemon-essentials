@@ -7,8 +7,9 @@ class PartnerSprite < IconSprite
   def initialize(*args)
     super(args[0], args[1], args[2])
     @partner_name = ""
-    @namebmp = BitmapSprite.new(128, 42, @viewport)
+    @namebmp = BitmapSprite.new(Graphics.width, Graphics.height, args[2])
     pbSetSystemFont(@namebmp.bitmap)
+    @namebmp.z = self.z + 1
   end
 
   def namebmp; @namebmp; end
@@ -18,22 +19,20 @@ class PartnerSprite < IconSprite
   end
 
   def update
-    @namebmp.x = self.x + self.width / 2 - @namebmp.width / 2
-    @namebmp.y = self.y - 24
     @namebmp.z = self.z + 1
     @namebmp.bitmap.clear
-    @namebmp.update
-    pbDrawTextPositions(@namebmp.bitmap, [[@partner_name, @namebmp.x + @namebmp.width / 2, @namebmp.y + @namebmp.height / 2, 2, NAME_BASE, NAME_SHADOW]])
+    pbDrawTextPositions(@namebmp.bitmap, [[@partner_name, self.x + self.width / 8, self.y, 2, NAME_BASE, NAME_SHADOW]])
     super
   end
 
   def dispose
+    @namebmp.bitmap.dispose
     @namebmp.dispose
     super
   end
 
   def visible=(value)
-    super
     @namebmp.visible = value
+    super
   end
 end
