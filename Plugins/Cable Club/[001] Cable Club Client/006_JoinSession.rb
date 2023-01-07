@@ -87,7 +87,6 @@ module CableClub
           raise "Unknown state: #{state}"
         end
       end
-    connection.dispose
     end
   end
 end
