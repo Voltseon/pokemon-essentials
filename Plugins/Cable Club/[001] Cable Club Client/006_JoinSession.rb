@@ -74,7 +74,7 @@ module CableClub
               partner_name = record.str
               partner_trainer_type = record.sym
               partner_party = parse_party(record)
-              $Partner_sprite.name = partner_name
+              $Partner_sprite.partner_name = partner_name
               #pbMessageDisplay(msgwindow, _INTL("{1} {2} connected!",GameData::TrainerType.get(partner_trainer_type).name, partner_name))
               state = :session
 
