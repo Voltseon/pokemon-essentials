@@ -13,10 +13,6 @@ class PartnerSprite < Sprite_Character
     super(args[0],args[1])
   end
 
-  def character_name=(value)
-    @character_name = value
-  end
-
   def drawpos; @drawpos; end
 
   def partner_name=(value)
