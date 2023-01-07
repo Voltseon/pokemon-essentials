@@ -46,7 +46,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_status, {
         ids.push(s.id)
       end
       loop do
-update_leader
+update_leader if defined?(update_leader)
         msg = _INTL("Current status: {1}", GameData::Status.get(pkmn.status).name)
         if pkmn.status == :SLEEP
           msg = _INTL("Current status: {1} (turns: {2})",
@@ -117,7 +117,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_pokerus, {
   "effect" => proc { |pkmn, pkmnid, heldpoke, settingUpBattle, screen|
     cmd = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       pokerus = (pkmn.pokerus) ? pkmn.pokerus : 0
       msg = [_INTL("{1} doesn't have Pokérus.", pkmn.name),
              _INTL("Has strain {1}, infectious for {2} more days.", pokerus / 16, pokerus % 16),
@@ -213,7 +213,7 @@ MenuHandlers.add(:pokemon_debug_menu, :hidden_values, {
   "effect" => proc { |pkmn, pkmnid, heldpoke, settingUpBattle, screen|
     cmd = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       persid = sprintf("0x%08X", pkmn.personalID)
       cmd = screen.pbShowCommands(_INTL("Personal ID is {1}.", persid),
                                   [_INTL("Set EVs"),
@@ -224,7 +224,7 @@ update_leader
       when 0   # Set EVs
         cmd2 = 0
         loop do
-update_leader
+update_leader if defined?(update_leader)
           totalev = 0
           evcommands = []
           ev_id = []
@@ -279,7 +279,7 @@ update_leader
       when 1   # Set IVs
         cmd2 = 0
         loop do
-update_leader
+update_leader if defined?(update_leader)
           hiddenpower = pbHiddenPower(pkmn)
           totaliv = 0
           ivcommands = []
@@ -507,7 +507,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_move_pp, {
   "effect" => proc { |pkmn, pkmnid, heldpoke, settingUpBattle, screen|
     cmd = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       commands = []
       pkmn.moves.each do |i|
         break if !i.id
@@ -528,7 +528,7 @@ update_leader
         else
           cmd2 = 0
           loop do
-update_leader
+update_leader if defined?(update_leader)
             msg = _INTL("{1}: PP {2}/{3} (PP Up {4}/3)", movename, move.pp, move.total_pp, move.ppup)
             cmd2 = screen.pbShowCommands(msg,
                                          [_INTL("Set PP"),
@@ -590,7 +590,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_item, {
       _INTL("Remove item")
     ]
     loop do
-update_leader
+update_leader if defined?(update_leader)
       msg = (pkmn.hasItem?) ? _INTL("Item is {1}.", pkmn.item.name) : _INTL("No item.")
       cmd = screen.pbShowCommands(msg, commands, cmd)
       break if cmd < 0
@@ -629,7 +629,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_ability, {
       _INTL("Reset")
     ]
     loop do
-update_leader
+update_leader if defined?(update_leader)
       if pkmn.ability
         msg = _INTL("Ability is {1} (index {2}).", pkmn.ability.name, pkmn.ability_index)
       else
@@ -695,7 +695,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_nature, {
     commands.push(_INTL("[Reset]"))
     cmd = ids.index(pkmn.nature_id || ids[0])
     loop do
-update_leader
+update_leader if defined?(update_leader)
       msg = _INTL("Nature is {1}.", pkmn.nature.name)
       cmd = screen.pbShowCommands(msg, commands, cmd)
       break if cmd < 0
@@ -719,7 +719,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_gender, {
     else
       cmd = 0
       loop do
-update_leader
+update_leader if defined?(update_leader)
         msg = [_INTL("Gender is male."), _INTL("Gender is female.")][pkmn.male? ? 0 : 1]
         cmd = screen.pbShowCommands(msg,
                                     [_INTL("Make male"),
@@ -754,7 +754,7 @@ MenuHandlers.add(:pokemon_debug_menu, :species_and_form, {
   "effect" => proc { |pkmn, pkmnid, heldpoke, settingUpBattle, screen|
     cmd = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       msg = [_INTL("Species {1}, form {2}.", pkmn.speciesName, pkmn.form),
              _INTL("Species {1}, form {2} (forced).", pkmn.speciesName, pkmn.form)][(pkmn.forced_form.nil?) ? 0 : 1]
       cmd = screen.pbShowCommands(msg,
@@ -827,7 +827,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_shininess, {
   "effect" => proc { |pkmn, pkmnid, heldpoke, settingUpBattle, screen|
     cmd = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       msg_idx = pkmn.shiny? ? (pkmn.super_shiny? ? 1 : 0) : 2
       msg = [_INTL("Is shiny."), _INTL("Is super shiny."), _INTL("Is normal (not shiny).")][msg_idx]
       cmd = screen.pbShowCommands(msg, [_INTL("Make shiny"), _INTL("Make super shiny"),
@@ -871,7 +871,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_pokeball, {
     end
     balls.each { |ball| commands.push(ball[1]) }
     loop do
-update_leader
+update_leader if defined?(update_leader)
       oldball = GameData::Item.get(pkmn.poke_ball).name
       cmd = screen.pbShowCommands(_INTL("{1} used.", oldball), commands, cmd)
       break if cmd < 0
@@ -887,7 +887,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_ribbons, {
   "effect" => proc { |pkmn, pkmnid, heldpoke, settingUpBattle, screen|
     cmd = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       commands = []
       ids = []
       GameData::Ribbon.each do |ribbon_data|
@@ -923,7 +923,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_nickname, {
   "effect" => proc { |pkmn, pkmnid, heldpoke, settingUpBattle, screen|
     cmd = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       speciesname = pkmn.speciesName
       msg = [_INTL("{1} has the nickname {2}.", speciesname, pkmn.name),
              _INTL("{1} has no nickname.", speciesname)][pkmn.nicknamed? ? 0 : 1]
@@ -951,7 +951,7 @@ MenuHandlers.add(:pokemon_debug_menu, :ownership, {
   "effect" => proc { |pkmn, pkmnid, heldpoke, settingUpBattle, screen|
     cmd = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       gender = [_INTL("Male"), _INTL("Female"), _INTL("Unknown")][pkmn.owner.gender]
       msg = [_INTL("Player's Pokémon\n{1}\n{2}\n{3} ({4})",
                    pkmn.owner.name, gender, pkmn.owner.public_id, pkmn.owner.id),
@@ -998,7 +998,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_discardable, {
   "effect" => proc { |pkmn, pkmnid, heldpoke, settingUpBattle, screen|
     cmd = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       msg = _INTL("Click option to toggle.")
       cmds = []
       cmds.push((pkmn.cannot_store) ? _INTL("Cannot store") : _INTL("Can store"))
@@ -1029,7 +1029,7 @@ MenuHandlers.add(:pokemon_debug_menu, :set_egg, {
   "effect"      => proc { |pkmn, pkmnid, heldpoke, settingUpBattle, screen|
     cmd = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       msg = [_INTL("Not an egg"),
              _INTL("Egg (hatches in {1} steps).", pkmn.steps_to_hatch)][pkmn.egg? ? 1 : 0]
       cmd = screen.pbShowCommands(msg,
@@ -1072,7 +1072,7 @@ MenuHandlers.add(:pokemon_debug_menu, :shadow_pkmn, {
   "effect" => proc { |pkmn, pkmnid, heldpoke, settingUpBattle, screen|
     cmd = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       msg = [_INTL("Not a Shadow Pokémon."),
              _INTL("Heart gauge is {1} (stage {2}).", pkmn.heart_gauge, pkmn.heartStage)][pkmn.shadowPokemon? ? 1 : 0]
       cmd = screen.pbShowCommands(msg, [_INTL("Make Shadow"), _INTL("Set heart gauge")], cmd)

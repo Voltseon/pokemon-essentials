@@ -31,7 +31,7 @@ class Battle::Scene
     pbSelectBattler(idxBattler)
     ret = -1
     loop do
-update_leader
+update_leader if defined?(update_leader)
       oldIndex = cw.index
       pbUpdate(cw)
       # Update selected command
@@ -79,7 +79,7 @@ update_leader
     needFullRefresh = true
     needRefresh = false
     loop do
-update_leader
+update_leader if defined?(update_leader)
       # Refresh view if necessary
       if needFullRefresh
         pbShowWindow(FIGHT_BOX)
@@ -159,7 +159,7 @@ update_leader
     switchScreen.pbStartScene(msg, @battle.pbNumPositions(0, 0))
     # Loop while in party screen
     loop do
-update_leader
+update_leader if defined?(update_leader)
       # Select a Pokémon
       scene.pbSetHelpText(msg)
       idxParty = switchScreen.pbChoosePokemon
@@ -221,7 +221,7 @@ update_leader
     # Loop while in Bag screen
     wasTargeting = false
     loop do
-update_leader
+update_leader if defined?(update_leader)
       # Select an item
       item = itemScene.pbChooseItem
       break if !item
@@ -270,7 +270,7 @@ update_leader
         idxParty = -1
         # Loop while in party screen
         loop do
-update_leader
+update_leader if defined?(update_leader)
           # Select a Pokémon
           pkmnScene.pbSetHelpText(_INTL("Use on which Pokémon?"))
           idxParty = pkmnScreen.pbChoosePokemon
@@ -402,7 +402,7 @@ update_leader
     pbFadeInAndShow(@sprites, visibleSprites) if visibleSprites
     ret = -1
     loop do
-update_leader
+update_leader if defined?(update_leader)
       oldIndex = cw.index
       pbUpdate(cw)
       # Update selected command
@@ -413,7 +413,7 @@ update_leader
           indexLength = @battle.sideSizes[cw.index % 2] * 2
           newIndex = cw.index
           loop do
-update_leader
+update_leader if defined?(update_leader)
             newIndex += inc
             break if newIndex < 0 || newIndex >= indexLength
             next if texts[newIndex].nil?

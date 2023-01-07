@@ -62,7 +62,7 @@ class PokemonPokedexMenu_Scene
   def pbScene
     ret = -1
     loop do
-update_leader
+update_leader if defined?(update_leader)
       Graphics.update
       Input.update
       pbUpdate
@@ -112,7 +112,7 @@ class PokemonPokedexMenuScreen
     commands.push(_INTL("Exit"))
     @scene.pbStartScene(commands, commands2)
     loop do
-update_leader
+update_leader if defined?(update_leader)
       cmd = @scene.pbScene
       break if cmd < 0 || cmd >= commands2.length   # Cancel/Exit
       $PokemonGlobal.pokedexDex = $player.pokedex.accessible_dexes[cmd]

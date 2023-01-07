@@ -88,7 +88,7 @@ class Interpreter
   def update
     @loop_count = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       @loop_count += 1
       if @loop_count > 100   # Call Graphics.update for freeze prevention
         Graphics.update
@@ -230,7 +230,7 @@ update_leader
     return -1 if !@list || @list.length == 0
     i = index + 1
     loop do
-update_leader
+update_leader if defined?(update_leader)
       return i if i >= @list.length - 1
       case @list[i].code
       when 118, 108, 408   # Label, Comment
@@ -251,7 +251,7 @@ update_leader
   def pbRepeatAbove(index)
     index = @list[index].indent
     loop do
-update_leader
+update_leader if defined?(update_leader)
       index -= 1
       return index + 1 if @list[index].indent == indent
     end
@@ -261,7 +261,7 @@ update_leader
     indent = @list[index].indent
     temp_index = index
     loop do
-update_leader
+update_leader if defined?(update_leader)
       temp_index += 1
       return index + 1 if temp_index >= @list.size - 1
       return temp_index + 1 if @list[temp_index].code == 413 &&
@@ -272,7 +272,7 @@ update_leader
   def pbJumpToLabel(index, label_name)
     temp_index = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       return index + 1 if temp_index >= @list.size - 1
       return temp_index + 1 if @list[temp_index].code == 118 &&
                                @list[temp_index].parameters[0] == label_name
@@ -327,7 +327,7 @@ update_leader
       interp = Interpreter.new
       interp.setup(common_event.list, 0)
       loop do
-update_leader
+update_leader if defined?(update_leader)
         Graphics.update
         Input.update
         interp.update
@@ -419,7 +419,7 @@ update_leader
     if old_x != event.x || old_y != event.y
       $game_player.lock
       loop do
-update_leader
+update_leader if defined?(update_leader)
         Graphics.update
         Input.update
         pbUpdateSceneMap

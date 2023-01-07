@@ -152,7 +152,7 @@ class ItemStorage_Scene
     itemwindow.refresh
     pbActivateWindow(@sprites, "itemwindow") {
       loop do
-update_leader
+update_leader if defined?(update_leader)
         Graphics.update
         Input.update
         olditem = itemwindow.item
@@ -206,7 +206,7 @@ module UIHelper
     cw.visible        = true
     pbBottomLeftLines(cw, 2)
     loop do
-update_leader
+update_leader if defined?(update_leader)
       Graphics.update
       Input.update
       (block_given?) ? yield : cw.update
@@ -226,7 +226,7 @@ update_leader
     msgwindow.text = message
     pbBottomRight(msgwindow)
     loop do
-update_leader
+update_leader if defined?(update_leader)
       Graphics.update
       Input.update
       (block_given?) ? yield : msgwindow.update
@@ -255,7 +255,7 @@ update_leader
     cw.y -= dw.height
     ret = false
     loop do
-update_leader
+update_leader if defined?(update_leader)
       cw.visible = (!dw.busy?)
       Graphics.update
       Input.update
@@ -293,7 +293,7 @@ update_leader
     helpwindow.resizeHeightToFit(helpwindow.text, Graphics.width - numwindow.width)
     pbBottomLeft(helpwindow)
     loop do
-update_leader
+update_leader if defined?(update_leader)
       Graphics.update
       Input.update
       numwindow.update
@@ -357,7 +357,7 @@ update_leader
       helpwindow.resizeHeightToFit(helpwindow.text, Graphics.width - cmdwindow.width)
       pbBottomLeft(helpwindow)
       loop do
-update_leader
+update_leader if defined?(update_leader)
         Graphics.update
         Input.update
         yield

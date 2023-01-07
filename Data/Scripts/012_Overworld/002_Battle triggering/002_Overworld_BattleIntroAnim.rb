@@ -141,7 +141,7 @@ def pbBattleAnimation(bgm = nil, battletype = 0, foe = nil)
   viewport.color = Color.black
   timer = 0.0
   loop do
-update_leader
+update_leader if defined?(update_leader)
     Graphics.update
     Input.update
     pbUpdateSceneMap
@@ -162,7 +162,7 @@ def pbBattleAnimationCore(anim, viewport, location, num_flashes = 2)
     num_flashes.times do   # 2 flashes
       timer = 0.0
       loop do
-update_leader
+update_leader if defined?(update_leader)
         if timer < half_flash_time
           viewport.color.alpha = 255 * timer / half_flash_time
         else

@@ -9,7 +9,7 @@ class RuledTeam
     @team = []
     retnum = []
     loop do
-update_leader
+update_leader if defined?(update_leader)
       count.times do |i|
         retnum[i] = rand(party.length)
         @team[i] = party[retnum[i]]

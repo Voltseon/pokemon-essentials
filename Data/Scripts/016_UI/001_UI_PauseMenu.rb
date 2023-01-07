@@ -55,7 +55,7 @@ class PokemonPauseMenu_Scene
     cmdwindow.y        = 0
     cmdwindow.visible  = true
     loop do
-update_leader
+update_leader if defined?(update_leader)
       cmdwindow.update
       Graphics.update
       Input.update
@@ -116,7 +116,7 @@ class PokemonPauseMenu
     # Main loop
     end_scene = false
     loop do
-update_leader
+update_leader if defined?(update_leader)
       choice = @scene.pbShowCommands(command_list)
       if choice < 0
         pbPlayCloseMenuSE

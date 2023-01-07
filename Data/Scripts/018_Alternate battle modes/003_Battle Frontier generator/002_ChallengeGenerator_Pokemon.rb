@@ -40,7 +40,7 @@ end
 def pbRandomMove
   keys = GameData::Move.keys
   loop do
-update_leader
+update_leader if defined?(update_leader)
     move_id = keys.sample
     move = GameData::Move.get(move_id)
     next if move.id == :SKETCH || move.id == :STRUGGLE
@@ -148,15 +148,15 @@ def pbRandomPokemonFromRule(rules, trainer)
   pkmn = nil
   iteration = -1
   loop do
-update_leader
+update_leader if defined?(update_leader)
     iteration += 1
     species = nil
     level = rules.ruleset.suggestedLevel
     keys = GameData::Species.keys
     loop do
-update_leader
+update_leader if defined?(update_leader)
       loop do
-update_leader
+update_leader if defined?(update_leader)
         species = keys.sample
         break if GameData::Species.get(species).form == 0
       end
@@ -179,7 +179,7 @@ update_leader
     nature = nil
     keys = GameData::Nature.keys
     loop do
-update_leader
+update_leader if defined?(update_leader)
       nature = keys.sample
       nature_data = GameData::Nature.get(nature)
       if [:LAX, :GENTLE].include?(nature_data.id) || nature_data.stat_changes.length == 0
@@ -214,7 +214,7 @@ update_leader
     # Most used: Leftovers, Life Orb, Choice Band, Choice Scarf, Focus Sash
     item = nil
     loop do
-update_leader
+update_leader if defined?(update_leader)
       if rand(40) == 0
         item = :LEFTOVERS
         break
@@ -283,7 +283,7 @@ update_leader
       snore = GameData::Move.exists?(:SNORE) ? :SNORE : nil
       sleeptalk = GameData::Move.exists?(:SLEEPTALK) ? :SLEEPTALK : nil
       loop do
-update_leader
+update_leader if defined?(update_leader)
         newmoves.clear
         while newmoves.length < [moves.length, Pokemon::MAX_MOVES].min
           m = moves[rand(moves.length)]

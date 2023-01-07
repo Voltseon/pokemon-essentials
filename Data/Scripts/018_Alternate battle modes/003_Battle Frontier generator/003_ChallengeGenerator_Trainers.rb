@@ -25,7 +25,7 @@ def pbTrainerInfo(pokemonlist, trfile, rules)
       else
         tr_typekeys = GameData::TrainerType.keys
         loop do
-update_leader
+update_leader if defined?(update_leader)
           tr_type = tr_typekeys.sample
           tr_type_data = GameData::TrainerType.get(tr_type)
           next if tr_type_data.base_money >= 100

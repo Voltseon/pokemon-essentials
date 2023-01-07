@@ -165,7 +165,7 @@ class PokemonTilesetScene
   def pbStartScene
     open_screen
     loop do
-update_leader
+update_leader if defined?(update_leader)
       Graphics.update
       Input.update
       if Input.repeat?(Input::UP)

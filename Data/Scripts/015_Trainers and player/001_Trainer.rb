@@ -34,7 +34,7 @@ class Trainer
   # Random ID other than this Trainer's ID
   def make_foreign_ID
     loop do
-update_leader
+update_leader if defined?(update_leader)
       ret = rand(2**16) | (rand(2**16) << 16)
       return ret if ret != @id
     end

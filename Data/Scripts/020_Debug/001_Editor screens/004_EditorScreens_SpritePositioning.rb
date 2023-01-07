@@ -179,7 +179,7 @@ class SpritePositioner
     defindex = 0
     i = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       i += 1
       fn = sprintf("Graphics/Pokemon/Shadow/%d", i)
       break if !pbResolveBitmap(fn)
@@ -193,7 +193,7 @@ update_leader
     ret = false
     oldindex = cw.index
     loop do
-update_leader
+update_leader if defined?(update_leader)
       Graphics.update
       Input.update
       cw.update
@@ -249,7 +249,7 @@ update_leader
     @sprites["info"].visible = true
     ret = false
     loop do
-update_leader
+update_leader if defined?(update_leader)
       sprite.visible = (Graphics.frame_count % 16) < 12   # Flash the selected sprite
       Graphics.update
       Input.update
@@ -320,7 +320,7 @@ update_leader
     cw.viewport = @viewport
     ret = -1
     loop do
-update_leader
+update_leader if defined?(update_leader)
       Graphics.update
       Input.update
       cw.update
@@ -361,7 +361,7 @@ update_leader
     ret = false
     oldindex = -1
     loop do
-update_leader
+update_leader if defined?(update_leader)
       Graphics.update
       Input.update
       cw.update
@@ -398,15 +398,15 @@ class SpritePositionerScreen
   def pbStart
     @scene.pbOpen
     loop do
-update_leader
+update_leader if defined?(update_leader)
       species = @scene.pbChooseSpecies
       break if !species
       loop do
-update_leader
+update_leader if defined?(update_leader)
         command = @scene.pbMenu
         break if command < 0
         loop do
-update_leader
+update_leader if defined?(update_leader)
           par = @scene.pbSetParameter(command)
           break if !par
           command = (command + 1) % 3

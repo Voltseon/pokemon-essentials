@@ -260,7 +260,7 @@ def pbCommands2(cmdwindow, commands, cmdIfCancel, defaultindex = -1, noresize = 
   cmdwindow.active   = true
   command = 0
   loop do
-update_leader
+update_leader if defined?(update_leader)
     Graphics.update
     Input.update
     cmdwindow.update
@@ -298,7 +298,7 @@ def pbCommands3(cmdwindow, commands, cmdIfCancel, defaultindex = -1, noresize = 
   cmdwindow.active   = true
   command = 0
   loop do
-update_leader
+update_leader if defined?(update_leader)
     Graphics.update
     Input.update
     cmdwindow.update
@@ -344,7 +344,7 @@ def pbChooseList(commands, default = 0, cancelValue = -1, sortType = 1)
   sortMode = (sortType >= 0) ? sortType : 0   # 0=ID, 1=alphabetical
   sorting = true
   loop do
-update_leader
+update_leader if defined?(update_leader)
     if sorting
       case sortMode
       when 0
@@ -393,7 +393,7 @@ def pbCommandsSortable(cmdwindow, commands, cmdIfCancel, defaultindex = -1, sort
   cmdwindow.active   = true
   command = 0
   loop do
-update_leader
+update_leader if defined?(update_leader)
     Graphics.update
     Input.update
     cmdwindow.update

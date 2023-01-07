@@ -163,7 +163,7 @@ class PokemonReadyMenu_Scene
     cmdwindow.index    = @index[@index[2]]
     cmdwindow.visible  = false
     loop do
-update_leader
+update_leader if defined?(update_leader)
       pbUpdate
       if Input.trigger?(Input::LEFT) && @index[2] == 1 && @movecommands.length > 0
         @index[2] = 0
@@ -252,7 +252,7 @@ class PokemonReadyMenu
     commands[1].sort! { |a, b| a[1] <=> b[1] }
     @scene.pbStartScene(commands)
     loop do
-update_leader
+update_leader if defined?(update_leader)
       command = @scene.pbShowCommands
       break if command == -1
       if command[0] == 0   # Use a move

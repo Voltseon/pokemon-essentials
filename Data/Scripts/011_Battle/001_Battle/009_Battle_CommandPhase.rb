@@ -196,7 +196,7 @@ class Battle
     actioned = []
     idxBattler = -1
     loop do
-update_leader
+update_leader if defined?(update_leader)
       break if @decision != 0   # Battle ended, stop choosing actions
       idxBattler += 1
       break if idxBattler >= @battlers.length
@@ -212,7 +212,7 @@ update_leader
       actioned.push(idxBattler)
       commandsEnd = false   # Whether to cancel choosing all other actions this round
       loop do
-update_leader
+update_leader if defined?(update_leader)
         cmd = pbCommandMenu(idxBattler, actioned.length == 1)
         # If being Sky Dropped, can't do anything except use a move
         if cmd > 0 && @battlers[idxBattler].effects[PBEffects::SkyDrop] >= 0

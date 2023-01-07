@@ -350,7 +350,7 @@ class PokemonBag_Scene
     swapinitialpos = -1
     pbActivateWindow(@sprites, "itemlist") {
       loop do
-update_leader
+update_leader if defined?(update_leader)
         oldindex = itemwindow.index
         Graphics.update
         Input.update
@@ -384,7 +384,7 @@ update_leader
           if Input.trigger?(Input::LEFT)
             newpocket = itemwindow.pocket
             loop do
-update_leader
+update_leader if defined?(update_leader)
               newpocket = (newpocket == 1) ? PokemonBag.pocket_count : newpocket - 1
               break if !@choosing || newpocket == itemwindow.pocket
               if @filterlist
@@ -403,7 +403,7 @@ update_leader
           elsif Input.trigger?(Input::RIGHT)
             newpocket = itemwindow.pocket
             loop do
-update_leader
+update_leader if defined?(update_leader)
               newpocket = (newpocket == PokemonBag.pocket_count) ? 1 : newpocket + 1
               break if !@choosing || newpocket == itemwindow.pocket
               if @filterlist
@@ -463,7 +463,7 @@ class PokemonBagScreen
     @scene.pbStartScene(@bag)
     item = nil
     loop do
-update_leader
+update_leader if defined?(update_leader)
       item = @scene.pbChooseItem
       break if !item
       itm = GameData::Item.get(item)
@@ -542,7 +542,7 @@ update_leader
       elsif cmdDebug >= 0 && command == cmdDebug   # Debug
         command = 0
         loop do
-update_leader
+update_leader if defined?(update_leader)
           command = @scene.pbShowCommands(_INTL("Do what with {1}?", itemname),
                                           [_INTL("Change quantity"),
                                            _INTL("Make Mystery Gift"),
@@ -608,7 +608,7 @@ update_leader
     storage = $PokemonGlobal.pcItemStorage
     @scene.pbStartScene(storage)
     loop do
-update_leader
+update_leader if defined?(update_leader)
       item = @scene.pbChooseItem
       break if !item
       itm = GameData::Item.get(item)
@@ -643,7 +643,7 @@ update_leader
     end
     storage = $PokemonGlobal.pcItemStorage
     loop do
-update_leader
+update_leader if defined?(update_leader)
       item = @scene.pbChooseItem
       break if !item
       itm = GameData::Item.get(item)
@@ -679,7 +679,7 @@ update_leader
     storage = $PokemonGlobal.pcItemStorage
     @scene.pbStartScene(storage)
     loop do
-update_leader
+update_leader if defined?(update_leader)
       item = @scene.pbChooseItem
       break if !item
       itm = GameData::Item.get(item)

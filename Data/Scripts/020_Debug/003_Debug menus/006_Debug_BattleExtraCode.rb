@@ -367,7 +367,7 @@ class Battle::DebugSetEffects
       if @variables[effect] > -1
         pbPlayCursorSE
         loop do
-update_leader
+update_leader if defined?(update_leader)
           @variables[effect] -= 1
           break if @variables[effect] == -1 || @battle.battlers[@variables[effect]]
         end
@@ -377,7 +377,7 @@ update_leader
       if @variables[effect] < @battle.battlers.length - 1
         pbPlayCursorSE
         loop do
-update_leader
+update_leader if defined?(update_leader)
           @variables[effect] += 1
           break if @battle.battlers[@variables[effect]]
         end
@@ -421,7 +421,7 @@ update_leader
 
   def update
     loop do
-update_leader
+update_leader if defined?(update_leader)
       Graphics.update
       Input.update
       @window.update

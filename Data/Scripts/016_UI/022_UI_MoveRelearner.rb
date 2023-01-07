@@ -112,7 +112,7 @@ class MoveRelearner_Scene
     oldcmd = -1
     pbActivateWindow(@sprites, "commands") {
       loop do
-update_leader
+update_leader if defined?(update_leader)
         oldcmd = @sprites["commands"].index
         Graphics.update
         Input.update
@@ -169,7 +169,7 @@ class MoveRelearnerScreen
     moves = pbGetRelearnableMoves(pkmn)
     @scene.pbStartScene(pkmn, moves)
     loop do
-update_leader
+update_leader if defined?(update_leader)
       move = @scene.pbChooseMove
       if move
         if @scene.pbConfirm(_INTL("Teach {1}?", GameData::Move.get(move).name))

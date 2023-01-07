@@ -252,7 +252,7 @@ class StringListProperty
     commands = []
     do_refresh = true
     loop do
-update_leader
+update_leader if defined?(update_leader)
       if do_refresh
         commands = []
         real_cmds.each_with_index do |entry, i|
@@ -478,7 +478,7 @@ module TypesProperty
     ret = oldsetting.clone
     index = 0
     loop do
-update_leader
+update_leader if defined?(update_leader)
       cmds = []
       2.times { |i| cmds.push(_INTL("Type {1} : {2}", i, ret[i] || "-")) }
       index = pbMessage(_INTL("Set the type(s) for this species."), cmds, -1)
@@ -636,7 +636,7 @@ class EVsProperty
       stat_ids[s.pbs_order] = s.id
     end
     loop do
-update_leader
+update_leader if defined?(update_leader)
       pbPropertyList(settingname, data, properties, false)
       evtotal = 0
       data.each { |value| evtotal += value if value }
@@ -731,7 +731,7 @@ def chooseMapPoint(map, rgnmap = false)
   sprite.z = 2
   ret = nil
   loop do
-update_leader
+update_leader if defined?(update_leader)
     Graphics.update
     Input.update
     xy = sprite.getXY
@@ -1028,7 +1028,7 @@ class GameDataPoolProperty
     need_refresh = true
     # Edit value pool
     loop do
-update_leader
+update_leader if defined?(update_leader)
       if need_refresh
         if @auto_sort
           values.sort! { |a, b| (a[0].nil?) ? -1 : b[0].nil? ? 1 : a[1] <=> b[1] }
@@ -1160,7 +1160,7 @@ module LevelUpMovesProperty
     commands = []
     refreshlist = true
     loop do
-update_leader
+update_leader if defined?(update_leader)
       if refreshlist
         realcmds.sort! { |a, b| (a[0] == b[0]) ? a[2] <=> b[2] : a[0] <=> b[0] }
         commands = []
@@ -1350,7 +1350,7 @@ class EvolutionsProperty
     oldsel = -1
     cmd = [0, 0]
     loop do
-update_leader
+update_leader if defined?(update_leader)
       if refreshlist
         realcmds.sort! { |a, b| a[3] <=> b[3] }
         commands = []
@@ -1607,9 +1607,9 @@ def pbPropertyList(title, data, properties, saveprompt = false)
   list.commands = commands
   list.index    = 0
   loop do
-update_leader
+update_leader if defined?(update_leader)
     loop do
-update_leader
+update_leader if defined?(update_leader)
       Graphics.update
       Input.update
       list.update

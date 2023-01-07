@@ -29,7 +29,7 @@ class PokemonJukebox_Scene
   def pbScene
     ret = -1
     loop do
-update_leader
+update_leader if defined?(update_leader)
       Graphics.update
       Input.update
       pbUpdate
@@ -78,7 +78,7 @@ class PokemonJukeboxScreen
     commands[commands.length]              = _INTL("Exit")
     @scene.pbStartScene(commands)
     loop do
-update_leader
+update_leader if defined?(update_leader)
       cmd = @scene.pbScene
       if cmd < 0
         pbPlayCloseMenuSE
@@ -112,7 +112,7 @@ update_leader
         files.sort! { |a, b| a.downcase <=> b.downcase }
         @scene.pbSetCommands(files, 0)
         loop do
-update_leader
+update_leader if defined?(update_leader)
           cmd2 = @scene.pbScene
           if cmd2 < 0
             pbPlayCancelSE

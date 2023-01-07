@@ -188,7 +188,7 @@ class Battle
     tempExp1 = pkmn.exp
     battler = pbFindBattler(idxParty)
     loop do
-update_leader   # For each level gained in turn...
+update_leader if defined?(update_leader)   # For each level gained in turn...
       # EXP Bar animation
       levelMinExp = growth_rate.minimum_exp_for_level(curLevel)
       levelMaxExp = growth_rate.minimum_exp_for_level(curLevel + 1)
@@ -253,7 +253,7 @@ update_leader   # For each level gained in turn...
                           pkmnName, moveName, pkmn.numMoves.to_word))
     if pbDisplayConfirm(_INTL("Should {1} forget a move to learn {2}?", pkmnName, moveName))
       loop do
-update_leader
+update_leader if defined?(update_leader)
         forgetMove = @scene.pbForgetMove(pkmn, newMove)
         if forgetMove >= 0
           oldMoveName = pkmn.moves[forgetMove].name
