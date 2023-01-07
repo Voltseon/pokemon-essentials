@@ -74,7 +74,7 @@ def pbCableClub(joinsession=false)
   rescue Connection::Disconnected => e
     case e.message
     when "disconnected"
-      pbMessageDisplay(msgwindow, _INTL("Thank you for using the Cable Club. We hope to see you again soon."))
+      pbMessageDisplay(msgwindow, _INTL("Thank you for using the Cable Club. We hope to see you again soon.")) if !joinsession
       return true
     when "invalid version"
       pbMessageDisplay(msgwindow, _INTL("I'm sorry, your game version is out of date compared to the Cable Club."))

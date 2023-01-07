@@ -1,4 +1,5 @@
 $Connection = nil
+$Partner_sprite = nil
 
 module CableClub
   def self.session(msgwindow, partner_trainer_id)
@@ -19,7 +20,9 @@ module CableClub
       partner_chosen = nil
       partner_confirm = false
 
-      partner_event = pbMapInterpreter.get_character(13)
+      
+
+      $Partner_sprite = IconSprite.new(0,0,$scene.spritesetGlobal.viewport)
 
       loop do
         if state != last_state
@@ -81,7 +84,7 @@ module CableClub
         # Choosing an activity (leader only).
         when :session
           $Connection = connection
-          partner_event.character_name = "trainer_#{partner_trainer_type}"
+          $Partner_sprite.setBitmap(GameData::TrainerType.charset_filename(partner_trainer_type))
           break
         else
           raise "Unknown state: #{state}"
@@ -103,8 +106,11 @@ def update_leader
   end
   $Connection.update do |record|
     break if record.int != $game_map.map_id
-    pbMapInterpreter.get_character(13).moveto(record.int,record.int)
-    pbMapInterpreter.get_character(13).direction = record.int
+    x = ((record.int.to_f - $game_map.display_x) / Game_Map::X_SUBPIXELS).round + Game_Map::TILE_WIDTH / 2
+    y = ((record.int.to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT / 2
+    $Partner_sprite.x = x
+    $Partner_sprite.y = y
+    $Partner_sprite.src_rect.set(0,(record.int/2)-1,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   end
 end
 
