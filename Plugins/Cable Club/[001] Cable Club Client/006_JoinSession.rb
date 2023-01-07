@@ -123,8 +123,8 @@ def update_leader
     y = record.int
     z = (((y/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
     y = (((y/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
-    x += record.int
-    y += record.int
+    x -= record.int
+    y -= record.int
     $Partner_sprite.x = x
     $Partner_sprite.y = y
     $Partner_sprite.z = z
@@ -133,7 +133,7 @@ def update_leader
     $Partner_sprite.setBitmap("Graphics/Characters/#{record.str}")
     pattern = record.int
     src_x = record.bool ? 0 : pattern
-    $Partner_sprite.src_rect.set(src_x,((direction/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
+    $Partner_sprite.src_rect.set(src_x*$Partner_sprite.bitmap.width/4,((direction/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   end
 end
 
