@@ -61,7 +61,7 @@ class Connection
     # for the send buffer so that we can delay starting the battle.
     writer = RecordWriter.new
     yield writer
-    @socket.send(writer.line!)
+    @socket.write_nonblock(writer.line!)
   end
 
   def discard(n)
