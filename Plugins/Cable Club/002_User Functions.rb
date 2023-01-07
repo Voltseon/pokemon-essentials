@@ -54,7 +54,7 @@ def pbChangeOnlineTrainerType
 end
 
 # Returns false if an error occurred.
-def pbCableClub
+def pbCableClub(joinsession=false)
   if $player.party_count == 0
     pbMessage(_INTL("I'm sorry, you must have a Pokémon to enter the Cable Club."))
     return
@@ -69,7 +69,7 @@ def pbCableClub
       break if partner_trainer_id =~ /^[0-9]{5}$/
       pbMessageDisplay(msgwindow, _INTL("I'm sorry, {1} is not a trainer ID.", partner_trainer_id))
     end
-    CableClub::connect_to(msgwindow, partner_trainer_id)
+    joinsession ? CableClub::session(msgwindow, partner_trainer_id) : CableClub::connect_to(msgwindow, partner_trainer_id)
     raise Connection::Disconnected.new("disconnected")
   rescue Connection::Disconnected => e
     case e.message
