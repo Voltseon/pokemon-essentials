@@ -1,6 +1,7 @@
 $Connection = nil
 $Partner_sprite = nil
 $Partner_frame = 0
+$Connection_frame = 0
 
 module CableClub
   def self.session(msgwindow, partner_trainer_id)
@@ -101,7 +102,9 @@ end
 
 def update_leader
   return if $Connection.nil?
-  $scene.update if $scene.respond_to?(:update)
+  echoln $Connection_frame
+  $Connection_frame = $Connection_frame + 1 % 200
+  return unless $Connection_frame == 1
   if $Connection.can_send?
     $Connection.send do |writer|
       writer.int($game_map.map_id)
