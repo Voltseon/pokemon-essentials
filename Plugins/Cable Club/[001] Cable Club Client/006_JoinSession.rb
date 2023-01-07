@@ -113,7 +113,7 @@ def update_leader
       writer.int($game_player.pattern)
       writer.bool($game_player.moving?)
 
-      [76..100].each do |i|
+      (76..100).each do |i|
         if $LastVar[i].is_a?(Array)
           writer.bool($LastVar[i][0])
           writer.int($LastVar[i][1])
@@ -149,7 +149,7 @@ def update_leader
     src_x = record.bool ? pattern : 0
     $Partner_sprite.src_rect.set(src_x*$Partner_sprite.bitmap.width/4,((direction/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   
-    [76..100].each do |i|
+    (76..100).each do |i|
       last_switch = record.bool
       last_var = record.int
       switch = record.bool
