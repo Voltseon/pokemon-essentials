@@ -46,6 +46,7 @@ loop do
   case retval
   when 0   # failed
     loop do
+      update_leader if method_defined?(:update_leader)
       Graphics.update
     end
   when 1   # ended successfully

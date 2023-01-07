@@ -85,6 +85,7 @@ module CableClub
         # Choosing an activity (leader only).
         when :session
           $Connection = connection
+          $Partner_sprite.visible = false
           $Partner_sprite.setBitmap(GameData::TrainerType.charset_filename(partner_trainer_type))
           $Partner_sprite.ox = $Partner_sprite.bitmap.width/4
           $Partner_sprite.ox = $Partner_sprite.bitmap.height/4
@@ -108,7 +109,11 @@ def update_leader
     end
   end
   $Connection.update do |record|
-    break if record.int != $game_map.map_id
+    if record.int != $game_map.map_id
+      $Partner_sprite.visible = false
+      break
+    end
+    $Partner_sprite.visible = true
     x = (((record.int/10).to_f - $game_map.display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
     y = record.int
     z = (((y/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
@@ -116,20 +121,7 @@ def update_leader
     $Partner_sprite.x = x
     $Partner_sprite.y = y
     $Partner_sprite.z = z
-    $Partner_sprite.src_rect.set($Partner_frame*$Partner_sprite.bitmap.width/4,((record.int/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
+    $Partner_sprite.src_rect.set($Partner_frame/10*$Partner_sprite.bitmap.width/4,((record.int/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   end
-  $Partner_frame = ($Partner_frame + 1) % 4
-end
-
-module Graphics
-  unless defined?(g_update)
-    class << Graphics
-      alias g_update update
-    end
-  end
-
-  def self.update
-    g_update
-    update_leader
-  end
+  $Partner_frame = ($Partner_frame + 1) % 40
 end
