@@ -175,6 +175,7 @@ module BattleCreationHelperMethods
     return false
   end
 
+  # CABLECLUB
   # Generate information for the player and partner trainer(s)
   def set_up_player_trainers(foe_party)
     trainer_array = [$player]
