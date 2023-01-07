@@ -23,7 +23,7 @@ module CableClub
 
       
 
-      $Partner_sprite = PartnerSprite.new(Spriteset_Map.viewport,pbMapInterpreter.get_character(0))
+      $Partner_sprite = PartnerSprite.new(0,0,Spriteset_Map.viewport)
 
       loop do
         if state != last_state
@@ -87,7 +87,9 @@ module CableClub
         when :session
           $Connection = connection
           $Partner_sprite.visible = false
-          $Partner_sprite.character_name = partner_trainer_type
+          $Partner_sprite.setBitmap(GameData::TrainerType.charset_filename(partner_trainer_type))
+          $Partner_sprite.ox = $Partner_sprite.bitmap.width/4
+          $Partner_sprite.ox = $Partner_sprite.bitmap.height/4
           break
         else
           raise "Unknown state: #{state}"
@@ -145,9 +147,10 @@ def update_leader
     $Partner_sprite.z = z
     direction = record.int
 
-    $Partner_sprite.character_name = record.str
+    $Partner_sprite.setBitmap("Graphics/Characters/#{record.str}")
     pattern = record.int
-    $Partner_sprite.pattern = record.bool ? pattern : 0
+    src_x = record.bool ? pattern : 0
+    $Partner_sprite.src_rect.set(src_x*$Partner_sprite.bitmap.width/4,((direction/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   
     (76..100).each do |i|
       last_switch = record.bool
