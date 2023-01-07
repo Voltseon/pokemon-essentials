@@ -23,7 +23,7 @@ module CableClub
 
       
 
-      $Partner_sprite = IconSprite.new(0,0,Spriteset_Map.viewport)
+      $Partner_sprite = PartnerSprite.new(0,0,Spriteset_Map.viewport)
 
       loop do
         if state != last_state
