@@ -28,7 +28,7 @@ class Connection
       raise Disconnected.new("server disconnected") if recvd.empty?
       @recv_parser.parse(recvd) {|record| @recv_records << record}
     end
-    if @recv_records.length > 500
+    if @recv_records.length > 20
       @socket.flush
       return
     end
