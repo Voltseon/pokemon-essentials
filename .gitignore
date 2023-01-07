@@ -1,10 +1,11 @@
-# Audio, Graphics and Plugins folders
-Audio/
-Graphics/
-Plugins/
-
 # Data folder, but not Data/Scripts folder
-Data/*
+Data/Actors.rxdata
+Data/Armors.rxdata
+Data/Enemies.rxdata
+Data/Items.rxdata
+Data/Skills.rxdata
+Data/States.rxdata
+Data/Weapons.rxdata
 !Data/Scripts.rxdata
 !Data/Scripts/
 
