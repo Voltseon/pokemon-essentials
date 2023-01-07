@@ -132,7 +132,7 @@ def update_leader
 
     $Partner_sprite.setBitmap("Graphics/Characters/#{record.str}")
     pattern = record.int
-    src_x = record.bool ? 0 : pattern
+    src_x = record.bool ? pattern : 0
     $Partner_sprite.src_rect.set(src_x*$Partner_sprite.bitmap.width/4,((direction/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   end
 end
