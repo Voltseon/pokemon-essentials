@@ -79,7 +79,7 @@ module CableClub
         # Choosing an activity (leader only).
         when :session
           if connection.can_send?
-            connection.send do |write|
+            connection.send do |writer|
               writer.int($game_map.map_id)
               writer.int($game_player.x)
               writer.int($game_player.y)
@@ -90,6 +90,7 @@ module CableClub
               connection.dispose if record.int != $game_map.map_id
               partner_event.moveto(record.int,record.int)
               partner_event.direction = record.int
+              partner_event.character_name = GameData::TrainerType.charset_filename(partner_trainer_type)
             end
           end
         else
