@@ -110,8 +110,9 @@ def update_leader
   $Connection.update do |record|
     break if record.int != $game_map.map_id
     x = (((record.int/10).to_f - $game_map.display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
-    y = (((record.int/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
-    z = (((record.int/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
+    y = record.int
+    z = (((y/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
+    y = (((y/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
     $Partner_sprite.x = x
     $Partner_sprite.y = y
     $Partner_sprite.z = z
