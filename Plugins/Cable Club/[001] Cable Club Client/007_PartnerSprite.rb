@@ -8,12 +8,10 @@ class PartnerSprite < IconSprite
     super(args[0], args[1], args[2])
     @partner_name = ""
     @namebmp = BitmapSprite.new(Graphics.width, Graphics.height, args[2])
-    pbSetSystemFont(@namebmp.bitmap)
-    @namebmp.z = self.z + 1
-    @drawpos = [nil,0,0]
+    @namebmp.opacity = 128
+    pbSetNarrowFont(@namebmp.bitmap)
   end
 
-  def namebmp; @namebmp; end
   def drawpos; @drawpos; end
 
   def partner_name=(value)
@@ -23,8 +21,7 @@ class PartnerSprite < IconSprite
   def update
     @namebmp.z = self.z + 1
     @namebmp.bitmap.clear
-    @drawpos = [@partner_name, self.x + self.width / 8,self.y]
-    pbDrawTextPositions(@namebmp.bitmap, [[@drawpos[0], @drawpos[1], @drawpos[2], 2, NAME_BASE, NAME_SHADOW]])
+    pbDrawTextPositions(@namebmp.bitmap, [[@partner_name, self.x ,self.y-24, 2, NAME_BASE, NAME_SHADOW]])
     super
   end
 
