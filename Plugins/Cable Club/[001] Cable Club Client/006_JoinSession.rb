@@ -114,9 +114,9 @@ def update_leader
     $Partner_sprite.x = x
     $Partner_sprite.y = y
     $Partner_sprite.z = y
-    $Partner_sprite.src_rect.set($Partner_frame/100*$Partner_sprite.bitmap.width/4,((record.int/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
+    $Partner_sprite.src_rect.set($Partner_frame*$Partner_sprite.bitmap.width/4,((record.int/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   end
-  $Partner_frame = ($Partner_frame + 1) % 400
+  $Partner_frame = ($Partner_frame + 1) % 4
 end
 
 module Graphics
