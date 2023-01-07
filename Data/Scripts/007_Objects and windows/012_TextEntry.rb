@@ -246,6 +246,10 @@ class Window_TextEntry_Keyboard < Window_TextEntry
     elsif Input.triggerex?(:BACKSPACE) || Input.repeatex?(:BACKSPACE)
       self.delete if @helper.cursor > 0
       return
+    elsif Input.triggerex?(:UP) && $InCommandLine && !$game_temp.lastcommand.empty?
+      self.text = $game_temp.lastcommand
+      @helper.cursor = self.text.scan(/./m).length
+      return
     elsif Input.triggerex?(:RETURN) || Input.triggerex?(:ESCAPE)
       return
     end
