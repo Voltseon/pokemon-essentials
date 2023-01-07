@@ -1,13 +1,13 @@
 class PartnerSprite < IconSprite
-  attr_accessor :name
+  attr_accessor :partner_name
   def initialize(*args)
     super(args[0], args[1], args[2])
-    @name = ""
+    @partner_name = ""
     @namebmp = BitmapSprite.new(128, 42, @viewport)
   end
 
-  def name=(value)
-    @name = value
+  def partner_name=(value)
+    @partner_name = value
   end
 
   def update
@@ -15,7 +15,8 @@ class PartnerSprite < IconSprite
     @namebmp.x = self.x + self.width / 2 - @namebmp.width / 2
     @namebmp.y = self.y - 24
     @namebmp.bitmap.clear
-    pbDrawTextPositions(@namebmp.bitmap, [@name, @namebmp.x + @namebmp.width / 2, @namebmp.y, 2, Color.new(248,248,248,128), Color.new(64,64,64,128)])
+    @namebmp.update
+    pbDrawTextPositions(@namebmp.bitmap, [@partner_name, @namebmp.x + @namebmp.width / 2, @namebmp.y + @namebmp.height / 2, 2, Color.new(248,248,248,128), Color.new(64,64,64,128)])
   end
 
   def dispose
