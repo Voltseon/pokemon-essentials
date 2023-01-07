@@ -1,3 +1,5 @@
+$Connection = nil
+
 module CableClub
   def self.session(msgwindow, partner_trainer_id)
     pbMessageDisplayDots(msgwindow, _INTL("Connecting"), 0)
@@ -78,20 +80,9 @@ module CableClub
 
         # Choosing an activity (leader only).
         when :session
-          if connection.can_send?
-            connection.send do |writer|
-              writer.int($game_map.map_id)
-              writer.int($game_player.x)
-              writer.int($game_player.y)
-              writer.int($game_player.direction)
-            end
-          end
-          connection.update do |record|
-            break if record.int != $game_map.map_id
-            partner_event.moveto(record.int,record.int)
-            partner_event.direction = record.int
-            partner_event.character_name = "trainer_#{partner_trainer_type}"
-          end
+          $Connection = connection
+          partner_event.character_name = "trainer_#{partner_trainer_type}"
+          break
         else
           raise "Unknown state: #{state}"
         end
@@ -100,3 +91,21 @@ module CableClub
     end
   end
 end
+
+EventHandlers.add(:on_frame_update, :session,
+  proc {
+    if $Connection.can_send?
+      $Connection.send do |writer|
+        writer.int($game_map.map_id)
+        writer.int($game_player.x)
+        writer.int($game_player.y)
+        writer.int($game_player.direction)
+      end
+    end
+    $Connection.update do |record|
+      break if record.int != $game_map.map_id
+      get_character(13).moveto(record.int,record.int)
+      get_character(13).direction = record.int
+    end
+  }
+)
