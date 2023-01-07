@@ -30,7 +30,7 @@ $InCommandLine = false
 SPEEDUP_STAGES = [1,3]
 $GameSpeed = 0
 $frame = 0
-$CanToggle = false
+$CanToggle = true
 
 module Graphics
   class << Graphics
