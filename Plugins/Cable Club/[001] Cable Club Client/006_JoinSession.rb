@@ -91,21 +91,32 @@ module CableClub
   end
 end
 
-EventHandlers.add(:on_frame_update, :session,
-  proc {
-    next if $Connection.nil?
-    if $Connection.can_send?
-      $Connection.send do |writer|
-        writer.int($game_map.map_id)
-        writer.int($game_player.x)
-        writer.int($game_player.y)
-        writer.int($game_player.direction)
-      end
+def update_leader
+  return if $Connection.nil?
+  if $Connection.can_send?
+    $Connection.send do |writer|
+      writer.int($game_map.map_id)
+      writer.int($game_player.x)
+      writer.int($game_player.y)
+      writer.int($game_player.direction)
     end
-    $Connection.update do |record|
-      break if record.int != $game_map.map_id
-      pbMapInterpreter.get_character(13).moveto(record.int,record.int)
-      pbMapInterpreter.get_character(13).direction = record.int
+  end
+  $Connection.update do |record|
+    break if record.int != $game_map.map_id
+    pbMapInterpreter.get_character(13).moveto(record.int,record.int)
+    pbMapInterpreter.get_character(13).direction = record.int
+  end
+end
+
+module Graphics
+  unless defined?(g_update)
+    class << Graphics
+      alias g_update update
     end
-  }
-)
+  end
+
+  def self.update
+    g_update
+    update_leader
+  end
+end
