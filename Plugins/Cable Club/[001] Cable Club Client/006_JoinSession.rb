@@ -109,8 +109,8 @@ def update_leader
       writer.int($game_player.direction)
 
       writer.str($game_player.character_name)
-      writer.bool($game_player.moving?)
       writer.int($game_player.pattern)
+      writer.bool($game_player.moving?)
     end
   end
   $Connection.update do |record|
@@ -131,7 +131,8 @@ def update_leader
     direction = record.int
 
     $Partner_sprite.setBitmap("Graphics/Characters/#{record.str}")
-    src_x = record.bool ? 0 : record.int
+    pattern = record.int
+    src_x = record.bool ? 0 : pattern
     $Partner_sprite.src_rect.set(src_x,((direction/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   end
 end
