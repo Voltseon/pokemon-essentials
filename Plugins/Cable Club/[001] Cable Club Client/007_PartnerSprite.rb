@@ -18,13 +18,13 @@ class PartnerSprite < IconSprite
   end
 
   def update
-    super
-    @namebmp.x = @x + @width / 2 - @namebmp.width / 2
-    @namebmp.y = @y - 24
-    @namebmp.z = @z + 1
+    @namebmp.x = self.x + self.width / 2 - @namebmp.width / 2
+    @namebmp.y = self.y - 24
+    @namebmp.z = self.z + 1
     @namebmp.bitmap.clear
     @namebmp.update
     pbDrawTextPositions(@namebmp.bitmap, [[@partner_name, @namebmp.x + @namebmp.width / 2, @namebmp.y + @namebmp.height / 2, 2, NAME_BASE, NAME_SHADOW]])
+    super
   end
 
   def dispose
