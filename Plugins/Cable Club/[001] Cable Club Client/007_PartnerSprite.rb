@@ -1,4 +1,4 @@
-class PartnerSprite < IconSprite
+class PartnerSprite < Sprite_Character
   attr_accessor :partner_name
 
   NAME_BASE = Color.new(248,248,248)
@@ -6,9 +6,8 @@ class PartnerSprite < IconSprite
   Y_OFFSET = 12
 
   def initialize(*args)
-    super(args[0], args[1], args[2])
     @partner_name = ""
-    @namebmp = BitmapSprite.new(Graphics.width, Graphics.height, args[2])
+    @namebmp = BitmapSprite.new(Graphics.width, Graphics.height, args[0])
     @namebmp.opacity = 184
     pbSetNarrowFont(@namebmp.bitmap)
     super(args[0],args[1])
