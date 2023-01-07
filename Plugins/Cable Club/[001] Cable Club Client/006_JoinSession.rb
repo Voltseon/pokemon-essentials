@@ -130,8 +130,8 @@ def update_leader
 
   $Connection.update do |record|
     if record.int != $game_map.map_id
-      #$Partner_sprite.visible = false
-      #break
+      $Partner_sprite.visible = false
+      break
     end
     $Partner_sprite.visible = true
     x = (((record.int/10).to_f - $game_map.display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
