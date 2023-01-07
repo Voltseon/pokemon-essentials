@@ -86,7 +86,7 @@ module CableClub
           $Connection = connection
           $Partner_sprite.setBitmap(GameData::TrainerType.charset_filename(partner_trainer_type))
           $Partner_sprite.ox = $Partner_sprite.bitmap.width/8
-          $Partner_sprite.ox = $Partner_sprite.bitmap.height/8
+          $Partner_sprite.oy = $Partner_sprite.bitmap.height/8
           break
         else
           raise "Unknown state: #{state}"
@@ -101,17 +101,17 @@ def update_leader
   if $Connection.can_send?
     $Connection.send do |writer|
       writer.int($game_map.map_id)
-      writer.int(($game_player.real_x*10).to_i)
-      writer.int(($game_player.real_y*10).to_i)
+      writer.int(($game_player.screen_x*10).to_i)
+      writer.int(($game_player.screen_y*10).to_i)
+      writer.int($game_player.screen_z.to_i)
       writer.int($game_player.direction)
     end
   end
   $Connection.update do |record|
     break if record.int != $game_map.map_id
-    x = (((record.int/10).to_f - $game_map.display_x) / Game_Map::X_SUBPIXELS).round + Game_Map::TILE_WIDTH / 2
-    y = (((record.int/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT / 2
-    $Partner_sprite.x = x
-    $Partner_sprite.y = y
+    $Partner_sprite.x = (record.int).to_f/10
+    $Partner_sprite.y = (record.int).to_f/10
+    $Partner_sprite.z = record.int
     $Partner_sprite.src_rect.set(0,((record.int/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   end
 end
