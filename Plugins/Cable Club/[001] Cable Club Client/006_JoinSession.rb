@@ -99,9 +99,7 @@ module CableClub
 end
 
 def update_leader
-  echoln :D
   return if $Connection.nil?
-  echoln :C
   if $Connection.can_send?
     $Connection.send do |writer|
       writer.int($game_map.map_id)

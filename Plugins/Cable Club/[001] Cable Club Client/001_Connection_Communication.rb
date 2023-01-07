@@ -8,7 +8,8 @@ class Connection
   def self.open(host, port)
     # XXX: Non-blocking connect.
     begin
-      socket = TCPSocket.open(host, port)
+      socket = UDPSocket.new
+      socket.connect(host, port)
       connection = Connection.new(socket)
       yield connection
     end
@@ -60,7 +61,7 @@ class Connection
     # for the send buffer so that we can delay starting the battle.
     writer = RecordWriter.new
     yield writer
-    @socket.write_nonblock(writer.line!)
+    @socket.send(writer.line!)
   end
 
   def discard(n)
