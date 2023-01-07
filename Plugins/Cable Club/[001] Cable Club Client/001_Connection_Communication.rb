@@ -8,8 +8,7 @@ class Connection
   def self.open(host, port)
     # XXX: Non-blocking connect.
     begin
-      socket = UDPSocket.new
-      socket.connect(host, port)
+      socket = TCPSocket.open(host, port)
       connection = Connection.new(socket)
       yield connection
     end
@@ -27,7 +26,7 @@ class Connection
     if @socket.nread>0
       recvd = @socket.recv(4096)
       raise Disconnected.new("server disconnected") if recvd.empty?
-      @recv_parser.parse(recvd) {|record| @recv_records << record}
+      @recv_parser.parse(recvd) {|record| @recv_records << record; @socket.flush}
     end
     # Process at most one record so that any control flow in the block doesn't cause us to lose records.
     if !@recv_records.empty?
