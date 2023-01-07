@@ -646,7 +646,7 @@ class PokemonStorageScene
     msgwindow.text = message
     pbBottomRight(msgwindow)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       if Input.trigger?(Input::BACK) || Input.trigger?(Input::USE)
@@ -677,7 +677,7 @@ update_leader if defined?(update_leader)
     cmdwindow.y -= msgwindow.height
     cmdwindow.index = index
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       msgwindow.update
@@ -824,7 +824,7 @@ update_leader if defined?(update_leader)
     pbUpdateOverlay(selection)
     pbSetMosaic(selection)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       key = -1
@@ -898,7 +898,7 @@ update_leader if defined?(update_leader)
     return pbSelectBoxInternal(party) if @command == 1   # Withdraw
     ret = nil
     loop do
-update_leader if defined?(update_leader)
+update_leader
       if !@choseFromParty
         ret = pbSelectBoxInternal(party)
       end
@@ -930,7 +930,7 @@ update_leader if defined?(update_leader)
     pbSetMosaic(selection)
     lastsel = 1
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       key = -1
@@ -1014,7 +1014,7 @@ update_leader if defined?(update_leader)
     Graphics.frame_reset
     distancePerFrame = 64 * 20 / Graphics.frame_rate
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       @sprites["box"].x -= distancePerFrame
@@ -1035,7 +1035,7 @@ update_leader if defined?(update_leader)
     Graphics.frame_reset
     distancePerFrame = 64 * 20 / Graphics.frame_rate
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       @sprites["box"].x += distancePerFrame
@@ -1077,7 +1077,7 @@ update_leader if defined?(update_leader)
     pbSEPlay("GUI storage show party panel")
     distancePerFrame = 48 * 20 / Graphics.frame_rate
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       @sprites["boxparty"].y -= distancePerFrame
@@ -1091,7 +1091,7 @@ update_leader if defined?(update_leader)
     pbSEPlay("GUI storage hide party panel")
     distancePerFrame = 48 * 20 / Graphics.frame_rate
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       @sprites["boxparty"].y += distancePerFrame
@@ -1327,7 +1327,7 @@ update_leader if defined?(update_leader)
     redraw = true
     markrect = Rect.new(0, 0, MARK_WIDTH, MARK_HEIGHT)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       # Redraw the markings and text
       if redraw
         @sprites["markingoverlay"].bitmap.clear
@@ -1496,7 +1496,7 @@ class PokemonStorageScreen
     when 0   # Organise
       @scene.pbStartBox(self, command)
       loop do
-update_leader if defined?(update_leader)
+update_leader
         selected = @scene.pbSelectBox(@storage.party)
         if selected.nil?
           if pbHeldPokemon
@@ -1577,7 +1577,7 @@ update_leader if defined?(update_leader)
     when 1   # Withdraw
       @scene.pbStartBox(self, command)
       loop do
-update_leader if defined?(update_leader)
+update_leader
         selected = @scene.pbSelectBox(@storage.party)
         if selected.nil?
           next if pbConfirm(_INTL("Continue Box operations?"))
@@ -1617,7 +1617,7 @@ update_leader if defined?(update_leader)
     when 2   # Deposit
       @scene.pbStartBox(self, command)
       loop do
-update_leader if defined?(update_leader)
+update_leader
         selected = @scene.pbSelectParty(@storage.party)
         if selected == -3   # Close box
           if pbConfirm(_INTL("Exit from the Box?"))
@@ -1734,7 +1734,7 @@ update_leader if defined?(update_leader)
       pbDisplay(_INTL("{1} refuses to go into storage!", @storage[box, index].name))
     else
       loop do
-update_leader if defined?(update_leader)
+update_leader
         destbox = @scene.pbChooseBox(_INTL("Deposit in which Box?"))
         if destbox >= 0
           firstfree = @storage.pbFirstFreePos(destbox)
@@ -1970,7 +1970,7 @@ update_leader if defined?(update_leader)
     @scene.pbStartBox(self, 1)
     retval = nil
     loop do
-update_leader if defined?(update_leader)
+update_leader
       selected = @scene.pbSelectBox(@storage.party)
       if selected && selected[0] == -3   # Close box
         if pbConfirm(_INTL("Exit from the Box?"))

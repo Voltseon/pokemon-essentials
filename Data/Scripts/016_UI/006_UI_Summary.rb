@@ -214,7 +214,7 @@ class PokemonSummary_Scene
     @sprites["messagebox"].visible = true
     pbPlayDecisionSE
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -240,7 +240,7 @@ update_leader if defined?(update_leader)
       pbBottomRight(cmdwindow)
       cmdwindow.y -= @sprites["messagebox"].height
       loop do
-update_leader if defined?(update_leader)
+update_leader
         Graphics.update
         Input.update
         cmdwindow.visible = true if !@sprites["messagebox"].busy?
@@ -268,7 +268,7 @@ update_leader if defined?(update_leader)
       cmdwindow.index = index
       pbBottomRight(cmdwindow)
       loop do
-update_leader if defined?(update_leader)
+update_leader
         Graphics.update
         Input.update
         cmdwindow.update
@@ -923,7 +923,7 @@ update_leader if defined?(update_leader)
     switching = false
     drawSelectedMove(nil, @pokemon.moves[selmove])
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -991,7 +991,7 @@ update_leader if defined?(update_leader)
     numRows    = [((numRibbons + 3) / 4).floor, 3].max
     drawSelectedRibbon(@pokemon.ribbons[selribbon])
     loop do
-update_leader if defined?(update_leader)
+update_leader
       @sprites["uparrow"].visible   = (@ribbonOffset > 0)
       @sprites["downarrow"].visible = (@ribbonOffset < numRows - 3)
       Graphics.update
@@ -1079,7 +1079,7 @@ update_leader if defined?(update_leader)
     redraw = true
     markrect = Rect.new(0, 0, MARK_WIDTH, MARK_HEIGHT)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       # Redraw the markings and text
       if redraw
         @sprites["markingoverlay"].bitmap.clear
@@ -1228,7 +1228,7 @@ update_leader if defined?(update_leader)
     selmove = 0
     maxmove = (new_move) ? Pokemon::MAX_MOVES : Pokemon::MAX_MOVES - 1
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -1265,7 +1265,7 @@ update_leader if defined?(update_leader)
   def pbScene
     @pokemon.play_cry
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -1354,7 +1354,7 @@ class PokemonSummaryScreen
     ret = -1
     @scene.pbStartForgetScene(party, partyindex, move_to_learn)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       ret = @scene.pbChooseMoveToForget(move_to_learn)
       break if ret < 0 || !move_to_learn
       break if $DEBUG || !party[partyindex].moves[ret].hidden_move?
@@ -1369,7 +1369,7 @@ update_leader if defined?(update_leader)
     @scene.pbStartForgetScene(party, partyindex, nil)
     pbMessage(message) { @scene.pbUpdate }
     loop do
-update_leader if defined?(update_leader)
+update_leader
       ret = @scene.pbChooseMoveToForget(nil)
       break if ret >= 0
       pbMessage(_INTL("You must choose a move!")) { @scene.pbUpdate }

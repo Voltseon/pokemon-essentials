@@ -33,7 +33,7 @@ module CableClub
       partner_confirm = false
 
       loop do
-update_leader if defined?(update_leader)
+update_leader
         if state != last_state
           last_state = state
           frame = 0
@@ -333,7 +333,7 @@ update_leader if defined?(update_leader)
                 partner_speciesname = (partner_pkmn.egg?) ? _INTL("Egg") : partner_pkmn.speciesName
                 your_speciesname = (your_pkmn.egg?) ? _INTL("Egg") : your_pkmn.speciesName
                 loop do
-update_leader if defined?(update_leader)
+update_leader
                   pbMessageDisplay(msgwindow, _INTL("{1} has offered {2} ({3}) for your {4} ({5}).\\^",partner_name,
                       partner_pkmn.name,partner_speciesname,your_pkmn.name,your_speciesname))
                   command = pbShowCommands(msgwindow, [_INTL("Check {1}'s offer",partner_name), _INTL("Check My Offer"), _INTL("Accept/Deny Trade")], -1)

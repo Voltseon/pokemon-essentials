@@ -98,7 +98,7 @@ def pbHiddenMoveAnimation(pokemon)
   frames = 0
   strobeSpeed = 64 * 20 / Graphics.frame_rate
   loop do
-update_leader if defined?(update_leader)
+update_leader
     Graphics.update
     Input.update
     sprite.update
@@ -865,7 +865,7 @@ def pbSweetScent
   viewport.color.alpha -= 10
   alphaDiff = 12 * 20 / Graphics.frame_rate
   loop do
-update_leader if defined?(update_leader)
+update_leader
     if count == 0 && viewport.color.alpha < 128
       viewport.color.alpha += alphaDiff
     elsif count > Graphics.frame_rate / 4
@@ -968,7 +968,7 @@ def pbAscendWaterfall
   $game_player.through    = true
   $game_player.move_speed = 2
   loop do
-update_leader if defined?(update_leader)
+update_leader
     $game_player.move_up
     terrain = $game_player.pbTerrainTag
     break if !terrain.waterfall && !terrain.waterfall_crest
@@ -987,7 +987,7 @@ def pbDescendWaterfall
   $game_player.through    = true
   $game_player.move_speed = 2
   loop do
-update_leader if defined?(update_leader)
+update_leader
     $game_player.move_down
     terrain = $game_player.pbTerrainTag
     break if !terrain.waterfall && !terrain.waterfall_crest

@@ -24,7 +24,7 @@ def pbChangeOnlineTrainerType
   end
   commands.push(_INTL("Cancel"))
   loop do
-update_leader if defined?(update_leader)
+update_leader
     cmd=pbMessage(_INTL("Which kind of Trainer would you like to be?"),commands,-1)
     if cmd>=0 && cmd<commands.length-1
       trainername=commands[cmd]
@@ -65,7 +65,7 @@ def pbCableClub(joinsession=false)
     pbMessageDisplay(msgwindow, _ISPRINTF("What's the ID of the trainer you're searching for? (Your ID: {1:05d})\\^",$player.public_ID($player.id)))
     partner_trainer_id = ""
     loop do
-update_leader if defined?(update_leader)
+update_leader
       partner_trainer_id = pbFreeText(msgwindow, partner_trainer_id, false, 5)
       return if partner_trainer_id.empty?
       break if partner_trainer_id =~ /^[0-9]{5}$/

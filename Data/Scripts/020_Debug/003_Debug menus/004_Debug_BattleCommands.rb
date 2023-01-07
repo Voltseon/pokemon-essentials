@@ -26,7 +26,7 @@ MenuHandlers.add(:battle_debug_menu, :list_player_battlers, {
     end
     cmd = 0
     loop do
-update_leader if defined?(update_leader)
+update_leader
       cmd = pbMessage("\\ts[]" + _INTL("Choose a Pokémon."), cmds, -1, nil, cmd)
       break if cmd < 0
       battle.pbBattlePokemonDebug(battlers[cmd].pokemon, battlers[cmd])
@@ -47,7 +47,7 @@ MenuHandlers.add(:battle_debug_menu, :list_foe_battlers, {
     end
     cmd = 0
     loop do
-update_leader if defined?(update_leader)
+update_leader
       cmd = pbMessage("\\ts[]" + _INTL("Choose a Pokémon."), cmds, -1, nil, cmd)
       break if cmd < 0
       battle.pbBattlePokemonDebug(battlers[cmd].pokemon, battlers[cmd])
@@ -84,7 +84,7 @@ MenuHandlers.add(:battle_debug_menu, :pokemon_teams, {
     foe_party_starts = battle.pbPartyStarts(1)
     cmd = 0
     loop do
-update_leader if defined?(update_leader)
+update_leader
       # Find all teams and how many Pokémon they have
       commands = []
       team_indices = []
@@ -117,7 +117,7 @@ update_leader if defined?(update_leader)
       # Pick a Pokémon to look at
       pkmn_cmd = 0
       loop do
-update_leader if defined?(update_leader)
+update_leader
         pkmn = []
         pkmn_cmds = []
         battle.eachInTeam(team_indices[cmd][0], team_indices[cmd][1]) do |p|
@@ -149,7 +149,7 @@ MenuHandlers.add(:battle_debug_menu, :trainer_items, {
   "effect"      => proc { |battle|
     cmd = 0
     loop do
-update_leader if defined?(update_leader)
+update_leader
       # Find all NPC trainers and their items
       commands = []
       item_arrays = []
@@ -202,7 +202,7 @@ MenuHandlers.add(:battle_debug_menu, :mega_evolution, {
   "effect"      => proc { |battle|
     cmd = 0
     loop do
-update_leader if defined?(update_leader)
+update_leader
       commands = []
       cmds = []
       battle.megaEvolution.each_with_index do |side_values, side|
@@ -254,7 +254,7 @@ MenuHandlers.add(:battle_debug_menu, :weather, {
     end
     cmd = 0
     loop do
-update_leader if defined?(update_leader)
+update_leader
       weather_data = GameData::BattleWeather.try_get(battle.field.weather)
       msg = _INTL("Current weather: {1}", weather_data.name || _INTL("Unknown"))
       if weather_data.id != :None
@@ -317,7 +317,7 @@ MenuHandlers.add(:battle_debug_menu, :terrain, {
     end
     cmd = 0
     loop do
-update_leader if defined?(update_leader)
+update_leader
       terrain_data = GameData::BattleTerrain.try_get(battle.field.terrain)
       msg = _INTL("Current terrain: {1}", terrain_data.name || _INTL("Unknown"))
       if terrain_data.id != :None
@@ -379,7 +379,7 @@ MenuHandlers.add(:battle_debug_menu, :environment_time, {
     end
     cmd = 0
     loop do
-update_leader if defined?(update_leader)
+update_leader
       environment_data = GameData::Environment.try_get(battle.environment)
       msg = _INTL("Environment: {1}", environment_data.name || _INTL("Unknown"))
       msg += "\r\n"
@@ -411,7 +411,7 @@ MenuHandlers.add(:battle_debug_menu, :backdrop, {
   "description" => _INTL("Set the names of the backdrop and base graphics."),
   "effect"      => proc { |battle|
     loop do
-update_leader if defined?(update_leader)
+update_leader
       cmd = pbMessage("\\ts[]" + _INTL("Set which backdrop name?"),
                       [_INTL("Backdrop"),
                        _INTL("Base modifier")], -1)
@@ -490,7 +490,7 @@ MenuHandlers.add(:battle_debug_menu, :position_effects, {
     end
     cmd = 0
     loop do
-update_leader if defined?(update_leader)
+update_leader
       cmd = pbMessage("\\ts[]" + _INTL("Choose a battler position."), cmds, -1, nil, cmd)
       break if cmd < 0
       editor = Battle::DebugSetEffects.new(battle, :position, positions[cmd])

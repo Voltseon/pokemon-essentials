@@ -8,7 +8,7 @@ class PokemonTrade_Scene
 
   def pbRunPictures(pictures, sprites)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       pictures.each { |pic| pic.update }
       sprites.each_with_index do |sprite, i|
         if sprite.is_a?(IconSprite)

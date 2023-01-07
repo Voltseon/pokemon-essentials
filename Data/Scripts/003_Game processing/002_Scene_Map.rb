@@ -121,7 +121,7 @@ class Scene_Map
   def miniupdate
     $game_temp.in_mini_update = true
     loop do
-update_leader if defined?(update_leader)
+update_leader
       $game_player.update
       updateMaps
       $game_system.update
@@ -165,7 +165,7 @@ update_leader if defined?(update_leader)
 
   def update
     loop do
-update_leader if defined?(update_leader)
+update_leader
       pbMapInterpreter.update
       $game_player.update
       updateMaps
@@ -227,7 +227,7 @@ update_leader if defined?(update_leader)
     createSpritesets
     Graphics.transition
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       update

@@ -193,7 +193,7 @@ _END_
     pbBGMPlay(BGM)
     Graphics.transition
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       update

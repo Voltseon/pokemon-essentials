@@ -6,7 +6,7 @@ class Battle::Scene
     # Make everything appear
     introAnim = Animation::Intro.new(@sprites, @viewport, @battle)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       introAnim.update
       pbUpdate
       break if introAnim.animDone?
@@ -130,7 +130,7 @@ update_leader if defined?(update_leader)
     end
     # Play all animations
     loop do
-update_leader if defined?(update_leader)
+update_leader
       fadeAnim.update
       sendOutAnims.each do |a|
         next if a[2]
@@ -167,7 +167,7 @@ update_leader if defined?(update_leader)
     # Recall animation
     recallAnim = Animation::BattlerRecall.new(@sprites, @viewport, @battle.battlers[idxBattler])
     loop do
-update_leader if defined?(update_leader)
+update_leader
       recallAnim&.update
       pbUpdate
       break if recallAnim.animDone?
@@ -176,7 +176,7 @@ update_leader if defined?(update_leader)
     # Data box disappear animation
     dataBoxAnim = Animation::DataBoxDisappear.new(@sprites, @viewport, idxBattler)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       dataBoxAnim.update
       pbUpdate
       break if dataBoxAnim.animDone?
@@ -194,7 +194,7 @@ update_leader if defined?(update_leader)
     @sprites["abilityBar_#{side}"].battler = battler
     abilitySplashAnim = Animation::AbilitySplashAppear.new(@sprites, @viewport, side)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       abilitySplashAnim.update
       pbUpdate
       break if abilitySplashAnim.animDone?
@@ -208,7 +208,7 @@ update_leader if defined?(update_leader)
     return if !@sprites["abilityBar_#{side}"].visible
     abilitySplashAnim = Animation::AbilitySplashDisappear.new(@sprites, @viewport, side)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       abilitySplashAnim.update
       pbUpdate
       break if abilitySplashAnim.animDone?
@@ -244,7 +244,7 @@ update_leader if defined?(update_leader)
     # Damage animation
     damageAnim = Animation::BattlerDamage.new(@sprites, @viewport, battler.index, effectiveness)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       damageAnim.update
       pbUpdate
       break if damageAnim.animDone?
@@ -266,7 +266,7 @@ update_leader if defined?(update_leader)
     end
     # Update loop
     loop do
-update_leader if defined?(update_leader)
+update_leader
       damageAnims.each { |a| a.update }
       pbUpdate
       allDone = true
@@ -326,7 +326,7 @@ update_leader if defined?(update_leader)
     faintAnim   = Animation::BattlerFaint.new(@sprites, @viewport, battler.index, @battle)
     dataBoxAnim = Animation::DataBoxDisappear.new(@sprites, @viewport, battler.index)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       faintAnim.update
       dataBoxAnim.update
       pbUpdate
@@ -345,7 +345,7 @@ update_leader if defined?(update_leader)
       @sprites, @viewport, ball, shakes, critical, @battle.battlers[targetBattler], showPlayer
     )
     loop do
-update_leader if defined?(update_leader)
+update_leader
       captureAnim.update
       pbUpdate
       break if captureAnim.animDone? && !inPartyAnimation?
@@ -359,7 +359,7 @@ update_leader if defined?(update_leader)
     pbMEPlay(pbGetWildCaptureME)
     timer = 0.0
     loop do
-update_leader if defined?(update_leader)
+update_leader
       pbUpdate
       timer += Graphics.delta_s
       break if timer >= 3.5
@@ -375,7 +375,7 @@ update_leader if defined?(update_leader)
     # Data box disappear animation
     dataBoxAnim = Animation::DataBoxDisappear.new(@sprites, @viewport, idxBattler)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       dataBoxAnim.update
       ball.opacity -= 12 * 20 / Graphics.frame_rate if ball.opacity > 0
       pbUpdate
@@ -390,7 +390,7 @@ update_leader if defined?(update_leader)
       @sprites, @viewport, ball, @battle.battlers[idxBattler]
     )
     loop do
-update_leader if defined?(update_leader)
+update_leader
       throwAnim.update
       pbUpdate
       break if throwAnim.animDone?
@@ -560,7 +560,7 @@ update_leader if defined?(update_leader)
     # Play the animation
     animPlayer.start
     loop do
-update_leader if defined?(update_leader)
+update_leader
       animPlayer.update
       pbUpdate
       break if animPlayer.animDone?

@@ -230,7 +230,7 @@ def pbGenerateChallenge(rule, tag)
     yield(_INTL("Simulating battles ({1} of {2})", iter + 1, iterations))
     i = 0
     loop do
-update_leader if defined?(update_leader)
+update_leader
       changed = false
       teams.length.times do |j|
         yield(nil)

@@ -51,7 +51,7 @@ def pbImportAnim(animations, canvas, animwin)
   cmdwin.height = 480
   cmdwin.viewport = canvas.viewport
   loop do
-update_leader if defined?(update_leader)
+update_leader
     Graphics.update
     Input.update
     cmdwin.update

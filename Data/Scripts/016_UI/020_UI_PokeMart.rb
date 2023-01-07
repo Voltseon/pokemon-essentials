@@ -405,7 +405,7 @@ class PokemonMart_Scene
     i = 0
     pbPlayDecisionSE
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       self.update
@@ -430,7 +430,7 @@ update_leader if defined?(update_leader)
     yielded = false
     pbPlayDecisionSE
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       wasbusy = cw.busy?
@@ -463,7 +463,7 @@ update_leader if defined?(update_leader)
     cw.index = 0
     pbPlayDecisionSE
     loop do
-update_leader if defined?(update_leader)
+update_leader
       cw.visible = !dw.busy?
       Graphics.update
       Input.update
@@ -499,7 +499,7 @@ update_leader if defined?(update_leader)
       pbBottomRight(numwindow)
       numwindow.y -= helpwindow.height
       loop do
-update_leader if defined?(update_leader)
+update_leader
         Graphics.update
         Input.update
         numwindow.update
@@ -553,7 +553,7 @@ update_leader if defined?(update_leader)
     pbActivateWindow(@sprites, "itemwindow") {
       pbRefresh
       loop do
-update_leader if defined?(update_leader)
+update_leader
         Graphics.update
         Input.update
         olditem = itemwindow.item
@@ -609,7 +609,7 @@ class PokemonMartScreen
     @scene.pbStartBuyScene(@stock, @adapter)
     item = nil
     loop do
-update_leader if defined?(update_leader)
+update_leader
       item = @scene.pbChooseBuyItem
       break if !item
       quantity       = 0
@@ -689,7 +689,7 @@ update_leader if defined?(update_leader)
   def pbSellScreen
     item = @scene.pbStartSellScene(@adapter.getInventory, @adapter)
     loop do
-update_leader if defined?(update_leader)
+update_leader
       item = @scene.pbChooseSellItem
       break if !item
       itemname       = @adapter.getName(item)
@@ -742,7 +742,7 @@ def pbPokemonMart(stock, speech = nil, cantsell = false)
   commands[cmdQuit = commands.length] = _INTL("No, thanks")
   cmd = pbMessage(speech || _INTL("Welcome! How may I help you?"), commands, cmdQuit + 1)
   loop do
-update_leader if defined?(update_leader)
+update_leader
     if cmdBuy >= 0 && cmd == cmdBuy
       scene = PokemonMart_Scene.new
       screen = PokemonMartScreen.new(scene, stock)

@@ -188,7 +188,7 @@ class BugContestState
     @contestants = []
     [5, CONTESTANT_NAMES.length].min.times do
       loop do
-update_leader if defined?(update_leader)
+update_leader
         value = rand(CONTESTANT_NAMES.length)
         next if @contestants.include?(value)
         @contestants.push(value)

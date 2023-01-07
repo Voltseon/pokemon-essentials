@@ -205,7 +205,7 @@ class SlotMachineScene
       @sprites["window1"].src_rect.set(0, 0, 152, 208)
       # Pay out
       loop do
-update_leader if defined?(update_leader)
+update_leader
         break if @sprites["payout"].score <= 0
         Graphics.update
         Input.update
@@ -281,7 +281,7 @@ update_leader if defined?(update_leader)
     spinFrameTime   = Graphics.frame_rate / 4
     insertFrameTime = Graphics.frame_rate * 4 / 10
     loop do
-update_leader if defined?(update_leader)
+update_leader
       Graphics.update
       Input.update
       update

@@ -26,7 +26,6 @@ module CableClub
       $Partner_sprite = IconSprite.new(0,0,Spriteset_Map.viewport)
 
       loop do
-update_leader if defined?(update_leader)
 update_leader
         if state != last_state
           last_state = state
