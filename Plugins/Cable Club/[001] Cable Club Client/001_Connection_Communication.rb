@@ -25,7 +25,7 @@ class Connection
   def update
     if @socket.nread>0
       recvd = @socket.recv(4096)
-      if recvd > 20
+      if @socket.nread > 20
         @socket.flush
         return
       end
