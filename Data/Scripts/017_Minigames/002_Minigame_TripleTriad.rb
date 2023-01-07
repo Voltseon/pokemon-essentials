@@ -225,7 +225,6 @@ class TriadScene
     @sprites["helpwindow"].text = text
     timer = 0.0
     loop do
-update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -238,7 +237,6 @@ update_leader
     @sprites["helpwindow"].letterbyletter = true
     @sprites["helpwindow"].text           = text + "\1"
     loop do
-update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -280,7 +278,6 @@ update_leader
       @sprites["player#{i}"].z = 2
     end
     loop do
-update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -379,7 +376,6 @@ update_leader
     choice     = 0
     lastChoice = -1
     loop do
-update_leader
       if lastChoice != choice
         y = 44
         @opponentCardIndexes.length.times do |i|
@@ -420,7 +416,6 @@ update_leader
     choice     = 0
     lastChoice = -1
     loop do
-update_leader
       if lastChoice != choice
         y = 44
         @cardIndexes.length.times do |i|
@@ -463,7 +458,6 @@ update_leader
     boardY = 0
     doRefresh = true
     loop do
-update_leader
       if doRefresh
         y = 44
         @cardIndexes.length.times do |i|
@@ -741,7 +735,6 @@ class TriadScreen
       square = TriadSquare.new
       if @elements
         loop do
-update_leader
           trial_type = type_keys.sample
           type_data = GameData::Type.get(trial_type)
           next if type_data.pseudo_type
@@ -1113,7 +1106,6 @@ def pbBuyTriads
   olditem = commands[cmdwindow.index][3]
   Graphics.frame_reset
   loop do
-update_leader
     Graphics.update
     Input.update
     cmdwindow.active = true
@@ -1207,7 +1199,6 @@ def pbSellTriads
   Graphics.frame_reset
   until done
     loop do
-update_leader
       Graphics.update
       Input.update
       cmdwindow.active = true
@@ -1304,7 +1295,6 @@ def pbTriadList
   lastIndex = -1
   until done
     loop do
-update_leader
       Graphics.update
       Input.update
       cmdwindow.update

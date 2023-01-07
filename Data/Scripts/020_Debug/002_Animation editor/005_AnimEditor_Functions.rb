@@ -39,7 +39,6 @@ def pbSelectAnim(canvas, animwin)
   ctlwin.viewport = canvas.viewport
   ctlwin.addSlider(_INTL("Hue:"), 0, 359, 0)
   loop do
-update_leader
     bmpwin.bitmapname = cmdwin.commands[cmdwin.index]
     Graphics.update
     Input.update
@@ -74,7 +73,6 @@ def pbChangeMaximum(canvas)
   cancelbutton = sliderwin2.addButton(_INTL("Cancel"))
   sliderwin2.opacity = 200
   loop do
-update_leader
     Graphics.update
     Input.update
     sliderwin2.update
@@ -99,7 +97,6 @@ def pbAnimName(animation, cmdwin)
   cancelbutton = window.addButton(_INTL("Cancel"))
   window.opacity = 224
   loop do
-update_leader
     Graphics.update
     Input.update
     window.update
@@ -138,7 +135,6 @@ def pbAnimList(animations, canvas, animwin)
   maxsizewindow.opacity = 224
   maxsizewindow.viewport = canvas.viewport
   loop do
-update_leader
     Graphics.update
     Input.update
     cmdwin.update
@@ -198,7 +194,6 @@ def pbChooseNum(cel)
   okbutton = sliderwin2.addButton(_INTL("OK"))
   cancelbutton = sliderwin2.addButton(_INTL("Cancel"))
   loop do
-update_leader
     Graphics.update
     Input.update
     sliderwin2.update
@@ -225,7 +220,6 @@ def pbSetTone(cel, previewsprite)
   okbutton = sliderwin2.addButton(_INTL("OK"))
   cancelbutton = sliderwin2.addButton(_INTL("Cancel"))
   loop do
-update_leader
     previewsprite.tone.set(sliderwin2.value(0), sliderwin2.value(1),
                            sliderwin2.value(2), sliderwin2.value(3))
     Graphics.update
@@ -256,7 +250,6 @@ def pbSetFlash(cel, previewsprite)
   okbutton = sliderwin2.addButton(_INTL("OK"))
   cancelbutton = sliderwin2.addButton(_INTL("Cancel"))
   loop do
-update_leader
     previewsprite.tone.set(sliderwin2.value(0), sliderwin2.value(1),
                            sliderwin2.value(2), sliderwin2.value(3))
     Graphics.update
@@ -314,7 +307,6 @@ def pbCellProperties(canvas)
   previewsprite.z = previewwin.z + 1
   sliderwin2.opacity = 200
   loop do
-update_leader
     Graphics.update
     Input.update
     sliderwin2.update
@@ -410,7 +402,6 @@ def pbTimingList(canvas)
   framewindow.opacity = 200
   framewindow.viewport = canvas.viewport
   loop do
-update_leader
     Graphics.update
     Input.update
     cmdwin.update
@@ -541,7 +532,6 @@ def pbSelectSE(canvas, audio)
   maxsizewindow.opacity = 200
   maxsizewindow.viewport = canvas.viewport
   loop do
-update_leader
     Graphics.update
     Input.update
     cmdwin.update
@@ -610,7 +600,6 @@ def pbSelectBG(canvas, timing)
   maxsizewindow.opacity = 200
   maxsizewindow.viewport = canvas.viewport
   loop do
-update_leader
     Graphics.update
     Input.update
     cmdwin.update
@@ -665,7 +654,6 @@ def pbEditBG(canvas, timing)
   maxsizewindow.opacity = 200
   maxsizewindow.viewport = canvas.viewport
   loop do
-update_leader
     Graphics.update
     Input.update
     maxsizewindow.update
@@ -710,7 +698,6 @@ def pbCopyFrames(canvas)
   cancelbutton = sliderwin2.addButton(_INTL("Cancel"))
   sliderwin2.opacity = 200
   loop do
-update_leader
     Graphics.update
     Input.update
     sliderwin2.update
@@ -757,7 +744,6 @@ def pbClearFrames(canvas)
   cancelbutton = sliderwin2.addButton(_INTL("Cancel"))
   sliderwin2.opacity = 200
   loop do
-update_leader
     Graphics.update
     Input.update
     sliderwin2.update
@@ -791,7 +777,6 @@ def pbTweening(canvas)
   okbutton = sliderwin2.addButton(_INTL("OK"))
   cancelbutton = sliderwin2.addButton(_INTL("Cancel"))
   loop do
-update_leader
     Graphics.update
     Input.update
     sliderwin2.update
@@ -883,7 +868,6 @@ def pbCellBatch(canvas)
   okbutton = sliderwin2.addButton(_INTL("OK"))
   cancelbutton = sliderwin2.addButton(_INTL("Cancel"))
   loop do
-update_leader
     Graphics.update
     Input.update
     sliderwin1.update
@@ -932,7 +916,6 @@ def pbEntireSlide(canvas)
   cancelbutton = sliderwin2.addButton(_INTL("Cancel"))
   sliderwin2.opacity = 200
   loop do
-update_leader
     Graphics.update
     Input.update
     sliderwin2.update
@@ -966,7 +949,6 @@ def pbAnimEditorHelpWindow
   cmdwin.z = 99999
   cmdwin.text = helptext
   loop do
-update_leader
     Graphics.update
     Input.update
     cmdwin.update
@@ -1013,7 +995,6 @@ def animationEditorMain(animation)
   # Name window
   bottomwindow = AnimationNameWindow.new(canvas, 240, 384 + 128 + 96, 512, 64, canvas.viewport)
   loop do
-update_leader
     Graphics.update
     Input.update
     sliderwin.update

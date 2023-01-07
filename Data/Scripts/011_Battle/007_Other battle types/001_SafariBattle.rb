@@ -233,7 +233,6 @@ class Battle::Scene
     @sprites["dataBox_0"] = SafariDataBox.new(@battle, @viewport)
     dataBoxAnim = Animation::DataBoxAppear.new(@sprites, @viewport, 0)
     loop do
-update_leader
       dataBoxAnim.update
       pbUpdate
       break if dataBoxAnim.animDone?
@@ -255,7 +254,6 @@ update_leader
     @briefMessage = false
     baitAnim = Animation::ThrowBait.new(@sprites, @viewport, @battle.battlers[1])
     loop do
-update_leader
       baitAnim.update
       pbUpdate
       break if baitAnim.animDone?
@@ -267,7 +265,6 @@ update_leader
     @briefMessage = false
     rockAnim = Animation::ThrowRock.new(@sprites, @viewport, @battle.battlers[1])
     loop do
-update_leader
       rockAnim.update
       pbUpdate
       break if rockAnim.animDone?
@@ -452,7 +449,6 @@ class SafariBattle
       escapeFactor = (pbEscapeRate(catch_rate) * 100) / 1275
       escapeFactor = [[escapeFactor, 2].max, 20].min
       loop do
-update_leader
         cmd = @scene.pbSafariCommandMenu(0)
         case cmd
         when 0   # Ball

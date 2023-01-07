@@ -87,7 +87,6 @@ MenuHandlers.add(:debug_menu, :storage_wallpapers, {
       paperscmd = 0
       unlockarray = $PokemonStorage.unlockedWallpapers
       loop do
-update_leader
         paperscmds = []
         paperscmds.push(_INTL("Unlock all"))
         paperscmds.push(_INTL("Lock all"))
@@ -194,7 +193,6 @@ MenuHandlers.add(:debug_menu, :test_wild_battle_advanced, {
     size0 = 1
     pkmnCmd = 0
     loop do
-update_leader
       pkmnCmds = []
       pkmn.each { |p| pkmnCmds.push(sprintf("%s Lv.%d", p.name, p.level)) }
       pkmnCmds.push(_INTL("[Add Pokémon]"))
@@ -275,7 +273,6 @@ MenuHandlers.add(:debug_menu, :test_trainer_battle_advanced, {
     size1 = 1
     trainerCmd = 0
     loop do
-update_leader
       trainerCmds = []
       trainers.each { |t| trainerCmds.push(sprintf("%s x%d", t[1].full_name, t[1].party_count)) }
       trainerCmds.push(_INTL("[Add trainer]"))
@@ -708,7 +705,6 @@ MenuHandlers.add(:debug_menu, :set_badges, {
   "effect"      => proc {
     badgecmd = 0
     loop do
-update_leader
       badgecmds = []
       badgecmds.push(_INTL("Give all"))
       badgecmds.push(_INTL("Remove all"))
@@ -797,7 +793,6 @@ MenuHandlers.add(:debug_menu, :toggle_pokedex, {
   "effect"      => proc {
     dexescmd = 0
     loop do
-update_leader
       dexescmds = []
       dexescmds.push(_INTL("Have Pokédex: {1}", $player.has_pokedex ? "[YES]" : "[NO]"))
       dex_names = Settings.pokedex_names
@@ -1154,7 +1149,6 @@ MenuHandlers.add(:debug_menu, :create_pbs_files, {
       "types.txt"
     ]
     loop do
-update_leader
       cmd = pbShowCommands(nil, cmds, -1, cmd)
       case cmd
       when 0  then Compiler.write_all

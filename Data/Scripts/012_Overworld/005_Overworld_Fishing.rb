@@ -45,7 +45,6 @@ def pbFishing(hasEncounter, rodType = 1)
   msgWindow = pbCreateMessageWindow
   ret = false
   loop do
-update_leader
     time = rand(5..10)
     time = [time, rand(5..10)].min if speedup
     message = ""
@@ -111,7 +110,6 @@ def pbWaitForInput(msgWindow, message, frames)
   twitchFrame = 0
   twitchFrameTime = Graphics.frame_rate * 2 / 10   # 0.2 seconds, 8 frames
   loop do
-update_leader
     Graphics.update
     Input.update
     pbUpdateSceneMap

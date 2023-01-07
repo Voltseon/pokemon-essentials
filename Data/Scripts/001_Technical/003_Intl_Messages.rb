@@ -256,7 +256,6 @@ def pbGetText(infile)
       end
       i = 0
       loop do
-update_leader
         break unless i < section.length
         if itemlength == 3
           if !section[i][/^\d+$/]

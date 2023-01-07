@@ -53,7 +53,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :set_status, {
       ids.push(s.id)
     end
     loop do
-update_leader
       msg = _INTL("Current status: {1}", GameData::Status.get(pkmn.status).name)
       if pkmn.status == :SLEEP
         msg += " " + _INTL("(turns: {1})", pkmn.statusCount)
@@ -149,7 +148,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :set_stat_stages, {
     end
     cmd = 0
     loop do
-update_leader
       commands = []
       stat_ids = []
       GameData::Stat.each_battle do |stat|
@@ -202,7 +200,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :set_stat_values, {
     end
     cmd = 0
     loop do
-update_leader
       commands = []
       GameData::Stat.each_main_battle do |stat|
         command_name = stat.name + ": " + stat_vals[stat_ids.index(stat.id)].to_s
@@ -298,7 +295,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :hidden_values, {
   "effect" => proc { |pkmn, battler, battle|
     cmd = 0
     loop do
-update_leader
       persid = sprintf("0x%08X", pkmn.personalID)
       cmd = pbMessage("\\ts[]" + _INTL("Choose hidden values to edit."),
                       [_INTL("Set EVs"), _INTL("Set IVs")], -1, nil, cmd)
@@ -307,7 +303,6 @@ update_leader
       when 0   # Set EVs
         cmd2 = 0
         loop do
-update_leader
           total_evs = 0
           ev_commands = []
           ev_id = []
@@ -362,7 +357,6 @@ update_leader
       when 1   # Set IVs
         cmd2 = 0
         loop do
-update_leader
           hiddenpower = pbHiddenPower(pkmn)
           totaliv = 0
           ivcommands = []
@@ -425,7 +419,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :set_types, {
     max_main_types = 5   # Arbitrary value, could be any number
     cmd = 0
     loop do
-update_leader
       commands = []
       types = []
       max_main_types.times do |i|
@@ -528,7 +521,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :set_move_pp, {
   "effect" => proc { |pkmn, battler, battle|
     cmd = 0
     loop do
-update_leader
       move_names = []
       move_indices = []
       pkmn.moves.each_with_index do |move, index|
@@ -551,7 +543,6 @@ update_leader
         else
           cmd2 = 0
           loop do
-update_leader
             msg = _INTL("{1}: PP {2}/{3} (PP Up {4}/3)", move_name, move.pp, move.total_pp, move.ppup)
             cmd2 = pbMessage("\\ts[]" + msg,
                              [_INTL("Set PP"), _INTL("Full PP"), _INTL("Set PP Up")], -1, nil, cmd2)
@@ -623,7 +614,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :set_item, {
       _INTL("Remove item")
     ]
     loop do
-update_leader
       msg = (pkmn.hasItem?) ? _INTL("Item is {1}.", pkmn.item.name) : _INTL("No item.")
       cmd = pbMessage("\\ts[]" + msg, commands, -1, nil, cmd)
       break if cmd < 0
@@ -659,7 +649,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :set_ability, {
     commands.push(_INTL("Set ability for battler")) if battler
     commands.push(_INTL("Reset"))
     loop do
-update_leader
       if battler
         msg = _INTL("Battler's ability is {1}. Pokémon's ability is {2}.",
                     battler.abilityName, pkmn.ability.name)
@@ -723,7 +712,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :set_nature, {
     commands.push(_INTL("[Reset]"))
     cmd = ids.index(pkmn.nature_id || ids[0])
     loop do
-update_leader
       msg = _INTL("Nature is {1}.", pkmn.nature.name)
       cmd = pbMessage("\\ts[]" + msg, commands, -1, nil, cmd)
       break if cmd < 0
@@ -748,7 +736,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :set_gender, {
     end
     cmd = 0
     loop do
-update_leader
       msg = [_INTL("Gender is male."), _INTL("Gender is female.")][pkmn.male? ? 0 : 1]
       cmd = pbMessage("\\ts[]" + msg,
                       [_INTL("Make male"), _INTL("Make female"), _INTL("Reset")], -1, nil, cmd)
@@ -788,7 +775,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :set_form, {
       next
     end
     loop do
-update_leader
       cmd = pbMessage("\\ts[]" + _INTL("Form is {1}.", pkmn.form), formcmds[1], -1, nil, cmd)
       break if cmd < 0
       f = formcmds[0][cmd]
@@ -826,7 +812,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :set_shininess, {
   "effect" => proc { |pkmn, battler, battle|
     cmd = 0
     loop do
-update_leader
       msg_idx = pkmn.shiny? ? (pkmn.super_shiny? ? 1 : 0) : 2
       msg = [_INTL("Is shiny."), _INTL("Is super shiny."), _INTL("Is normal (not shiny).")][msg_idx]
       cmd = pbMessage("\\ts[]" + msg,
@@ -859,7 +844,6 @@ MenuHandlers.add(:battle_pokemon_debug_menu, :shadow_pokemon, {
   "effect" => proc { |pkmn, battler, battle|
     if battler.shadowPokemon?
       loop do
-update_leader
         if battler.inHyperMode?
           msg = _INTL("Shadow Pokémon (in Hyper Mode)")
         else

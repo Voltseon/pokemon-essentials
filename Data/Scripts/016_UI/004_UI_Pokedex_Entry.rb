@@ -441,7 +441,6 @@ class PokemonPokedexInfo_Scene
     end
     oldindex = -1
     loop do
-update_leader
       if oldindex != index
         $player.pokedex.set_last_form_seen(@species, @available[index][1], @available[index][2])
         pbUpdateDummyPokemon
@@ -474,7 +473,6 @@ update_leader
   def pbScene
     Pokemon.play_cry(@species, @form)
     loop do
-update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -548,7 +546,6 @@ update_leader
   def pbSceneBrief
     Pokemon.play_cry(@species, @form)
     loop do
-update_leader
       Graphics.update
       Input.update
       pbUpdate

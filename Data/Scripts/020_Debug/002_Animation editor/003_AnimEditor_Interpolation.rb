@@ -240,7 +240,6 @@ def pbDefinePath(canvas)
   points = []
   path = nil
   loop do
-update_leader
     Graphics.update
     Input.update
     sliderwin2.update
@@ -286,7 +285,6 @@ update_leader
         "", 0, 320 - 64, 128, 64, canvas.viewport
       )
       loop do
-update_leader
         Graphics.update
         Input.update
         if Input.trigger?(Input::BACK)
@@ -369,7 +367,6 @@ update_leader
       )
       sliderwin2.visible = false
       loop do
-update_leader
         Graphics.update
         Input.update
         if Input.triggerex?(:ESCAPE)

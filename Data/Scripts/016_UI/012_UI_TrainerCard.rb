@@ -78,7 +78,6 @@ class PokemonTrainerCard_Scene
   def pbTrainerCard
     pbSEPlay("GUI trainer card open")
     loop do
-update_leader
       Graphics.update
       Input.update
       pbUpdate

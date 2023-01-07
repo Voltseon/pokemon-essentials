@@ -111,7 +111,6 @@ class TotalLevelAdjustment < LevelAdjustment
       total += @minLevel
     end
     loop do
-update_leader
       work = false
       thisTeam.each_with_index do |pkmn, i|
         next if ret[i] >= @maxLevel || total >= @totalLevel

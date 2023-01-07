@@ -454,11 +454,9 @@ class SpriteWindow < Window
     top = dstrect.y
     y = 0
     loop do
-update_leader
       break unless y < dstrect.height
       x = 0
       loop do
-update_leader
         break unless x < dstrect.width
         dstbitmap.blt(x + left, y + top, srcbitmap, srcrect)
         x += srcrect.width

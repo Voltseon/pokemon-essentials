@@ -7,7 +7,6 @@ def pbEmergencySave
     File.open(SaveData::FILE_PATH, "rb") do |r|
       File.open(SaveData::FILE_PATH + ".bak", "wb") do |w|
         loop do
-update_leader
           s = r.read(4096)
           break if !s
           w.write(s)

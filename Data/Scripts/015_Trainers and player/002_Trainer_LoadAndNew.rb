@@ -18,7 +18,6 @@ def pbNewTrainer(tr_type, tr_name, tr_version, save_changes = true)
       break
     end
     loop do
-update_leader
       species = pbChooseSpeciesList
       if species
         params = ChooseNumberParams.new

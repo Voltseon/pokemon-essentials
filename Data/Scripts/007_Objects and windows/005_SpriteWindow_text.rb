@@ -401,7 +401,6 @@ class Window_AdvancedTextPokemon < SpriteWindow_Base
     resume
     visiblelines = (self.height - self.borderY) / @lineHeight
     loop do
-update_leader
       curcharSkip(999)
       break if @curchar >= @fmtchars.length    # End of message
       if @textchars[@curchar] == "\1"          # Pause message

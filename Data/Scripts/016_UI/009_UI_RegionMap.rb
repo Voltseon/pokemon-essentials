@@ -251,7 +251,6 @@ class PokemonRegionMap_Scene
     new_y    = 0
     dist_per_frame = 8 * 20 / Graphics.frame_rate
     loop do
-update_leader
       Graphics.update
       Input.update
       pbUpdate

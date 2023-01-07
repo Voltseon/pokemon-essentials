@@ -136,7 +136,6 @@ def pbTrackPopupMenu(commands)
   menuwindow = Window_Menu.new(commands, mousepos[0], mousepos[1])
   menuwindow.z = 99999
   loop do
-update_leader
     Graphics.update
     Input.update
     menuwindow.update
@@ -564,7 +563,6 @@ class AnimationCanvas < Sprite
         @lastframesprites[i].visible = false
       end
       loop do
-update_leader
         Graphics.update
         self.update
         break if !@playing

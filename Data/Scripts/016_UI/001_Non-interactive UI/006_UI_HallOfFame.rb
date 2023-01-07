@@ -334,7 +334,6 @@ class HallOfFame_Scene
 
   def pbAnimationLoop
     loop do
-update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -345,7 +344,6 @@ update_leader
 
   def pbPCSelection
     loop do
-update_leader
       Graphics.update
       Input.update
       pbUpdate

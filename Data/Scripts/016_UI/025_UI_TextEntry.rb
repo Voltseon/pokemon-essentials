@@ -182,7 +182,6 @@ class PokemonEntryScene
   def pbEntry1
     ret = ""
     loop do
-update_leader
       Graphics.update
       Input.update
       if Input.triggerex?(:ESCAPE) && @minlength == 0
@@ -203,7 +202,6 @@ update_leader
   def pbEntry2
     ret = ""
     loop do
-update_leader
       Graphics.update
       Input.update
       @sprites["helpwindow"].update
@@ -535,7 +533,6 @@ class PokemonEntryScene2
     deltaX = 48 * 20 / Graphics.frame_rate
     deltaY = 24 * 20 / Graphics.frame_rate
     loop do
-update_leader
       if @sprites["bottomtab"].y < 414
         @sprites["bottomtab"].y += deltaY
         @sprites["bottomtab"].y = 414 if @sprites["bottomtab"].y > 414
@@ -612,7 +609,6 @@ update_leader
         @cursorpos = OK if @cursorpos < MODE1
       else
         loop do
-update_leader
           cursormod = wrapmod(cursormod - 1, ROWS)
           @cursorpos = cursororigin + cursormod
           break unless pbColumnEmpty?(cursormod)
@@ -624,7 +620,6 @@ update_leader
         @cursorpos = MODE1 if @cursorpos > OK
       else
         loop do
-update_leader
           cursormod = wrapmod(cursormod + 1, ROWS)
           @cursorpos = cursororigin + cursormod
           break unless pbColumnEmpty?(cursormod)
@@ -688,7 +683,6 @@ update_leader
   def pbEntry
     ret = ""
     loop do
-update_leader
       Graphics.update
       Input.update
       pbUpdate

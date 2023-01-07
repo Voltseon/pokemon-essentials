@@ -364,7 +364,6 @@ class MapScreenScene
     )
     title.z = 2
     loop do
-update_leader
       Graphics.update
       Input.update
       break if Input.trigger?(Input::BACK) || Input.trigger?(Input::USE)
@@ -548,7 +547,6 @@ update_leader
 
   def pbMapScreenLoop
     loop do
-update_leader
       Graphics.update
       Input.update
       update

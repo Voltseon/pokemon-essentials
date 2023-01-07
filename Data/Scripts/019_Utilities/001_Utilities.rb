@@ -4,7 +4,6 @@
 def _pbNextComb(comb, length)
   i = comb.length - 1
   loop do
-update_leader
     valid = true
     (i...comb.length).each do |j|
       if j == i
@@ -41,7 +40,6 @@ def pbEachCombination(array, num)
   arr = []
   num.times { |i| currentComb[i] = i }
   loop do
-update_leader
     num.times { |i| arr[i] = array[currentComb[i]] }
     yield arr
     break unless _pbNextComb(currentComb, array.length)
@@ -452,7 +450,6 @@ def pbMoveTutorChoose(move, movelist = nil, bymachine = false, oneusemachine = f
     screen = PokemonPartyScreen.new(scene, $player.party)
     screen.pbStartScene(_INTL("Teach which Pokémon?"), false, annot)
     loop do
-update_leader
       chosen = screen.pbChoosePokemon
       break if chosen < 0
       pokemon = $player.party[chosen]
@@ -520,7 +517,6 @@ def pbCommonEvent(id)
   interp = Interpreter.new
   interp.setup(celist, 0)
   loop do
-update_leader
     Graphics.update
     Input.update
     interp.update

@@ -328,7 +328,6 @@ class PokemonOption_Scene
     pbActivateWindow(@sprites, "option") {
       index = -1
       loop do
-update_leader
         Graphics.update
         Input.update
         pbUpdate

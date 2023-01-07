@@ -142,7 +142,6 @@ class EventScene
 
   def pictureWait(extraframes = 0)
     loop do
-update_leader
       hasRunning = false
       @pictures.each do |pic|
         hasRunning = true if pic.running?

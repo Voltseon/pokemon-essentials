@@ -417,7 +417,6 @@ module Compiler
     end
     subarrays = repeat && schema[1].length > 2
     loop do
-update_leader
       subrecord = []
       (start...schema[1].length).each do |i|
         chr = schema[1][i, 1]
@@ -581,7 +580,6 @@ update_leader
     start = (["*", "^"].include?(schema[1][0, 1])) ? 1 : 0
     index = -1
     loop do
-update_leader
       (start...schema[1].length).each do |i|
         index += 1
         value = rec[index]
@@ -933,7 +931,6 @@ update_leader
       end
       raise Reset.new if e.is_a?(Hangup)
       loop do
-update_leader
         Graphics.update
       end
     end

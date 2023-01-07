@@ -52,7 +52,6 @@ module CableClub
       frame = 0
       ret = false
       loop do
-update_leader
         frame += 1
         pbMessageDisplayDots(msgwindow,_INTL("Receiving {1} Data",record_name),frame)
         Graphics.update

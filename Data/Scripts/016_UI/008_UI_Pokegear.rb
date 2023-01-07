@@ -89,7 +89,6 @@ class PokemonPokegear_Scene
   def pbScene
     ret = -1
     loop do
-update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -144,7 +143,6 @@ class PokemonPokegearScreen
     # Main loop
     end_scene = false
     loop do
-update_leader
       choice = @scene.pbScene
       if choice < 0
         end_scene = true

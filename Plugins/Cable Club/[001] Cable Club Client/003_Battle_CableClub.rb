@@ -31,7 +31,6 @@ class Battle_CableClub < Battle
       cw.letterbyletter = false
       begin
         loop do
-update_leader
           frame += 1
           cw.text = _INTL("Waiting" + "." * (1 + ((frame / 8) % 3)))
           @scene.pbFrameUpdate(cw)
@@ -100,7 +99,6 @@ update_leader
     # Check through each fainted battler to see if that spot can be filled.
     switched = []
     loop do
-update_leader
       switched.clear
       # check in same order
       battlers = []
@@ -169,7 +167,6 @@ class Battle
         cw.letterbyletter = false
         begin
           loop do
-update_leader
             frame += 1
             cw.text = _INTL("Waiting" + "." * (1 + ((frame / 8) % 3)))
             @battle.scene.pbFrameUpdate(cw)

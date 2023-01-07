@@ -181,7 +181,6 @@ def pbChooseNumber(msgwindow, params)
   cmdwindow.number = defaultNumber
   pbPositionNearMsgWindow(cmdwindow, msgwindow, :right)
   loop do
-update_leader
     Graphics.update
     Input.update
     pbUpdateSceneMap
@@ -470,13 +469,11 @@ def pbMessageDisplay(msgwindow, message, letterbyletter = true, commandProc = ni
     next getSkinColor(msgwindow.windowskin, m, isDarkSkin)
   }
   loop do
-update_leader
     last_text = text.clone
     text.gsub!(/\\v\[([0-9]+)\]/i) { $game_variables[$1.to_i] }
     break if text == last_text
   end
   loop do
-update_leader
     last_text = text.clone
     text.gsub!(/\\l\[([0-9]+)\]/i) {
       linecount = [1, $1.to_i].max
@@ -575,7 +572,6 @@ update_leader
   msgwindow.text = text
   Graphics.frame_reset if Graphics.frame_rate > 40
   loop do
-update_leader
     if signWaitCount > 0
       signWaitCount -= 1
       if atTop
@@ -752,7 +748,6 @@ def pbShowCommands(msgwindow, commands = nil, cmdIfCancel = 0, defaultCmd = 0)
   cmdwindow.index = defaultCmd
   command = 0
   loop do
-update_leader
     Graphics.update
     Input.update
     cmdwindow.update
@@ -795,7 +790,6 @@ def pbShowCommandsWithHelp(msgwindow, commands, help, cmdIfCancel = 0, defaultCm
     msgwin.text = help[cmdwindow.index]
     msgwin.width = msgwin.width   # Necessary evil to make it use the proper margins
     loop do
-update_leader
       Graphics.update
       Input.update
       oldindex = cmdwindow.index
@@ -858,7 +852,6 @@ def pbFreeText(msgwindow, currenttext, passwordbox, maxlength, width = 240)
   window.passwordChar = "*" if passwordbox
   Input.text_input = true
   loop do
-update_leader
     Graphics.update
     Input.update
     if Input.triggerex?(:ESCAPE)
