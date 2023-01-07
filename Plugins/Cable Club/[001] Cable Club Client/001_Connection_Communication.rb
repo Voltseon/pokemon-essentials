@@ -30,7 +30,7 @@ class Connection
     end
     # Process at most one record so that any control flow in the block doesn't cause us to lose records.
     if !@recv_records.empty?
-      until @recv_records.empty?
+      until @recv_records.length < 10
         record = @recv_records.shift
       end
       if record.disconnect?
