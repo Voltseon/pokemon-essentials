@@ -94,6 +94,7 @@ end
 
 EventHandlers.add(:on_frame_update, :session,
   proc {
+    next if $Connection.nil?
     if $Connection.can_send?
       $Connection.send do |writer|
         writer.int($game_map.map_id)
