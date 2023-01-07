@@ -126,10 +126,9 @@ def update_leader
   $Partner_frame = ($Partner_frame + 1) % 40
 end
 
-=begin
-module Kernel
+module Graphics
   unless defined?(g_update)
-    class << Kernel
+    class << Graphics
       alias g_update update
     end
 
@@ -139,4 +138,3 @@ module Kernel
     end
   end
 end
-=end
