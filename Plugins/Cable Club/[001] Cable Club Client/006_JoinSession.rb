@@ -99,8 +99,8 @@ def update_leader
   if $Connection.can_send?
     $Connection.send do |writer|
       writer.int($game_map.map_id)
-      writer.int($game_player.x)
-      writer.int($game_player.y)
+      writer.int($game_player.real_x)
+      writer.int($game_player.real_y)
       writer.int($game_player.direction)
     end
   end
