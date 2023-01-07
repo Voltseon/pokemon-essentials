@@ -626,7 +626,7 @@ module PluginManager
     # get the order of plugins to interpret
     order, plugins = self.getPluginOrder
     # compile if necessary
-    if self.needCompiling?(order, plugins)
+    if self.needCompiling?(order, plugins) || $DEBUG
       self.compilePlugins(order, plugins)
     else
       Console.echoln_li("Plugins were not compiled")
