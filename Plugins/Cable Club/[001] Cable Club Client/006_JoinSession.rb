@@ -1,5 +1,6 @@
 $Connection = nil
 $Partner_sprite = nil
+$Partner_frame = 0
 
 module CableClub
   def self.session(msgwindow, partner_trainer_id)
@@ -103,7 +104,6 @@ def update_leader
       writer.int($game_map.map_id)
       writer.int(($game_player.real_x*10).to_i)
       writer.int(($game_player.real_y*10).to_i)
-      writer.int($game_player.screen_z.to_i)
       writer.int($game_player.direction)
     end
   end
@@ -113,9 +113,10 @@ def update_leader
     y = (((record.int/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
     $Partner_sprite.x = x
     $Partner_sprite.y = y
-    $Partner_sprite.z = record.int
-    $Partner_sprite.src_rect.set(0,((record.int/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
+    $Partner_sprite.z = y
+    $Partner_sprite.src_rect.set($Partner_frame/100*$Partner_sprite.bitmap.width/4,((record.int/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   end
+  $Partner_frame = ($Partner_frame + 1) % 400
 end
 
 module Graphics
