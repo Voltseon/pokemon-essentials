@@ -99,7 +99,9 @@ module CableClub
 end
 
 def update_leader
+  echoln :D
   return if $Connection.nil?
+  echoln :C
   if $Connection.can_send?
     $Connection.send do |writer|
       writer.int($game_map.map_id)
@@ -131,10 +133,10 @@ module Graphics
     class << Graphics
       alias g_update update
     end
+  end
 
-    def update
-      g_update
-      update_leader
-    end
+  def self.update
+    g_update
+    update_leader
   end
 end
