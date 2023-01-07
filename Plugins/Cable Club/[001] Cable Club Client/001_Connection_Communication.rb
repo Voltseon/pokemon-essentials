@@ -25,12 +25,12 @@ class Connection
   def update
     if @socket.nread>0
       recvd = @socket.recv(4096)
+      if recvd > 20
+        @socket.flush
+        return
+      end
       raise Disconnected.new("server disconnected") if recvd.empty?
       @recv_parser.parse(recvd) {|record| @recv_records << record}
-    end
-    if @recv_records.length > 20
-      @socket.flush
-      return
     end
     # Process at most one record so that any control flow in the block doesn't cause us to lose records.
     if !@recv_records.empty?
