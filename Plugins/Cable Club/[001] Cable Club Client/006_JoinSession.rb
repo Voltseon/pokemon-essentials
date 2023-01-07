@@ -147,7 +147,7 @@ def update_leader
 
     $Partner_sprite.character_name = record.str
     pattern = record.int
-    $Partner_sprite.pattern = record.bool ? pattern : 0
+    $Partner_sprite.set_character(direction,(record.bool ? pattern : 0))
   
     (76..100).each do |i|
       last_switch = record.bool
