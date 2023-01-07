@@ -16,6 +16,7 @@ class Connection
 
   def initialize(socket)
     @socket = socket
+    @socket.sync = true
     @recv_parser = Parser.new
     @recv_records = []
     @discard_records = 0
@@ -30,7 +31,7 @@ class Connection
     # Process at most one record so that any control flow in the block doesn't cause us to lose records.
     if !@recv_records.empty?
       record = @recv_records.shift
-      @socket.flush
+      #@socket.flush
       if record.disconnect?
         reason = record.str() rescue "unknown error"
         raise Disconnected.new(reason)
