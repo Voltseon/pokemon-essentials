@@ -1,5 +1,6 @@
 $Connection = nil
 $Partner_sprite = nil
+$LastVar = []
 
 module CableClub
   def self.session(msgwindow, partner_trainer_id)
@@ -111,8 +112,21 @@ def update_leader
       writer.str($game_player.character_name)
       writer.int($game_player.pattern)
       writer.bool($game_player.moving?)
+
+      [76..100].each do |i|
+        if $LastVar[i].is_a?(Array)
+          writer.bool($LastVar[i][0])
+          writer.int($LastVar[i][1])
+        else
+          writer.bool($game_switches[i])
+          writer.int($game_variables[i])
+        end
+        writer.bool($game_switches[i])
+        writer.int($game_variables[i])
+      end
     end
   end
+
   $Connection.update do |record|
     if record.int != $game_map.map_id
       $Partner_sprite.visible = false
@@ -134,6 +148,16 @@ def update_leader
     pattern = record.int
     src_x = record.bool ? pattern : 0
     $Partner_sprite.src_rect.set(src_x*$Partner_sprite.bitmap.width/4,((direction/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
+  
+    [76..100].each do |i|
+      last_switch = record.bool
+      last_var = record.int
+      switch = record.bool
+      var = record.int
+      $LastVar[i] = [$game_switches[i], $game_variables[i]]
+      $game_switches[i] = switch if last_switch != switch
+      $game_variables[i] = var if last_var != var
+    end
   end
 end
 
