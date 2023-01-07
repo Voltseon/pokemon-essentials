@@ -70,7 +70,7 @@ def pbCableClub(joinsession=false)
       pbMessageDisplay(msgwindow, _INTL("I'm sorry, {1} is not a trainer ID.", partner_trainer_id))
     end
     joinsession ? CableClub::session(msgwindow, partner_trainer_id) : CableClub::connect_to(msgwindow, partner_trainer_id)
-    raise Connection::Disconnected.new("disconnected")
+    raise Connection::Disconnected.new("disconnected") unless joinsession
   rescue Connection::Disconnected => e
     case e.message
     when "disconnected"
