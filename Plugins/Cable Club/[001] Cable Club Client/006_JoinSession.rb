@@ -85,6 +85,8 @@ module CableClub
         when :session
           $Connection = connection
           $Partner_sprite.setBitmap(GameData::TrainerType.charset_filename(partner_trainer_type))
+          $Partner_sprite.ox = $Partner_sprite.bitmap.width/8
+          $Partner_sprite.ox = $Partner_sprite.bitmap.height/8
           break
         else
           raise "Unknown state: #{state}"
@@ -110,7 +112,7 @@ def update_leader
     y = (((record.int/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT / 2
     $Partner_sprite.x = x
     $Partner_sprite.y = y
-    $Partner_sprite.src_rect.set(0,(record.int/2)-1,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
+    $Partner_sprite.src_rect.set(0,((record.int/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   end
 end
 
