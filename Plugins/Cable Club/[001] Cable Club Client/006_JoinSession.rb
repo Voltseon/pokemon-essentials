@@ -85,13 +85,12 @@ module CableClub
               writer.int($game_player.y)
               writer.int($game_player.direction)
             end
-
-            connection.update do |record|
-              connection.dispose if record.int != $game_map.map_id
-              partner_event.moveto(record.int,record.int)
-              partner_event.direction = record.int
-              partner_event.character_name = GameData::TrainerType.charset_filename(partner_trainer_type)
-            end
+          end
+          connection.update do |record|
+            connection.dispose if record.int != $game_map.map_id
+            partner_event.moveto(record.int,record.int)
+            partner_event.direction = record.int
+            partner_event.character_name = GameData::TrainerType.charset_filename_brief(partner_trainer_type)
           end
         else
           raise "Unknown state: #{state}"
