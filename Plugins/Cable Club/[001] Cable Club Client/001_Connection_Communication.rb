@@ -34,8 +34,10 @@ class Connection
         until @recv_records.empty?
           record = @recv_records.shift
         end
+      else
+        record = @recv_records.shift
       end
-      if record&.disconnect?
+      if record.disconnect?
         reason = record.str() rescue "unknown error"
         raise Disconnected.new(reason)
       end
