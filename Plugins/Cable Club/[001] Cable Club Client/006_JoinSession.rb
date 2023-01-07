@@ -125,3 +125,18 @@ def update_leader
   end
   $Partner_frame = ($Partner_frame + 1) % 40
 end
+
+=begin
+module Kernel
+  unless defined?(g_update)
+    class << Kernel
+      alias g_update update
+    end
+
+    def update
+      g_update
+      update_leader
+    end
+  end
+end
+=end

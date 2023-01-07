@@ -88,6 +88,7 @@ class Interpreter
   def update
     @loop_count = 0
     loop do
+      update_leader
       @loop_count += 1
       if @loop_count > 100   # Call Graphics.update for freeze prevention
         Graphics.update

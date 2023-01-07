@@ -42,7 +42,6 @@ def mainFunctionDebug
 end
 
 loop do
-  update_leader if defined?(update_leader)
   retval = mainFunction
   case retval
   when 0   # failed
