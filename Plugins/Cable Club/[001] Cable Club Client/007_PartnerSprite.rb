@@ -17,11 +17,6 @@ class PartnerSprite < Sprite_Character
     @character_name = value
   end
 
-  def set_character(direction, pattern)
-    @character.direction = direction
-    @character.pattern = pattern
-  end
-
   def drawpos; @drawpos; end
 
   def partner_name=(value)
