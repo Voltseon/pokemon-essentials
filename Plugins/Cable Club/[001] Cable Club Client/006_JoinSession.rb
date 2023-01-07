@@ -157,6 +157,9 @@ def update_leader
       $LastVar[i] = [$game_switches[i], $game_variables[i]]
       $game_switches[i] = switch if last_switch != switch
       $game_variables[i] = var if last_var != var
+      if last_switch != switch || last_var != var
+        $game_map.need_refresh = true
+      end
     end
   end
 end
