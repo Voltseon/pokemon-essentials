@@ -30,11 +30,10 @@ class Connection
     end
     # Process at most one record so that any control flow in the block doesn't cause us to lose records.
     if !@recv_records.empty?
-      record = @recv_records[0]
-      until @recv_records.length < 10
+      until @recv_records.length < 10 || @recv_records.empty?
         record = @recv_records.shift
       end
-      if record.disconnect?
+      if record&.disconnect?
         reason = record.str() rescue "unknown error"
         raise Disconnected.new(reason)
       end
