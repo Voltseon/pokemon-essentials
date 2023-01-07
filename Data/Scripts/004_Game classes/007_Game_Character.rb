@@ -82,8 +82,8 @@ class Game_Character
     @prelock_direction         = 0
   end
 
-  def x_offset; return @x_offset || 0; end
-  def y_offset; return @y_offset || 0; end
+  def x_offset; return @x_offset; end
+  def y_offset; return @y_offset; end
 
   def at_coordinate?(check_x, check_y)
     return check_x >= @x && check_x < @x + @width &&

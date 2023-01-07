@@ -138,8 +138,8 @@ def update_leader
     y = record.int
     z = (((y/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
     y = (((y/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
-    x -= record.int
-    y -= record.int
+    x += record.int
+    y += record.int
     $Partner_sprite.x = x
     $Partner_sprite.y = y
     $Partner_sprite.z = z
