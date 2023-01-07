@@ -89,7 +89,8 @@ module CableClub
           $Partner_sprite.setBitmap(GameData::TrainerType.charset_filename(partner_trainer_type))
           $Partner_sprite.ox = $Partner_sprite.bitmap.width/4
           $Partner_sprite.ox = $Partner_sprite.bitmap.height/4
-          break
+          state = :within
+        when :within
         else
           raise "Unknown state: #{state}"
         end
