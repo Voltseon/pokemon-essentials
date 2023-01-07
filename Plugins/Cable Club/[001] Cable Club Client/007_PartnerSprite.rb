@@ -1,7 +1,7 @@
 class PartnerSprite < IconSprite
   attr_accessor :name
   def initialize(*args)
-    super(args)
+    super(args[0], args[1], args[2])
     @name = ""
     @namebmp = BitmapSprite.new(128, 42, @viewport)
   end
