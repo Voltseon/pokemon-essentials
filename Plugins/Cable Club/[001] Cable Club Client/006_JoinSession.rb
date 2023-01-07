@@ -106,6 +106,9 @@ def update_leader
       writer.int(($game_player.real_x*10).to_i)
       writer.int(($game_player.real_y*10).to_i)
       writer.int($game_player.direction)
+
+      writer.string($game_player.character_name)
+      writer.bool($game_player.moving?)
     end
   end
   $Connection.update do |record|
@@ -121,7 +124,9 @@ def update_leader
     $Partner_sprite.x = x
     $Partner_sprite.y = y
     $Partner_sprite.z = z
-    $Partner_sprite.src_rect.set($Partner_frame/10*$Partner_sprite.bitmap.width/4,((record.int/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
+    $Partner_sprite.setBitmap("Graphics/Character/#{record.string}")
+    src_x = record.bool ? 0 : $Partner_frame/10*$Partner_sprite.bitmap.width/4
+    $Partner_sprite.src_rect.set(src_x,((record.int/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   end
   $Partner_frame = ($Partner_frame + 1) % 40
 end
