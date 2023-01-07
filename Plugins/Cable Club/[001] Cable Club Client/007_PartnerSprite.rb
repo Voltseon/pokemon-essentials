@@ -14,7 +14,7 @@ class PartnerSprite < Sprite_Character
   end
 
   def character_name=(value)
-    @character.character_name = value
+    @character.character_name = value.to_string
   end
 
   def set_character(direction, pattern)
