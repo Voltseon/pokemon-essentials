@@ -6,11 +6,11 @@ class PartnerSprite < Sprite_Character
   Y_OFFSET = 12
 
   def initialize(*args)
+    super(args[0],args[1])
     @partner_name = ""
     @namebmp = BitmapSprite.new(Graphics.width, Graphics.height, args[0])
     @namebmp.opacity = 184
     pbSetNarrowFont(@namebmp.bitmap)
-    super(args[0],args[1])
   end
 
   def drawpos; @drawpos; end
