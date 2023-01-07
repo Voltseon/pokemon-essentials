@@ -1,6 +1,5 @@
 $Connection = nil
 $Partner_sprite = nil
-$Partner_frame = 0
 
 module CableClub
   def self.session(msgwindow, partner_trainer_id)
@@ -105,10 +104,13 @@ def update_leader
       writer.int($game_map.map_id)
       writer.int(($game_player.real_x*10).to_i)
       writer.int(($game_player.real_y*10).to_i)
+      writer.int($game_player.x_offset)
+      writer.int($game_player.y_offset)
       writer.int($game_player.direction)
 
-      writer.string($game_player.character_name)
+      writer.str($game_player.character_name)
       writer.bool($game_player.moving?)
+      writer.int($game_player.pattern)
     end
   end
   $Connection.update do |record|
@@ -121,14 +123,16 @@ def update_leader
     y = record.int
     z = (((y/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
     y = (((y/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
+    x += record.int
+    y += record.int
     $Partner_sprite.x = x
     $Partner_sprite.y = y
     $Partner_sprite.z = z
-    $Partner_sprite.setBitmap("Graphics/Character/#{record.string}")
-    src_x = record.bool ? 0 : $Partner_frame/10*$Partner_sprite.bitmap.width/4
+
+    $Partner_sprite.setBitmap("Graphics/Character/#{record.str}")
+    src_x = record.bool ? 0 : record.int
     $Partner_sprite.src_rect.set(src_x,((record.int/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
   end
-  $Partner_frame = ($Partner_frame + 1) % 40
 end
 
 module Graphics
