@@ -96,6 +96,7 @@ class VoltorbFlip
     if @firstRound
       angleDiff = 10 * 20 / Graphics.frame_rate
       loop do
+update_leader
         @sprites["curtainL"].angle -= angleDiff
         @sprites["curtainR"].angle += angleDiff
         Graphics.update
@@ -497,6 +498,7 @@ class VoltorbFlip
     pbWait(Graphics.frame_rate / 10)
     # Wait for user input to continue
     loop do
+update_leader
       Graphics.update
       Input.update
       update
@@ -554,6 +556,7 @@ class VoltorbFlip
     @sprites["curtainR"].visible = true
     angleDiff = 18 * 20 / Graphics.frame_rate
     loop do
+update_leader
       @sprites["curtainL"].angle += angleDiff
       @sprites["curtainR"].angle -= angleDiff
       # Fixes a minor graphical bug
@@ -572,6 +575,7 @@ class VoltorbFlip
 
   def pbScene
     loop do
+update_leader
       Graphics.update
       Input.update
       getInput

@@ -138,6 +138,7 @@ class Interpreter
   def command_skip
     indent = @list[@index].indent
     loop do
+update_leader
       return true if @list[@index + 1].indent == indent
       @index += 1
     end
@@ -164,6 +165,7 @@ class Interpreter
     number_input_max_digits = nil
     # Check the next command(s) for things to add on to this text
     loop do
+update_leader
       next_index = pbNextIndex(@index)
       case @list[next_index].code
       when 401   # Continuation of 101 Show Text
@@ -246,6 +248,7 @@ class Interpreter
   def add_more_choices(choices, cancel_index, choice_index, indent)
     # Find index of next command after the current Show Choices command
     loop do
+update_leader
       break if @list[choice_index].indent == indent && ![402, 403, 404].include?(@list[choice_index].code)
       choice_index += 1
     end
@@ -269,6 +272,7 @@ class Interpreter
     # Find the "When" lines for this Show Choices command and update their index parameter
     temp_index = choice_index + 1
     loop do
+update_leader
       break if @list[temp_index].indent == indent && ![402, 403, 404].include?(@list[temp_index].code)
       if @list[temp_index].code == 402 && @list[temp_index].indent == indent
         @list[temp_index].parameters[0] += old_length
@@ -341,6 +345,7 @@ class Interpreter
     ret = 0
     timer = timeout_frames * Graphics.frame_rate / 20
     loop do
+update_leader
       Graphics.update
       Input.update
       pbUpdateSceneMap
@@ -455,6 +460,7 @@ class Interpreter
   def command_413
     indent = @list[@index].indent
     loop do
+update_leader
       @index -= 1
       return true if @list[@index].indent == indent
     end
@@ -466,6 +472,7 @@ class Interpreter
     indent = @list[@index].indent
     temp_index = @index
     loop do
+update_leader
       temp_index += 1
       return true if temp_index >= @list.size - 1   # Reached end of commands
       # Skip ahead to after the [Repeat Above] end of the current loop
@@ -517,6 +524,7 @@ class Interpreter
     label_name = @parameters[0]
     temp_index = 0
     loop do
+update_leader
       return true if temp_index >= @list.size - 1   # Reached end of commands
       # Check whether this command is a label with the desired name
       if @list[temp_index].code == 118 &&
@@ -1104,6 +1112,7 @@ class Interpreter
     script = @list[@index].parameters[0] + "\n"
     # Look for more script commands or a continuation of one, and add them to script
     loop do
+update_leader
       break if ![355, 655].include?(@list[@index + 1].code)
       script += @list[@index + 1].parameters[0] + "\n"
       @index += 1

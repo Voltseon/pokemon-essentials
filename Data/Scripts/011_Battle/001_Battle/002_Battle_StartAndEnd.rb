@@ -42,6 +42,7 @@ class Battle
     # Check if battle is possible, including changing the number of battlers per
     # side if necessary
     loop do
+update_leader
       needsChanging = false
       2.times do |side|   # Each side in turn
         next if side == 1 && wildBattle?   # Wild side's size already checked above
@@ -319,7 +320,8 @@ class Battle
   #=============================================================================
   def pbBattleLoop
     @turnCount = 0
-    loop do   # Now begin the battle loop
+    loop do
+update_leader   # Now begin the battle loop
       PBDebug.log("")
       PBDebug.log("***Round #{@turnCount + 1}***")
       if @debug && @turnCount >= 100

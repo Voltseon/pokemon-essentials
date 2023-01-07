@@ -146,6 +146,7 @@ class Battle
     # Check through each fainted battler to see if that spot can be filled.
     switched = []
     loop do
+update_leader
       switched.clear
       @battlers.each do |b|
         next if !b || !b.fainted?

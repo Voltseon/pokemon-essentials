@@ -41,6 +41,7 @@ def oggfiletime(file)
   pages = []
   page = nil
   loop do
+update_leader
     page = getOggPage(file)
     break if !page
     pages.push(page)
@@ -136,6 +137,7 @@ def getPlayTime2(filename)
     file.pos = 0
     # Find the length of an MP3 file
     loop do
+update_leader
       rstr = ""
       ateof = false
       until file.eof?

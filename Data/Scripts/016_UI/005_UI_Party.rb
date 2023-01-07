@@ -538,6 +538,7 @@ class PokemonParty_Scene
     @sprites["helpwindow"].visible = false
     pbPlayDecisionSE
     loop do
+update_leader
       Graphics.update
       Input.update
       self.update
@@ -565,6 +566,7 @@ class PokemonParty_Scene
       cmdwindow.y -= @sprites["messagebox"].height
       cmdwindow.z = @viewport.z + 1
       loop do
+update_leader
         Graphics.update
         Input.update
         cmdwindow.visible = true if !@sprites["messagebox"].busy?
@@ -598,6 +600,7 @@ class PokemonParty_Scene
       helpwindow.text = helptext
       pbBottomLeft(helpwindow)
       loop do
+update_leader
         Graphics.update
         Input.update
         cmdwindow.update
@@ -742,6 +745,7 @@ class PokemonParty_Scene
     @activecmd = initialsel if initialsel >= 0
     pbRefresh
     loop do
+update_leader
       Graphics.update
       Input.update
       self.update
@@ -795,6 +799,7 @@ class PokemonParty_Scene
     case key
     when Input::LEFT
       loop do
+update_leader
         currentsel -= 1
         break unless currentsel > 0 && currentsel < @party.length && !@party[currentsel]
       end
@@ -804,6 +809,7 @@ class PokemonParty_Scene
       currentsel = numsprites - 1 if currentsel < 0
     when Input::RIGHT
       loop do
+update_leader
         currentsel += 1
         break unless currentsel < @party.length && !@party[currentsel]
       end
@@ -822,6 +828,7 @@ class PokemonParty_Scene
         currentsel = numsprites - 1 if currentsel >= @party.length
       else
         loop do
+update_leader
           currentsel -= 2
           break unless currentsel > 0 && !@party[currentsel]
         end
@@ -1063,6 +1070,7 @@ class PokemonPartyScreen
     end
     @scene.pbStartScene(@party, _INTL("Choose Pokémon and confirm."), annot, true)
     loop do
+update_leader
       realorder = []
       @party.length.times do |i|
         @party.length.times do |j|
@@ -1145,6 +1153,7 @@ class PokemonPartyScreen
       annot
     )
     loop do
+update_leader
       @scene.pbSetHelpText(
         (@party.length > 1) ? _INTL("Choose a Pokémon.") : _INTL("Choose Pokémon or cancel.")
       )
@@ -1177,6 +1186,7 @@ class PokemonPartyScreen
       annot
     )
     loop do
+update_leader
       @scene.pbSetHelpText(
         (@party.length > 1) ? _INTL("Choose a Pokémon.") : _INTL("Choose Pokémon or cancel.")
       )
@@ -1205,6 +1215,7 @@ class PokemonPartyScreen
                         nil, false, can_access_storage)
     # Main loop
     loop do
+update_leader
       # Choose a Pokémon or cancel or press Action to quick switch
       @scene.pbSetHelpText((@party.length > 1) ? _INTL("Choose a Pokémon.") : _INTL("Choose Pokémon or cancel."))
       party_idx = @scene.pbChoosePokemon(false, -1, 1)
@@ -1256,6 +1267,7 @@ class PokemonPartyScreen
           @scene.pbSetHelpText(_INTL("Use on which Pokémon?"))
           old_party_idx = party_idx
           loop do
+update_leader
             @scene.pbPreSelect(old_party_idx)
             party_idx = @scene.pbChoosePokemon(true, party_idx)
             break if party_idx < 0
@@ -1434,6 +1446,7 @@ MenuHandlers.add(:party_menu_item, :move, {
     old_party_idx = party_idx
     moved = false
     loop do
+update_leader
       screen.scene.pbPreSelect(old_party_idx)
       party_idx = screen.scene.pbChoosePokemon(true, party_idx)
       break if party_idx < 0

@@ -19,6 +19,7 @@ module Battle::CatchAndStoreMixin
               _INTL("Check party")]
       cmds.delete_at(1) if @sendToBoxes == 2
       loop do
+update_leader
         cmd = pbShowCommands(_INTL("Where do you want to send {1} to?", pkmn.name), cmds, 99)
         break if cmd == 99   # Cancelling = send to a Box
         cmd += 1 if cmd >= 1 && @sendToBoxes == 2

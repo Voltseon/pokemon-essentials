@@ -516,6 +516,7 @@ class MiningGameScene
     pbSEPlay("Mining ping")
     pbMessage(_INTL("Something pinged in the wall!\n{1} confirmed!", @items.length))
     loop do
+update_leader
       update
       Graphics.update
       Input.update

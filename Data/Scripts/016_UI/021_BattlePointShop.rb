@@ -251,6 +251,7 @@ class BattlePointShop_Scene
     i = 0
     pbPlayDecisionSE
     loop do
+update_leader
       Graphics.update
       Input.update
       self.update
@@ -275,6 +276,7 @@ class BattlePointShop_Scene
     yielded = false
     pbPlayDecisionSE
     loop do
+update_leader
       Graphics.update
       Input.update
       wasbusy = cw.busy?
@@ -307,6 +309,7 @@ class BattlePointShop_Scene
     cw.index = 0
     pbPlayDecisionSE
     loop do
+update_leader
       cw.visible = !dw.busy?
       Graphics.update
       Input.update
@@ -343,6 +346,7 @@ class BattlePointShop_Scene
       pbBottomRight(numwindow)
       numwindow.y -= helpwindow.height
       loop do
+update_leader
         Graphics.update
         Input.update
         numwindow.update
@@ -396,6 +400,7 @@ class BattlePointShop_Scene
     pbActivateWindow(@sprites, "itemwindow") {
       pbRefresh
       loop do
+update_leader
         Graphics.update
         Input.update
         olditem = itemwindow.item
@@ -443,6 +448,7 @@ class BattlePointShopScreen
     @scene.pbStartScene(@stock, @adapter)
     item = nil
     loop do
+update_leader
       item = @scene.pbChooseItem
       break if !item
       quantity       = 0

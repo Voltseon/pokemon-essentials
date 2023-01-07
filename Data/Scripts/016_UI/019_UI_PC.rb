@@ -4,6 +4,7 @@
 def pbPCItemStorage
   command = 0
   loop do
+update_leader
     command = pbShowCommandsWithHelp(nil,
        [_INTL("Withdraw Item"),
         _INTL("Deposit Item"),
@@ -60,6 +61,7 @@ def pbPCMailbox
     pbMessage(_INTL("There's no Mail here."))
   else
     loop do
+update_leader
       command = 0
       commands = []
       $PokemonGlobal.mailbox.each do |mail|
@@ -116,6 +118,7 @@ end
 def pbTrainerPCMenu
   command = 0
   loop do
+update_leader
     command = pbMessage(_INTL("What do you want to do?"),
                         [_INTL("Item Storage"),
                          _INTL("Mailbox"),
@@ -143,6 +146,7 @@ def pbPokeCenterPC
   # Main loop
   command = 0
   loop do
+update_leader
     choice = pbMessage(_INTL("Which PC should be accessed?"), command_list, -1, nil, command)
     if choice < 0
       pbPlayCloseMenuSE
@@ -169,6 +173,7 @@ MenuHandlers.add(:pc_menu, :pokemon_storage, {
     pbMessage(_INTL("\\se[PC access]The Pokémon Storage System was opened."))
     command = 0
     loop do
+update_leader
       command = pbShowCommandsWithHelp(nil,
          [_INTL("Organize Boxes"),
           _INTL("Withdraw Pokémon"),

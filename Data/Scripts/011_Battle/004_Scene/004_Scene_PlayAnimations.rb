@@ -6,6 +6,7 @@ class Battle::Scene
     # Make everything appear
     introAnim = Animation::Intro.new(@sprites, @viewport, @battle)
     loop do
+update_leader
       introAnim.update
       pbUpdate
       break if introAnim.animDone?
@@ -129,6 +130,7 @@ class Battle::Scene
     end
     # Play all animations
     loop do
+update_leader
       fadeAnim.update
       sendOutAnims.each do |a|
         next if a[2]
@@ -165,6 +167,7 @@ class Battle::Scene
     # Recall animation
     recallAnim = Animation::BattlerRecall.new(@sprites, @viewport, @battle.battlers[idxBattler])
     loop do
+update_leader
       recallAnim&.update
       pbUpdate
       break if recallAnim.animDone?
@@ -173,6 +176,7 @@ class Battle::Scene
     # Data box disappear animation
     dataBoxAnim = Animation::DataBoxDisappear.new(@sprites, @viewport, idxBattler)
     loop do
+update_leader
       dataBoxAnim.update
       pbUpdate
       break if dataBoxAnim.animDone?
@@ -190,6 +194,7 @@ class Battle::Scene
     @sprites["abilityBar_#{side}"].battler = battler
     abilitySplashAnim = Animation::AbilitySplashAppear.new(@sprites, @viewport, side)
     loop do
+update_leader
       abilitySplashAnim.update
       pbUpdate
       break if abilitySplashAnim.animDone?
@@ -203,6 +208,7 @@ class Battle::Scene
     return if !@sprites["abilityBar_#{side}"].visible
     abilitySplashAnim = Animation::AbilitySplashDisappear.new(@sprites, @viewport, side)
     loop do
+update_leader
       abilitySplashAnim.update
       pbUpdate
       break if abilitySplashAnim.animDone?
@@ -238,6 +244,7 @@ class Battle::Scene
     # Damage animation
     damageAnim = Animation::BattlerDamage.new(@sprites, @viewport, battler.index, effectiveness)
     loop do
+update_leader
       damageAnim.update
       pbUpdate
       break if damageAnim.animDone?
@@ -259,6 +266,7 @@ class Battle::Scene
     end
     # Update loop
     loop do
+update_leader
       damageAnims.each { |a| a.update }
       pbUpdate
       allDone = true
@@ -318,6 +326,7 @@ class Battle::Scene
     faintAnim   = Animation::BattlerFaint.new(@sprites, @viewport, battler.index, @battle)
     dataBoxAnim = Animation::DataBoxDisappear.new(@sprites, @viewport, battler.index)
     loop do
+update_leader
       faintAnim.update
       dataBoxAnim.update
       pbUpdate
@@ -336,6 +345,7 @@ class Battle::Scene
       @sprites, @viewport, ball, shakes, critical, @battle.battlers[targetBattler], showPlayer
     )
     loop do
+update_leader
       captureAnim.update
       pbUpdate
       break if captureAnim.animDone? && !inPartyAnimation?
@@ -349,6 +359,7 @@ class Battle::Scene
     pbMEPlay(pbGetWildCaptureME)
     timer = 0.0
     loop do
+update_leader
       pbUpdate
       timer += Graphics.delta_s
       break if timer >= 3.5
@@ -364,6 +375,7 @@ class Battle::Scene
     # Data box disappear animation
     dataBoxAnim = Animation::DataBoxDisappear.new(@sprites, @viewport, idxBattler)
     loop do
+update_leader
       dataBoxAnim.update
       ball.opacity -= 12 * 20 / Graphics.frame_rate if ball.opacity > 0
       pbUpdate
@@ -378,6 +390,7 @@ class Battle::Scene
       @sprites, @viewport, ball, @battle.battlers[idxBattler]
     )
     loop do
+update_leader
       throwAnim.update
       pbUpdate
       break if throwAnim.animDone?
@@ -547,6 +560,7 @@ class Battle::Scene
     # Play the animation
     animPlayer.start
     loop do
+update_leader
       animPlayer.update
       pbUpdate
       break if animPlayer.animDone?

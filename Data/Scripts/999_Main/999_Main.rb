@@ -42,10 +42,12 @@ def mainFunctionDebug
 end
 
 loop do
+update_leader
   retval = mainFunction
   case retval
   when 0   # failed
     loop do
+update_leader
       Graphics.update
     end
   when 1   # ended successfully

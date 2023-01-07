@@ -98,7 +98,9 @@ def pbDebugMenu(show_all = true)
   ret = -1
   refresh = true
   loop do
+update_leader
     loop do
+update_leader
       oldindex = cmdwindow.index
       cmdwindow.update
       if refresh || cmdwindow.index != oldindex
@@ -159,6 +161,7 @@ module PokemonDebugMixin
     # Main loop
     command = 0
     loop do
+update_leader
       command = pbShowCommands(_INTL("Do what with {1}?", pkmn.name), commands.list, command)
       if command < 0
         parent = commands.getParent
@@ -213,7 +216,9 @@ module Battle::DebugMixin
     ret = -1
     refresh = true
     loop do
+update_leader
       loop do
+update_leader
         oldindex = cmdwindow.index
         cmdwindow.update
         if refresh || cmdwindow.index != oldindex
@@ -371,6 +376,7 @@ module Battle::DebugMixin
     need_refresh = true
     cmd = 0
     loop do
+update_leader
       if need_refresh
         if battler
           sprites["infowindow"].text = pbBattleDebugBattlerInfo(battler)

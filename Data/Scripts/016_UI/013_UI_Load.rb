@@ -187,6 +187,7 @@ class PokemonLoad_Scene
   def pbChoose(commands)
     @sprites["cmdwindow"].commands = commands
     loop do
+update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -303,6 +304,7 @@ class PokemonLoadScreen
     @scene.pbSetParty(@save_data[:player]) if show_continue
     @scene.pbStartScene2
     loop do
+update_leader
       command = @scene.pbChoose(commands)
       pbPlayDecisionSE if command != cmd_quit
       case command

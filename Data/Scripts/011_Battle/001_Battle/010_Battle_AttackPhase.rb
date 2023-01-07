@@ -108,6 +108,7 @@ class Battle
     end
     # Main move processing loop
     loop do
+update_leader
       priority = pbPriority
       # Forced to go next
       advance = false
@@ -142,6 +143,7 @@ class Battle
       else
         quashLevel = 0
         loop do
+update_leader
           quashLevel += 1
           moreQuash = false
           priority.each do |b|

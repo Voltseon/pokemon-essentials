@@ -70,6 +70,7 @@ def pbGenerateBattleTrainer(idxTrainer, rules)
   # There are more possible Pokémon than there are spaces available in the
   # trainer's party; randomly choose Pokémon
   loop do
+update_leader
     opponent.party.clear
     while opponent.party.length < rules.ruleset.suggestedNumber
       rnd = pokemonnumbers[rand(pokemonnumbers.length)]
@@ -150,6 +151,7 @@ def pbBattleFactoryPokemon(rules, win_count, swap_count, rentals)
   end
   party = []
   loop do
+update_leader
     party.clear
     while party.length < ((rentals.length == 0) ? 6 : old_max)
       rnd = pokemonNumbers[0] + rand(pokemonNumbers[1] - pokemonNumbers[0] + 1)

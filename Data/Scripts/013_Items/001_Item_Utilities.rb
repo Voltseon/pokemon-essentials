@@ -210,6 +210,7 @@ def pbTopRightWindow(text, scene = nil)
   window.z     = 99999
   pbPlayDecisionSE
   loop do
+update_leader
     Graphics.update
     Input.update
     window.update
@@ -448,6 +449,7 @@ def pbMaxUsesOfEVLoweringBerry(stat, pkmn)
     bonus_per_use += 1 if pkmn.poke_ball == :LUXURYBALL
     has_soothe_bell = pkmn.hasItem?(:SOOTHEBELL)
     loop do
+update_leader
       uses += 1
       gain = [10, 5, 2][happiness / 100]
       gain += bonus_per_use
@@ -599,6 +601,7 @@ def pbLearnMove(pkmn, move, ignore_if_known = false, by_machine = false, &block)
                   pkmn_name, move_name, pkmn.numMoves.to_word), &block)
   if pbConfirmMessage(_INTL("Should {1} forget a move to learn {2}?", pkmn_name, move_name), &block)
     loop do
+update_leader
       move_index = pbForgetMove(pkmn, move)
       if move_index >= 0
         old_move_name = pkmn.moves[move_index].name
@@ -659,6 +662,7 @@ def pbUseItem(bag, item, bagscene = nil)
       screen = PokemonPartyScreen.new(scene, $player.party)
       screen.pbStartScene(_INTL("Use on which Pokémon?"), false, annot)
       loop do
+update_leader
         scene.pbSetHelpText(_INTL("Use on which Pokémon?"))
         chosen = screen.pbChoosePokemon
         if chosen < 0

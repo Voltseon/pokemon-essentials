@@ -608,6 +608,7 @@ def pbMoveTowardPlayer(event)
   maxsize = [$game_map.width, $game_map.height].max
   return if !pbEventCanReachPlayer?(event, $game_player, maxsize)
   loop do
+update_leader
     x = event.x
     y = event.y
     event.move_toward_player

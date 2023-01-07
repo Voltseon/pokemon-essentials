@@ -431,6 +431,7 @@ module RandomDungeon
       maxHeight = @usable_height - (@buffer_y * 2)
       return if maxWidth < 0 || maxHeight < 0
       loop do
+update_leader
         @need_redraw = false
         @map_data.clear
         # Generate the basic layout of the map
@@ -531,12 +532,14 @@ module RandomDungeon
       ]
       visited = []
       loop do
+update_leader
         break if to_check.empty?
         checking = to_check.shift
         x1, x2, y, dy = checking
         x = x1
         if !visited[y * maxWidth + x] && tile_is_ground?(@map_data[x + @buffer_x, y + @buffer_y, 0])
           loop do
+update_leader
             break if visited[y * maxWidth + x - 1] || !tile_is_ground?(@map_data[x - 1 + @buffer_x, y + @buffer_y, 0])
             visited[y * maxWidth + x - 1] = true
             x -= 1
@@ -544,8 +547,10 @@ module RandomDungeon
         end
         to_check.push([x, x1 - 1, y - dy, -dy]) if x < x1
         loop do
+update_leader
           break if x1 > x2
           loop do
+update_leader
             break if visited[y * maxWidth + x1] || !tile_is_ground?(@map_data[x1 + @buffer_x, y + @buffer_y, 0])
             visited[y * maxWidth + x1] = true
             to_check.push([x, x1, y + dy, dy])
@@ -554,6 +559,7 @@ module RandomDungeon
           end
           x1 += 1
           loop do
+update_leader
             break if x1 >= x2
             break if !visited[y * maxWidth + x1] && tile_is_ground?(@map_data[x1 + @buffer_x, y + @buffer_y, 0])
             x1 += 1

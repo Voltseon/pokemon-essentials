@@ -22,6 +22,7 @@ def pbEditMysteryGift(type, item, id = 0, giftname = "")
       commands.push(item.obtain_text) if item.obtain_text && !item.obtain_text.empty?
       commands.push(_INTL("[Custom]"))
       loop do
+update_leader
         command = pbMessage(
           _INTL("Choose a phrase to be where the gift Pokémon was obtained from."),
           commands, -1
@@ -46,6 +47,7 @@ def pbEditMysteryGift(type, item, id = 0, giftname = "")
       params.setDefaultValue(type)
       params.setCancelValue(0)
       loop do
+update_leader
         newtype = pbMessageChooseNumber(_INTL("Choose a quantity of {1}.",
                                               GameData::Item.get(item).name), params)
         if newtype == 0
@@ -71,6 +73,7 @@ def pbEditMysteryGift(type, item, id = 0, giftname = "")
       params.setDefaultValue(id)
       params.setCancelValue(0)
       loop do
+update_leader
         newid = pbMessageChooseNumber(_INTL("Choose a unique ID for this gift."), params)
         if newid == 0
           return nil if pbConfirmMessage(_INTL("Stop editing this gift?"))
@@ -83,6 +86,7 @@ def pbEditMysteryGift(type, item, id = 0, giftname = "")
       end
     end
     loop do
+update_leader
       newgiftname = pbMessageFreeText(_INTL("Enter a name for the gift."), giftname, false, 250)
       if newgiftname != ""
         giftname = newgiftname
@@ -153,6 +157,7 @@ def pbManageMysteryGifts
   # Show list of all gifts.
   command = 0
   loop do
+update_leader
     commands = pbRefreshMGCommands(master, online)
     command = pbMessage(_INTL("\\ts[]Manage Mystery Gifts (X=online)."), commands, -1, nil, command)
     # Gift chosen
@@ -174,6 +179,7 @@ def pbManageMysteryGifts
     elsif command >= 0 && command < commands.length - 2   # A gift
       cmd = 0
       loop do
+update_leader
         commands = pbRefreshMGCommands(master, online)
         gift = master[command]
         cmds = [_INTL("Toggle on/offline"),
@@ -263,6 +269,7 @@ def pbDownloadMysteryGift(trainer)
       pbMessageDisplay(sprites["msgwindow"], _INTL("No new gifts are available."))
     else
       loop do
+update_leader
         commands = []
         pending.each do |gift|
           commands.push(gift[3])
@@ -288,6 +295,7 @@ def pbDownloadMysteryGift(trainer)
           end
           distanceDiff = 8 * 20 / Graphics.frame_rate
           loop do
+update_leader
             Graphics.update
             Input.update
             sprite.update
@@ -308,6 +316,7 @@ def pbDownloadMysteryGift(trainer)
           pending.delete_at(command)
           opacityDiff = 16 * 20 / Graphics.frame_rate
           loop do
+update_leader
             Graphics.update
             Input.update
             sprite.update

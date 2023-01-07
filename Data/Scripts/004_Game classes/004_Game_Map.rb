@@ -470,6 +470,7 @@ def pbScrollMap(direction, distance, speed)
     oldx = $game_map.display_x
     oldy = $game_map.display_y
     loop do
+update_leader
       Graphics.update
       Input.update
       break if !$game_map.scrolling?

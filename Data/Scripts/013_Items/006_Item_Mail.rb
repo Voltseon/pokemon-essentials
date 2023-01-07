@@ -82,6 +82,7 @@ def pbDisplayMail(mail, _bearer = nil)
   end
   pbFadeInAndShow(sprites)
   loop do
+update_leader
     Graphics.update
     Input.update
     pbUpdateSpriteHash(sprites)
@@ -97,6 +98,7 @@ end
 def pbWriteMail(item, pkmn, pkmnid, scene)
   message = ""
   loop do
+update_leader
     message = pbMessageFreeText(_INTL("Please enter a message (max. 250 characters)."),
                                 "", false, 250, Graphics.width) { scene.pbUpdate }
     if message != ""

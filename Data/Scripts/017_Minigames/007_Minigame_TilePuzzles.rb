@@ -495,6 +495,7 @@ class TilePuzzleScene
 
   def pbMain
     loop do
+update_leader
       update
       Graphics.update
       Input.update
@@ -519,6 +520,7 @@ class TilePuzzleScene
           pbWait(Graphics.frame_rate / 2)
         end
         loop do
+update_leader
           Graphics.update
           Input.update
           break if Input.trigger?(Input::USE) || Input.trigger?(Input::BACK)

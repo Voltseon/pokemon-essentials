@@ -137,6 +137,7 @@ class File
     t = Time.now
     File.open(source, "rb") do |f|
       loop do
+update_leader
         r = f.read(4096)
         break if !r
         if Time.now - t > 1

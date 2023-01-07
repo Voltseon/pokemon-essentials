@@ -142,6 +142,7 @@ class PokemonPhone_Scene
       index = -1
       switch_index = -1
       loop do
+update_leader
         Graphics.update
         Input.update
         pbUpdateSpriteHash(@sprites)
@@ -215,6 +216,7 @@ class PokemonPhoneScreen
     end
     @scene.pbStartScene
     loop do
+update_leader
       contact = @scene.pbChooseContact
       break if !contact
       commands = []

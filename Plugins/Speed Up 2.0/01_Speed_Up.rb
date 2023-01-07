@@ -64,6 +64,7 @@ def pbFreeTextNoWindow(currenttext, passwordbox, maxlength, width = 240)
   window.passwordChar = "*" if passwordbox
   Input.text_input = true
   loop do
+update_leader
     Graphics.update
     Input.update
     if Input.triggerex?(:ESCAPE)

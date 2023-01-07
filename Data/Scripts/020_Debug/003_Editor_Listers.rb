@@ -35,6 +35,7 @@ def pbListScreen(title, lister)
   list.commands = commands
   list.index    = selindex
   loop do
+update_leader
     Graphics.update
     Input.update
     list.update
@@ -83,6 +84,7 @@ def pbListScreenBlock(title, lister)
   list.commands = commands
   list.index = selindex
   loop do
+update_leader
     Graphics.update
     Input.update
     list.update

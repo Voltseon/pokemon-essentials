@@ -425,6 +425,7 @@ class PurifyChamberScreen
     @scene.pbOpenSetDetail(chamber.currentSet)
     heldpkmn = nil
     loop do
+update_leader
       # Commands
       # array[0]==0 - a position was chosen
       # array[0]==1 - a new set was chosen
@@ -607,6 +608,7 @@ class PurifyChamberScreen
     end
     @scene.pbOpenSet(chamber.currentSet)
     loop do
+update_leader
       set = @scene.pbChooseSet
       if set < 0
         if !@scene.pbConfirm("Continue viewing holograms?")
@@ -1187,6 +1189,7 @@ class PurifyChamberScene
   def pbSetScreen
     pbDeactivateWindows(@sprites) {
       loop do
+update_leader
         Graphics.update
         Input.update
         pbUpdate
@@ -1222,6 +1225,7 @@ class PurifyChamberScene
     pbActivateWindow(@sprites, "setwindow") {
       oldindex = @sprites["setwindow"].index
       loop do
+update_leader
         if oldindex != @sprites["setwindow"].index
           oldindex = @sprites["setwindow"].index
           @sprites["setview"].set = oldindex

@@ -150,6 +150,7 @@ class PokemonEggHatch_Scene
     targets.push(@sprites["pokemon"].x)
     targets.each_with_index do |target, i|
       loop do
+update_leader
         break if i.even? && @sprites["pokemon"].x >= target
         break if i.odd? && @sprites["pokemon"].x <= target
         @sprites["pokemon"].x += speed

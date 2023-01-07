@@ -90,6 +90,7 @@ class BattleSwapScene
   def pbChoosePokemon(canCancel)
     pbActivateWindow(@sprites, "list") {
       loop do
+update_leader
         Graphics.update
         Input.update
         pbUpdate
@@ -161,6 +162,7 @@ class BattleSwapScreen
     @scene.pbStartRentScene(rentals)
     chosen = []
     loop do
+update_leader
       index = @scene.pbChoosePokemon(false)
       commands = []
       commands.push(_INTL("SUMMARY"))
@@ -200,6 +202,7 @@ class BattleSwapScreen
   def pbStartSwap(currentPokemon, newPokemon)
     @scene.pbStartSwapScene(currentPokemon, newPokemon)
     loop do
+update_leader
       pkmn = @scene.pbChoosePokemon(true)
       if pkmn >= 0
         commands = [_INTL("SUMMARY"), _INTL("SWAP"), _INTL("RECHOOSE")]
@@ -211,6 +214,7 @@ class BattleSwapScreen
           @scene.pbSwapChosen(pkmn)
           yourPkmn = pkmn
           loop do
+update_leader
             pkmn = @scene.pbChoosePokemon(true)
             if pkmn >= 0
               if @scene.pbConfirm(_INTL("Accept this Pokémon?"))

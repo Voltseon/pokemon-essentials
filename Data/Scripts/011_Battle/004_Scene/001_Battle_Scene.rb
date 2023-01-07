@@ -193,6 +193,7 @@ class Battle::Scene
     yielded = false
     timer = 0.0
     loop do
+update_leader
       pbUpdate(cw)
       if !cw.busy?
         if !yielded
@@ -239,6 +240,7 @@ class Battle::Scene
     yielded = false
     timer = 0.0
     loop do
+update_leader
       pbUpdate(cw)
       if !cw.busy?
         if !yielded
@@ -285,6 +287,7 @@ class Battle::Scene
     cw.viewport = @viewport
     PBDebug.log(msg)
     loop do
+update_leader
       cw.visible = (!dw.busy?)
       pbUpdate(cw)
       dw.update

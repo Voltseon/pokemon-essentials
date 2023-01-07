@@ -363,6 +363,7 @@ class PokemonEvolutionScene
     alpha = 0
     alphaDiff = 10 * 20 / Graphics.frame_rate
     loop do
+update_leader
       sprite.color.red   = 255
       sprite.color.green = 255
       sprite.color.blue  = 255
@@ -446,6 +447,7 @@ class PokemonEvolutionScene
     tone = 0
     toneDiff = 20 * 20 / Graphics.frame_rate
     loop do
+update_leader
       Graphics.update
       pbUpdate(true)
       pbUpdateExpandScreen
@@ -478,6 +480,7 @@ class PokemonEvolutionScene
     tone = 255
     toneDiff = 40 * 20 / Graphics.frame_rate
     loop do
+update_leader
       Graphics.update
       pbUpdate
       tone -= toneDiff
@@ -541,6 +544,7 @@ class PokemonEvolutionScene
     @sprites["msgwindow"].text = _INTL("{1} is evolving!", @pokemon.name)
     timer = 0.0
     loop do
+update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -553,6 +557,7 @@ class PokemonEvolutionScene
     pbBGMPlay("Evolution")
     canceled = false
     loop do
+update_leader
       pbUpdateNarrowScreen
       metaplayer1.update
       metaplayer2.update

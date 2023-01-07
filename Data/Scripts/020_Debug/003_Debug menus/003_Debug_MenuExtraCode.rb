@@ -172,6 +172,7 @@ def pbDebugVariables(mode)
   right_window.mode     = mode
   right_window.active   = true
   loop do
+update_leader
     Graphics.update
     Input.update
     pbUpdateSpriteHash(sprites)
@@ -233,6 +234,7 @@ def pbDebugDayCare
   compat = 0
   need_refresh = true
   loop do
+update_leader
     if need_refresh
       commands.clear
       day_care.slots.each_with_index do |slot, i|
@@ -463,6 +465,7 @@ def pbDebugRoamers
   cmdwindow = sprites["cmdwindow"]
   cmdwindow.active = true
   loop do
+update_leader
     Graphics.update
     Input.update
     pbUpdateSpriteHash(sprites)
@@ -802,6 +805,7 @@ class PokemonDebugPartyScreen
     @helpWindow.visible = false
     pbPlayDecisionSE
     loop do
+update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -831,6 +835,7 @@ class PokemonDebugPartyScreen
       cmdwindow.y -= @messageBox.height
       cmdwindow.z = @viewport.z + 1
       loop do
+update_leader
         Graphics.update
         Input.update
         cmdwindow.visible = true if !@messageBox.busy?
@@ -863,6 +868,7 @@ class PokemonDebugPartyScreen
       @helpWindow.text = text
       pbBottomLeft(@helpWindow)
       loop do
+update_leader
         Graphics.update
         Input.update
         cmdwindow.update

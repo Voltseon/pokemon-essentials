@@ -15,6 +15,7 @@ def pbEncountersEditor
   ret = 0
   need_refresh = true
   loop do
+update_leader
     if need_refresh
       commands.clear
       maps.clear
@@ -137,6 +138,7 @@ def pbEncounterMapVersionEditor(enc_data)
   ret = 0
   need_refresh = true
   loop do
+update_leader
     if need_refresh
       commands.clear
       enc_types.clear
@@ -264,6 +266,7 @@ def pbEncounterTypeEditor(enc_data, enc_type)
   ret = 0
   need_refresh = true
   loop do
+update_leader
     if need_refresh
       enc_type_name = GameData::EncounterType.get(enc_type).real_name
       commands.clear
@@ -509,6 +512,7 @@ def pbTrainerBattleEditor
             data.push(tr_data.items[i])
           end
           loop do
+update_leader
             data = TrainerBattleProperty.set(tr_data.real_name, data)
             break if !data
             party = []
@@ -699,6 +703,7 @@ end
 def pbMetadataScreen
   sel_player = -1
   loop do
+update_leader
     sel_player = pbListScreen(_INTL("SET METADATA"), MetadataLister.new(sel_player, true))
     break if sel_player == -1
     case sel_player
@@ -787,6 +792,7 @@ end
 #===============================================================================
 def pbMapMetadataScreen(map_id = 0)
   loop do
+update_leader
     map_id = pbListScreen(_INTL("SET METADATA"), MapLister.new(map_id))
     break if map_id < 0
     (map_id == 0) ? pbEditMetadata : pbEditMapMetadata(map_id)
@@ -1019,9 +1025,11 @@ def pbRegionalDexEditor(dex)
   refresh_list = true
   cmd = [0, 0]   # [action, index in list]
   loop do
+update_leader
     # Populate commands
     if refresh_list
       loop do
+update_leader
         break if dex.length == 0 || dex[-1]
         dex.slice!(-1)
       end
@@ -1133,6 +1141,7 @@ def pbRegionalDexEditorMain
   oldsel = -1
   cmd = [0, 0]   # [action, index in list]
   loop do
+update_leader
     # Populate commands
     if refresh_list
       commands = [_INTL("[ADD DEX]")]
@@ -1291,6 +1300,7 @@ def pbAnimationsOrganiser
   oldsel = -1
   cmd = [0, 0]
   loop do
+update_leader
     if refreshlist
       commands = []
       list.length.times do |i|

@@ -86,6 +86,7 @@ class PokemonDuel
     @special = [false, false]
     decision = nil
     loop do
+update_leader
       @hp[0] = 0 if @hp[0] < 0
       @hp[1] = 0 if @hp[1] < 0
       pbRefresh

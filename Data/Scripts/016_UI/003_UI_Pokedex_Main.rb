@@ -386,6 +386,7 @@ class PokemonPokedex_Scene
       # Remove unseen species from the end of the list
       i = dexlist.length - 1
       loop do
+update_leader
         break if i < 0 || !dexlist[i] || $player.seen?(dexlist[i][:species])
         dexlist[i] = nil
         i -= 1
@@ -934,6 +935,7 @@ class PokemonPokedex_Scene
     nextparam = cmds.length % 2
     pbRefreshDexSearchParam(mode, cmds, selindex, index)
     loop do
+update_leader
       pbUpdate
       if index != oldindex || minmax != oldminmax
         @sprites["searchcursor"].minmax = minmax
@@ -1136,6 +1138,7 @@ class PokemonPokedex_Scene
     pbRefreshDexSearch(params, index)
     pbFadeInAndShow(@sprites)
     loop do
+update_leader
       Graphics.update
       Input.update
       pbUpdate
@@ -1262,6 +1265,7 @@ class PokemonPokedex_Scene
   def pbPokedex
     pbActivateWindow(@sprites, "pokedex") {
       loop do
+update_leader
         Graphics.update
         Input.update
         oldindex = @sprites["pokedex"].index
