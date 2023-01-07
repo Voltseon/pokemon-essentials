@@ -101,6 +101,8 @@ end
 
 def update_leader
   return if $Connection.nil?
+  Graphics.update
+  Input.update
   if $Connection.can_send?
     $Connection.send do |writer|
       writer.int($game_map.map_id)
