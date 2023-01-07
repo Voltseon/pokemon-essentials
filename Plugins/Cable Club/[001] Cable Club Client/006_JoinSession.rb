@@ -104,8 +104,8 @@ EventHandlers.add(:on_frame_update, :session,
     end
     $Connection.update do |record|
       break if record.int != $game_map.map_id
-      get_character(13).moveto(record.int,record.int)
-      get_character(13).direction = record.int
+      pbMapInterpreter.get_character(13).moveto(record.int,record.int)
+      pbMapInterpreter.get_character(13).direction = record.int
     end
   }
 )
