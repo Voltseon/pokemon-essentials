@@ -1,7 +1,6 @@
 $Connection = nil
 $Partner_sprite = nil
 $Partner_frame = 0
-$Connection_frame = 0
 
 module CableClub
   def self.session(msgwindow, partner_trainer_id)
@@ -90,8 +89,7 @@ module CableClub
           $Partner_sprite.setBitmap(GameData::TrainerType.charset_filename(partner_trainer_type))
           $Partner_sprite.ox = $Partner_sprite.bitmap.width/4
           $Partner_sprite.ox = $Partner_sprite.bitmap.height/4
-          state = :within
-        when :within
+          break
         else
           raise "Unknown state: #{state}"
         end
@@ -102,9 +100,6 @@ end
 
 def update_leader
   return if $Connection.nil?
-  echoln $Connection_frame
-  $Connection_frame = $Connection_frame + 1 % 200
-  return unless $Connection_frame == 1
   if $Connection.can_send?
     $Connection.send do |writer|
       writer.int($game_map.map_id)
