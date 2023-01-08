@@ -164,7 +164,6 @@ class Scene_Map
 
   def update
     loop do
-      update_leader
       pbMapInterpreter.update
       $game_player.update
       updateMaps

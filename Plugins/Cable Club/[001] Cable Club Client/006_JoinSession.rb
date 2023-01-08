@@ -106,6 +106,8 @@ def update_leader
   if $Connection.can_send?
     $Connection.send do |writer|
       writer.int($game_map.map_id)
+      writer.int($game_player.x)
+      writer.int($game_player.y)
       writer.int(($game_player.real_x*10).to_i)
       writer.int(($game_player.real_y*10).to_i)
       writer.int($game_player.x_offset)
@@ -132,7 +134,9 @@ def update_leader
 
   $Connection.update do |record|
     partner_map = record.int
-    if $Partner_sprite.on_screen
+    $Partner_sprite.partner_x = record.int
+    $Partner_sprite.partner_y = record.int
+    if getRelativePos($game_map.map_id, $game_player.x, $game_player.y, partner_map, $Partner_sprite.partner_x, $Partner_sprite.partner_y) > 10
       $Partner_sprite.visible = true
       if partner_map != $game_map.map_id
         $Partner_sprite.visible = false
@@ -145,10 +149,10 @@ def update_leader
     else
       $Partner_sprite.visible = false
     end
-    x = (((record.int/10).to_f - $map_factory.getMap(partner_map, false).display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
+    x = (((record.int/10).to_f - $map_factory.getMap(partner_map).display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
     y = record.int
-    z = (((y/10).to_f - $map_factory.getMap(partner_map, false).display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
-    y = (((y/10).to_f - $map_factory.getMap(partner_map, false).display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
+    z = (((y/10).to_f - $map_factory.getMap(partner_map).display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
+    y = (((y/10).to_f - $map_factory.getMap(partner_map).display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
     x += record.int
     y += record.int
     $Partner_sprite.x = x
