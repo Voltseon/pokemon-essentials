@@ -58,7 +58,7 @@ end
 class Sprite_Character < RPG::Sprite
   attr_accessor :character
 
-  Y_OFFSET = 58
+  Y_OFFSET = 60
 
   def initialize(viewport, character = nil)
     super(viewport)
