@@ -368,7 +368,7 @@ module Settings
   # The default screen height (at a scale of 1.0).
   SCREEN_HEIGHT = 384
   # The default screen scale factor. Possible values are 0.5, 1.0, 1.5 and 2.0.
-  SCREEN_SCALE  = 1.0
+  SCREEN_SCALE  = 2.0
 
   #=============================================================================
 
