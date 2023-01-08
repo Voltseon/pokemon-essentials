@@ -89,7 +89,6 @@ module CableClub
           when :session
             $Connection = connection
             $Partner.partner_id = partner_trainer_id
-            $Partner.visible = false
             $Partner.setBitmap(GameData::TrainerType.charset_filename(partner_trainer_type))
             $Partner.ox = $Partner.bitmap.width/4
             $Partner.ox = $Partner.bitmap.height/4
