@@ -55,7 +55,7 @@ end
 
 # Returns false if an error occurred.
 def pbCableClub(joinsession=false)
-  if $player.party_count == 0
+  if $player.party_count == 0 && !joinsession
     pbMessage(_INTL("I'm sorry, you must have a Pokémon to enter the Cable Club."))
     return
   end
