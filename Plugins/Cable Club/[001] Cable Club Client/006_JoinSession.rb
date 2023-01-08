@@ -1,6 +1,5 @@
 $Connection = nil
 $Partner = nil
-$LastVar = []
 $Client_id = 0
 
 module CableClub
@@ -77,6 +76,7 @@ module CableClub
                 partner_trainer_type = record.sym
                 partner_party = parse_party(record)
                 $Partner.partner_name = partner_name
+                $Partner.visible = false
                 #pbMessageDisplay(msgwindow, _INTL("{1} {2} connected!",GameData::TrainerType.get(partner_trainer_type).name, partner_name))
                 state = :session
 
@@ -101,7 +101,6 @@ module CableClub
     rescue
       $Connection = nil
       $Partner = nil
-      $LastVar = []
       $Client_id = 0
     end
   end
@@ -126,16 +125,16 @@ def update_leader
       writer.int($game_player.pattern)
       writer.bool($game_player.moving?)
 
-      (76..100).each do |i|
-        if $LastVar[i].is_a?(Array)
-          writer.bool($LastVar[i][0])
-          writer.int($LastVar[i][1])
-        else
+      if $Partner.partner_id == 0
+        (101..125).each do |i|
           writer.bool($game_switches[i])
           writer.int($game_variables[i])
         end
-        writer.bool($game_switches[i])
-        writer.int($game_variables[i])
+      else
+        (76..100).each do |i|
+          writer.bool($game_switches[i])
+          writer.int($game_variables[i])
+        end
       end
     end
   end
@@ -178,17 +177,22 @@ def update_leader
     pattern = record.int
     src_x = record.bool ? pattern : 0
     $Partner.src_rect.set(src_x*$Partner.bitmap.width/4,((direction/2)-1)*$Partner.bitmap.height/4,$Partner.bitmap.width/4,$Partner.bitmap.height/4)
-  
-    (76..100).each do |i|
-      last_switch = record.bool
-      last_var = record.int
-      switch = record.bool
-      var = record.int
-      $LastVar[i] = [$game_switches[i], $game_variables[i]]
-      $game_switches[i] = switch if last_switch != switch
-      $game_variables[i] = var if last_var != var
-      if last_switch != switch || last_var != var
-        $game_map.need_refresh = true
+
+    if $Partner.partner_id == 0
+      (76..100).each do |i|
+        switch = record.bool
+        var = record.int
+        $game_switches[i] = switch
+        $game_variables[i] = var
+        $game_map.need_refresh = true if $game_switches[i] != switch || $game_variables[i] != var
+      end
+    else
+      (101..125).each do |i|
+        switch = record.bool
+        var = record.int
+        $game_switches[i] = switch
+        $game_variables[i] = var
+        $game_map.need_refresh = true if $game_switches[i] != switch || $game_variables[i] != var
       end
     end
   end

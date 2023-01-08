@@ -78,27 +78,32 @@ def pbCableClub(joinsession=false)
       return true
     when "invalid version"
       pbMessageDisplay(msgwindow, _INTL("I'm sorry, your game version is out of date compared to the server."))
+      $scene = nil
       return false
     when "invalid party"
       pbMessageDisplay(msgwindow, _INTL("I'm sorry, your party contains Pokémon not allowed in the Cable Club."))
+      $scene = nil
       return false
     when "peer disconnected"
       pbMessageDisplay(msgwindow, _INTL("I'm sorry, the other trainer has disconnected."))
+      $scene = nil
       return true
     else
       pbMessageDisplay(msgwindow, _INTL("I'm sorry, the server has malfunctioned!"))
+      $scene = nil
       return false
     end
   rescue Errno::ECONNREFUSED
     pbMessageDisplay(msgwindow, _INTL("I'm sorry, the server is down at the moment."))
+    $scene = nil
     return false
   rescue
     pbPrintException($!)
     pbMessageDisplay(msgwindow, _INTL("I'm sorry, the server has malfunctioned!"))
+    $scene = nil
     return false
   ensure
     pbDisposeMessageWindow(msgwindow)
-    $scene = nil
   end
 end
 
