@@ -132,14 +132,18 @@ def update_leader
 
   $Connection.update do |record|
     partner_map = record.int
-    $Partner_sprite.visible = true
-    if partner_map != $game_map.map_id
-      $Partner_sprite.visible = false
-      MapFactoryHelper.eachConnectionForMap($game_map.map_id) do |conn|
-        next unless conn[0] == partner_map
-        $Partner_sprite.visible = true
-        break
+    if $Partner_sprite.on_screen
+      $Partner_sprite.visible = true
+      if partner_map != $game_map.map_id
+        $Partner_sprite.visible = false
+        MapFactoryHelper.eachConnectionForMap($game_map.map_id) do |conn|
+          next unless conn[0] == partner_map
+          $Partner_sprite.visible = true
+          break
+        end
       end
+    else
+      $Partner_sprite.visible = false
     end
     x = (((record.int/10).to_f - $map_factory.getMap(partner_map, false).display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
     y = record.int

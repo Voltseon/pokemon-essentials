@@ -42,4 +42,16 @@ class PartnerSprite < IconSprite
     @reflection.visible = value
     super
   end
+
+  def on_screen_x
+    return self.x-self.ox <= Graphics.width && self.x-self.ox + self.bitmap.width >= 0
+  end
+
+  def on_screen_y
+    return self.y-self.oy <= Graphics.height && self.y-self.oy + self.bitmap.height >= 0
+  end
+
+  def on_screen
+    return on_screen_x && on_screen_y
+  end
 end
