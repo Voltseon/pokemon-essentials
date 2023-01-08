@@ -1,5 +1,5 @@
 $Connection = nil
-$Partner_sprite = nil
+$Partner = nil
 $LastVar = []
 
 module CableClub
@@ -23,7 +23,7 @@ module CableClub
 
       
 
-      $Partner_sprite = PartnerSprite.new(0,0,Spriteset_Map.viewport)
+      $Partner = PartnerSprite.new(0,0,Spriteset_Map.viewport)
 
       loop do
         if state != last_state
@@ -74,7 +74,7 @@ module CableClub
               partner_name = record.str
               partner_trainer_type = record.sym
               partner_party = parse_party(record)
-              $Partner_sprite.partner_name = partner_name
+              $Partner.partner_name = partner_name
               #pbMessageDisplay(msgwindow, _INTL("{1} {2} connected!",GameData::TrainerType.get(partner_trainer_type).name, partner_name))
               state = :session
 
@@ -86,10 +86,10 @@ module CableClub
         # Choosing an activity (leader only).
         when :session
           $Connection = connection
-          $Partner_sprite.visible = false
-          $Partner_sprite.setBitmap(GameData::TrainerType.charset_filename(partner_trainer_type))
-          $Partner_sprite.ox = $Partner_sprite.bitmap.width/4
-          $Partner_sprite.ox = $Partner_sprite.bitmap.height/4
+          $Partner.visible = false
+          $Partner.setBitmap(GameData::TrainerType.charset_filename(partner_trainer_type))
+          $Partner.ox = $Partner.bitmap.width/4
+          $Partner.ox = $Partner.bitmap.height/4
           break
         else
           raise "Unknown state: #{state}"
@@ -101,7 +101,7 @@ end
 
 def update_leader
   return if $Connection.nil?
-  $Partner_sprite.update
+  $Partner.update
 
   if $Connection.can_send?
     $Connection.send do |writer|
@@ -134,39 +134,39 @@ def update_leader
 
   $Connection.update do |record|
     mapinfo = pbLoadMapInfos
-    $Partner_sprite.partner_map = record.int
-    $Partner_sprite.partner_x = record.int
-    $Partner_sprite.partner_y = record.int
-    dist = $map_factory.getRelativePos($game_map.map_id, $game_player.x, $game_player.y, $Partner_sprite.partner_map, $Partner_sprite.partner_x, $Partner_sprite.partner_y)
-    dist_normal = (dist[0] != 0 ? dist[1] / dist[0] : 0).abs
-    if dist_normal < 10
-      $Partner_sprite.visible = true
-      if $Partner_sprite.partner_map != $game_map.map_id
-        $Partner_sprite.visible = false
+    $Partner.partner_map = record.int
+    $Partner.partner_x = record.int
+    $Partner.partner_y = record.int
+    #dist = $map_factory.getRelativePos($game_map.map_id, $game_player.x, $game_player.y, $Partner.partner_map, $Partner.partner_x, $Partner.partner_y)
+    #dist_normal = (dist[0] != 0 ? dist[1] / dist[0] : 0).abs
+    if true#dist_normal < 10
+      $Partner.visible = true
+      if $Partner.partner_map != $game_map.map_id
+        $Partner.visible = false
         MapFactoryHelper.eachConnectionForMap($game_map.map_id) do |conn|
-          next unless conn[0] == $Partner_sprite.partner_map
-          $Partner_sprite.visible = true
+          next unless conn[0] == $Partner.partner_map
+          $Partner.visible = true
           break
         end
       end
     else
-      $Partner_sprite.visible = true
+      $Partner.visible = true
     end
-    x = (((record.int/10).to_f - $map_factory.getMap($Partner_sprite.partner_map,false).display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
+    x = (((record.int/10).to_f - $map_factory.getMap($Partner.partner_map,false).display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
     y = record.int
-    z = (((y/10).to_f - $map_factory.getMap($Partner_sprite.partner_map,false).display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
-    y = (((y/10).to_f - $map_factory.getMap($Partner_sprite.partner_map,false).display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
+    z = (((y/10).to_f - $map_factory.getMap($Partner.partner_map,false).display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
+    y = (((y/10).to_f - $map_factory.getMap($Partner.partner_map,false).display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
     x += record.int
     y += record.int
-    $Partner_sprite.x = x
-    $Partner_sprite.y = y
-    $Partner_sprite.z = z
+    $Partner.x = x
+    $Partner.y = y
+    $Partner.z = z
     direction = record.int
 
-    $Partner_sprite.setBitmap("Graphics/Characters/#{record.str}")
+    $Partner.setBitmap("Graphics/Characters/#{record.str}")
     pattern = record.int
     src_x = record.bool ? pattern : 0
-    $Partner_sprite.src_rect.set(src_x*$Partner_sprite.bitmap.width/4,((direction/2)-1)*$Partner_sprite.bitmap.height/4,$Partner_sprite.bitmap.width/4,$Partner_sprite.bitmap.height/4)
+    $Partner.src_rect.set(src_x*$Partner.bitmap.width/4,((direction/2)-1)*$Partner.bitmap.height/4,$Partner.bitmap.width/4,$Partner.bitmap.height/4)
   
     (76..100).each do |i|
       last_switch = record.bool
@@ -198,7 +198,18 @@ end
 
 def tpp
   $game_temp.player_transferring = true
-  $game_temp.player_new_map_id    = $Partner_sprite.partner_map
-  $game_temp.player_new_x         = $Partner_sprite.partner_x
-  $game_temp.player_new_y         = $Partner_sprite.partner_y
+  $game_temp.player_new_map_id    = $Partner.partner_map
+  $game_temp.player_new_x         = $Partner.partner_x
+  $game_temp.player_new_y         = $Partner.partner_y
 end
+
+EventHandlers.add(:on_player_interact, :talk_to_partner,
+  proc {
+    next if $Connection.nil?
+    facing_tile = $map_factory.getFacingTile
+    next if $Partner.partner_x != facing_tile[1] && $Partner.partner_y != facing_tile[2]
+    next if pbFacingEvent
+    next if $game_player.pbFacingTerrainTag.can_surf_freely
+    pbMessage("Hello!")
+  }
+)
