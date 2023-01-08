@@ -125,6 +125,8 @@ def update_leader
       writer.int($game_player.pattern)
       writer.bool($game_player.moving?)
 
+      writer.bool($game_temp.player_transferring)
+
       if $Client_id == 0
         (101..125).each do |i|
           writer.bool($game_switches[i])
@@ -177,6 +179,8 @@ def update_leader
     pattern = record.int
     src_x = record.bool ? pattern : 0
     $Partner.src_rect.set(src_x*$Partner.bitmap.width/4,((direction/2)-1)*$Partner.bitmap.height/4,$Partner.bitmap.width/4,$Partner.bitmap.height/4)
+
+    $Partner.visible = false if record.bool
 
     if $Client_id == 0
       (76..100).each do |i|

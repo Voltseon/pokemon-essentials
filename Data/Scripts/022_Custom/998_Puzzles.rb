@@ -35,5 +35,5 @@ def toggle_lamp_six
 end
 
 def check_solution
-  $game_switches[108] = $game_switches[102] && $game_switches[103] && $game_switches[104] && $game_switches[105]
+  $game_switches[108] = true if $game_switches[102] && $game_switches[103] && $game_switches[104] && $game_switches[105]
 end
