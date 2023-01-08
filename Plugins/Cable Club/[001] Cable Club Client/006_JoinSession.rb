@@ -224,7 +224,7 @@ EventHandlers.add(:on_player_interact, :talk_to_partner,
     next if $Partner.partner_y != facing_tile[1]
     next if $game_player.pbFacingEvent
     next if $game_player.pbFacingTerrainTag.can_surf_freely
-    do_battle($Connection, $Client_id, seed, battle_type, partner, partner_party)
+    pbTalkToPartner
   }
 )
 
