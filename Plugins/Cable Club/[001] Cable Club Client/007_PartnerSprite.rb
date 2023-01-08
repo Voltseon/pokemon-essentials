@@ -15,7 +15,6 @@ class PartnerSprite < IconSprite
     @namebmp = BitmapSprite.new(Graphics.width, Graphics.height, args[2])
     @namebmp.opacity = 184
     @reflection = Sprite_Reflection.new(self, nil, args[2])
-    @reflection.z = self.z + 50
     pbSetNarrowFont(@namebmp.bitmap)
   end
 
