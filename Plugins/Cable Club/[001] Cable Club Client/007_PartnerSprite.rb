@@ -3,6 +3,7 @@ class PartnerSprite < IconSprite
   attr_accessor :partner_map
   attr_accessor :partner_x
   attr_accessor :partner_y
+  attr_accessor :partner_id
 
   NAME_BASE = Color.new(248,248,248)
   NAME_SHADOW = Color.new(64,64,64)
@@ -21,10 +22,12 @@ class PartnerSprite < IconSprite
   def partner_map; @partner_map; end
   def partner_x; @partner_x; end
   def partner_y; @partner_y; end
+  def partner_id; @partner_id; end
 
   def partner_map=(value); @partner_map = value; end
   def partner_x=(value); @partner_x = value; end
   def partner_y=(value); @partner_y = value; end
+  def partner_id=(value); @partner_id = value; end
   def partner_name=(value); @partner_name = value; end
 
   def update

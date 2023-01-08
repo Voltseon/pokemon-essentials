@@ -100,3 +100,40 @@ def pbCableClub(joinsession=false)
     pbDisposeMessageWindow(msgwindow)
   end
 end
+
+def pbTalkToPartner
+  return false if !$Partner || !$Connection
+  msgwindow = pbCreateMessageWindow()
+  begin
+    partner_trainer_id = $Partner.partner_id
+    CableClub::connect_to(msgwindow, partner_trainer_id)
+    raise Connection::Disconnected.new("disconnected")
+  rescue Connection::Disconnected => e
+    case e.message
+    when "disconnected"
+      pbMessageDisplay(msgwindow, _INTL("Thank you for using the Cable Club. We hope to see you again soon."))
+      return true
+    when "invalid version"
+      pbMessageDisplay(msgwindow, _INTL("I'm sorry, your game version is out of date compared to the Cable Club."))
+      return false
+    when "invalid party"
+      pbMessageDisplay(msgwindow, _INTL("I'm sorry, your party contains Pokémon not allowed in the Cable Club."))
+      return false
+    when "peer disconnected"
+      pbMessageDisplay(msgwindow, _INTL("I'm sorry, the other trainer has disconnected."))
+      return true
+    else
+      pbMessageDisplay(msgwindow, _INTL("I'm sorry, the Cable Club server has malfunctioned!"))
+      return false
+    end
+  rescue Errno::ECONNREFUSED
+    pbMessageDisplay(msgwindow, _INTL("I'm sorry, the Cable Club server is down at the moment."))
+    return false
+  rescue
+    pbPrintException($!)
+    pbMessageDisplay(msgwindow, _INTL("I'm sorry, the Cable Club has malfunctioned!"))
+    return false
+  ensure
+    pbDisposeMessageWindow(msgwindow)
+  end
+end
