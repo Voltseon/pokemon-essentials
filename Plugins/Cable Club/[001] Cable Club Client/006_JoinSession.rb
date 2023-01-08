@@ -137,19 +137,25 @@ def update_leader
     $Partner_sprite.partner_map = record.int
     $Partner_sprite.partner_x = record.int
     $Partner_sprite.partner_y = record.int
-    $Partner_sprite.visible = true
-    if $Partner_sprite.partner_map != $game_map.map_id
-      $Partner_sprite.visible = false
-      MapFactoryHelper.eachConnectionForMap($game_map.map_id) do |conn|
-        next unless conn[0] == $Partner_sprite.partner_map
-        $Partner_sprite.visible = true
-        break
+    dist = $map_factory.getRelativePos($game_map.map_id, $game_player.x, $game_player.y, partner_map, $Partner_sprite.partner_x, $Partner_sprite.partner_y)
+    dist_normal = (dist[0] != 0 ? dist[1] / dist[0] : 0).abs
+    if dist_normal < 10
+      $Partner_sprite.visible = true
+      if $Partner_sprite.partner_map != $game_map.map_id
+        $Partner_sprite.visible = false
+        MapFactoryHelper.eachConnectionForMap($game_map.map_id) do |conn|
+          next unless conn[0] == $Partner_sprite.partner_map
+          $Partner_sprite.visible = true
+          break
+        end
       end
+    else
+      $Partner_sprite.visible = true
     end
-    x = (((record.int/10).to_f - mapinfo[$Partner_sprite.partner_map].display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
+    x = (((record.int/10).to_f - $map_factory.getMap($Partner_sprite.partner_map,false).display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
     y = record.int
-    z = (((y/10).to_f - mapinfo[$Partner_sprite.partner_map].display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
-    y = (((y/10).to_f - mapinfo[$Partner_sprite.partner_map].display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
+    z = (((y/10).to_f - $map_factory.getMap($Partner_sprite.partner_map,false).display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
+    y = (((y/10).to_f - $map_factory.getMap($Partner_sprite.partner_map).display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
     x += record.int
     y += record.int
     $Partner_sprite.x = x
