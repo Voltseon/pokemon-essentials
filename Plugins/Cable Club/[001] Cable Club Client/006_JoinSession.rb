@@ -125,7 +125,7 @@ def update_leader
       writer.int($game_player.pattern)
       writer.bool($game_player.moving?)
 
-      if $Partner.partner_id == 0
+      if $Client_id == 0
         (101..125).each do |i|
           writer.bool($game_switches[i])
           writer.int($game_variables[i])
@@ -178,7 +178,7 @@ def update_leader
     src_x = record.bool ? pattern : 0
     $Partner.src_rect.set(src_x*$Partner.bitmap.width/4,((direction/2)-1)*$Partner.bitmap.height/4,$Partner.bitmap.width/4,$Partner.bitmap.height/4)
 
-    if $Partner.partner_id == 0
+    if $Client_id == 0
       (76..100).each do |i|
         switch = record.bool
         var = record.int

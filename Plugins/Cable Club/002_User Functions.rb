@@ -61,7 +61,7 @@ def pbCableClub(joinsession=false)
   end
   msgwindow = pbCreateMessageWindow()
   begin
-    pbMessageDisplay(msgwindow, _ISPRINTF("Enter the unique identifyer of your partner in crime. (Your ID: {1:05d})\\^",$player.public_ID($player.id)))
+    pbMessageDisplay(msgwindow, _ISPRINTF("Enter the unique identifier of your partner in crime. (Your ID: {1:05d})\\^",$player.public_ID($player.id)))
     partner_trainer_id = ""
     loop do
       partner_trainer_id = pbFreeText(msgwindow, partner_trainer_id, false, 5)
