@@ -49,7 +49,7 @@ class PartnerSprite < IconSprite
 
   def visible=(value)
     @namebmp.visible = value
-    @reflection.visible = value
+    @reflection.visible = false if !value
     super
   end
 
