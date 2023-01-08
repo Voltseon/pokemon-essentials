@@ -170,7 +170,7 @@ def update_leader
     x += record.int
     y += record.int
     $Partner.x = x
-    $Partner.y = y
+    $Partner.y = y - 16
     $Partner.z = z
     direction = record.int
 
