@@ -208,7 +208,8 @@ EventHandlers.add(:on_player_interact, :talk_to_partner,
     next if $Connection.nil?
     next if $Partner.partner_map != $game_map.map_id
     facing_tile = get_facing_tile
-    next if $Partner.partner_x != facing_tile[0] && $Partner.partner_y != facing_tile[1]
+    next if $Partner.partner_x != facing_tile[0]
+    next if $Partner.partner_y != facing_tile[1]
     next if $game_player.pbFacingEvent
     next if $game_player.pbFacingTerrainTag.can_surf_freely
     pbMessage("Hello!")
