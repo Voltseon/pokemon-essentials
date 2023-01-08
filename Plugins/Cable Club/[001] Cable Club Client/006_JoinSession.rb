@@ -206,10 +206,41 @@ end
 EventHandlers.add(:on_player_interact, :talk_to_partner,
   proc {
     next if $Connection.nil?
-    facing_tile = $map_factory.getFacingTile
-    next if $Partner.partner_x != facing_tile[1] && $Partner.partner_y != facing_tile[2]
+    next if $Partner.partner_map != $game_map.map_id
+    facing_tile = get_facing_tile
+    next if $Partner.partner_x != facing_tile[0] && $Partner.partner_y != facing_tile[1]
     next if $game_player.pbFacingEvent
     next if $game_player.pbFacingTerrainTag.can_surf_freely
     pbMessage("Hello!")
   }
 )
+
+def get_facing_tile
+  x=0
+  y=0
+  case $game_player.direction
+  when 1
+    x -= 1
+    y += 1
+  when 2
+    y += 1
+  when 3
+    x += 1
+    y += 1
+  when 4
+    x -= 1
+  when 6
+    x += 1
+  when 7
+    x -= 1
+    y -= 1
+  when 8
+    y -= 1
+  when 9
+    x += 1
+    y -= 1
+  end
+  x+=$game_player.x
+  y+=$game_player.y
+  return [x,y]
+end
