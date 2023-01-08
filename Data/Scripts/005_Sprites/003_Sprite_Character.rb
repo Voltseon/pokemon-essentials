@@ -74,6 +74,7 @@ class Sprite_Character < RPG::Sprite
     self.zoom_x = TilemapRenderer::ZOOM_X
     self.zoom_y = TilemapRenderer::ZOOM_Y
     @namebmp = BitmapSprite.new(Graphics.width, Graphics.height, viewport)
+    @namebmp.visible = @character.is_a?(Game_Player)
     @namebmp.opacity = 184
     pbSetNarrowFont(@namebmp.bitmap)
     update
@@ -85,7 +86,7 @@ class Sprite_Character < RPG::Sprite
 
   def visible=(value)
     super(value)
-    @namebmp.visible = value
+    @namebmp.visible = value if @character.is_a?(Game_Player)
     @reflection.visible = value if @reflection
   end
 
