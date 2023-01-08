@@ -10,6 +10,7 @@ class PartnerSprite < IconSprite
     @partner_name = ""
     @namebmp = BitmapSprite.new(Graphics.width, Graphics.height, args[2])
     @namebmp.opacity = 184
+    @reflection = Sprite_Reflection.new(self, nil, args[2])
     pbSetNarrowFont(@namebmp.bitmap)
   end
 
@@ -23,17 +24,22 @@ class PartnerSprite < IconSprite
     @namebmp.z = self.z + 1
     @namebmp.bitmap.clear
     pbDrawTextPositions(@namebmp.bitmap, [[@partner_name, self.x-Game_Map::TILE_WIDTH, self.y-Y_OFFSET, 2, NAME_BASE, NAME_SHADOW]])
+    @reflection&.update
     super
   end
 
   def dispose
     @namebmp.bitmap.dispose
     @namebmp.dispose
+    @namebmp = nil
+    @reflection&.dispose
+    @reflection = nil
     super
   end
 
   def visible=(value)
     @namebmp.visible = value
+    @reflection.visible = value
     super
   end
 end
