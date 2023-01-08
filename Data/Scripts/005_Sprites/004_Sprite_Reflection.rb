@@ -50,7 +50,7 @@ class Sprite_Reflection
     if @sprite
       x = @rsprite.x - @rsprite.ox * TilemapRenderer::ZOOM_X
       y = @rsprite.y - @rsprite.oy * TilemapRenderer::ZOOM_Y
-      y -= Game_Map::TILE_HEIGHT * TilemapRenderer::ZOOM_Y if @rsprite.character.character_name[/offset/i]
+      y -= Game_Map::TILE_HEIGHT * TilemapRenderer::ZOOM_Y if @rsprite.is_a?(Sprite_Character) && @rsprite.character.character_name[/offset/i]
       @height = $PokemonGlobal.bridge if !@fixedheight
       y += @height * TilemapRenderer::ZOOM_Y * Game_Map::TILE_HEIGHT / 2
       width  = @rsprite.src_rect.width
@@ -59,7 +59,7 @@ class Sprite_Reflection
       @sprite.y        = y + (height + (height / 2)) * TilemapRenderer::ZOOM_Y
       @sprite.ox       = width / 2
       @sprite.oy       = (height / 2) - 2   # Hard-coded 2 pixel shift up
-      @sprite.oy       -= @rsprite.character.bob_height * 2
+      @sprite.oy       -= (@rsprite.is_a?(Sprite_Character)) ? @rsprite.character.bob_height * 2 : 0
       @sprite.z        = -50   # Still water is -100, map is 0 and above
       @sprite.z        += 1 if @event == $game_player
       @sprite.zoom_x   = @rsprite.zoom_x
