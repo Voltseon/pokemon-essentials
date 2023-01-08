@@ -73,7 +73,7 @@ class Sprite_Character < RPG::Sprite
     @surfbase = Sprite_SurfBase.new(self, character, viewport) if character == $game_player
     self.zoom_x = TilemapRenderer::ZOOM_X
     self.zoom_y = TilemapRenderer::ZOOM_Y
-    @namebmp = BitmapSprite.new(Graphics.width, Graphics.height, args[2])
+    @namebmp = BitmapSprite.new(Graphics.width, Graphics.height, viewport)
     @namebmp.opacity = 184
     pbSetNarrowFont(@namebmp.bitmap)
     update
