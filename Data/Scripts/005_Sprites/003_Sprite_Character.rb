@@ -58,6 +58,10 @@ end
 class Sprite_Character < RPG::Sprite
   attr_accessor :character
 
+  NAME_BASE = Color.new(248,248,248)
+  NAME_SHADOW = Color.new(64,64,64)
+  Y_OFFSET = 12
+
   def initialize(viewport, character = nil)
     super(viewport)
     @character    = character
@@ -69,6 +73,9 @@ class Sprite_Character < RPG::Sprite
     @surfbase = Sprite_SurfBase.new(self, character, viewport) if character == $game_player
     self.zoom_x = TilemapRenderer::ZOOM_X
     self.zoom_y = TilemapRenderer::ZOOM_Y
+    @namebmp = BitmapSprite.new(Graphics.width, Graphics.height, args[2])
+    @namebmp.opacity = 184
+    pbSetNarrowFont(@namebmp.bitmap)
     update
   end
 
@@ -78,10 +85,14 @@ class Sprite_Character < RPG::Sprite
 
   def visible=(value)
     super(value)
+    @namebmp.visible = value
     @reflection.visible = value if @reflection
   end
 
   def dispose
+    @namebmp.bitmap.dispose
+    @namebmp.dispose
+    @namebmp = nil
     @bushbitmap&.dispose
     @bushbitmap = nil
     @charbitmap&.dispose
@@ -96,6 +107,9 @@ class Sprite_Character < RPG::Sprite
   def update
     return if @character.is_a?(Game_Event) && !@character.should_update?
     super
+    @namebmp.z = self.z + 1
+    @namebmp.bitmap.clear
+    pbDrawTextPositions(@namebmp.bitmap, [[$player.name, self.x-Game_Map::TILE_WIDTH, self.y-Y_OFFSET, 2, NAME_BASE, NAME_SHADOW]])
     if @tile_id != @character.tile_id ||
        @character_name != @character.character_name ||
        @character_hue != @character.character_hue ||

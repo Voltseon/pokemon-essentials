@@ -182,17 +182,19 @@ def update_leader
       (76..100).each do |i|
         switch = record.bool
         var = record.int
+        should_refresh = $game_switches[i] != switch || $game_variables[i] != var
         $game_switches[i] = switch
         $game_variables[i] = var
-        $game_map.need_refresh = true if $game_switches[i] != switch || $game_variables[i] != var
+        $game_map.need_refresh = true if should_refresh
       end
     else
       (101..125).each do |i|
         switch = record.bool
         var = record.int
+        should_refresh = $game_switches[i] != switch || $game_variables[i] != var
         $game_switches[i] = switch
         $game_variables[i] = var
-        $game_map.need_refresh = true if $game_switches[i] != switch || $game_variables[i] != var
+        $game_map.need_refresh = true if should_refresh
       end
     end
   end
