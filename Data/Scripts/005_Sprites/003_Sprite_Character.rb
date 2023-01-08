@@ -58,9 +58,7 @@ end
 class Sprite_Character < RPG::Sprite
   attr_accessor :character
 
-  NAME_BASE = Color.new(248,248,248)
-  NAME_SHADOW = Color.new(64,64,64)
-  Y_OFFSET = 12
+  Y_OFFSET = 58
 
   def initialize(viewport, character = nil)
     super(viewport)
@@ -110,7 +108,7 @@ class Sprite_Character < RPG::Sprite
     super
     @namebmp.z = self.z + 1
     @namebmp.bitmap.clear
-    pbDrawTextPositions(@namebmp.bitmap, [[$player.name, self.x-Game_Map::TILE_WIDTH, self.y-Y_OFFSET, 2, NAME_BASE, NAME_SHADOW]])
+    pbDrawTextPositions(@namebmp.bitmap, [[$player.name, Graphics.width/2, Graphics.height/2-Y_OFFSET, 2, PLAYER_NAME_BASE[$Client_id], PLAYER_NAME_SHADOW[$Client_id]]]) if $Connection
     if @tile_id != @character.tile_id ||
        @character_name != @character.character_name ||
        @character_hue != @character.character_hue ||

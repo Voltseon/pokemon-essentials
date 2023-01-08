@@ -1,3 +1,6 @@
+PLAYER_NAME_BASE = [Color.new(248,128,0), Color.new(0,128,248)]
+PLAYER_NAME_SHADOW = [Color.new(128,32,0), Color.new(0,32,128)]
+
 class PartnerSprite < IconSprite
   attr_accessor :partner_name
   attr_accessor :partner_map
@@ -5,8 +8,6 @@ class PartnerSprite < IconSprite
   attr_accessor :partner_y
   attr_accessor :partner_id
 
-  NAME_BASE = Color.new(248,248,248)
-  NAME_SHADOW = Color.new(64,64,64)
   Y_OFFSET = 12
 
   def initialize(*args)
@@ -33,7 +34,7 @@ class PartnerSprite < IconSprite
   def update
     @namebmp.z = self.z + 1
     @namebmp.bitmap.clear
-    pbDrawTextPositions(@namebmp.bitmap, [[@partner_name, self.x-Game_Map::TILE_WIDTH, self.y-Y_OFFSET, 2, NAME_BASE, NAME_SHADOW]])
+    pbDrawTextPositions(@namebmp.bitmap, [[@partner_name, self.x-Game_Map::TILE_WIDTH, self.y-Y_OFFSET, 2, PLAYER_NAME_BASE[($Client_id-1).abs], PLAYER_NAME_SHADOW[($Client_id-1).abs]]])
     #@reflection.update
     super
   end
