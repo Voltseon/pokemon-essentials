@@ -133,6 +133,7 @@ def update_leader
   end
 
   $Connection.update do |record|
+    mapinfo = pbLoadMapInfos
     $Partner_sprite.partner_map = record.int
     $Partner_sprite.partner_x = record.int
     $Partner_sprite.partner_y = record.int
@@ -145,10 +146,10 @@ def update_leader
         break
       end
     end
-    x = (((record.int/10).to_f - $map_factory.getMap($Partner_sprite.partner_map).display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
+    x = (((record.int/10).to_f - mapinfo[$Partner_sprite.partner_map].display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
     y = record.int
-    z = (((y/10).to_f - $map_factory.getMap($Partner_sprite.partner_map).display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
-    y = (((y/10).to_f - $map_factory.getMap($Partner_sprite.partner_map).display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
+    z = (((y/10).to_f - mapinfo[$Partner_sprite.partner_map].display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
+    y = (((y/10).to_f - mapinfo[$Partner_sprite.partner_map].display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
     x += record.int
     y += record.int
     $Partner_sprite.x = x
