@@ -17,7 +17,7 @@ class PokemonSystem
   attr_accessor :textinput
 
   def initialize
-    @textspeed     = 1     # Text speed (0=slow, 1=normal, 2=fast)
+    @textspeed     = 2     # Text speed (0=slow, 1=normal, 2=fast)
     @battlescene   = 0     # Battle effects (animations) (0=on, 1=off)
     @battlestyle   = 0     # Battle style (0=switch, 1=set)
     @sendtoboxes   = 0     # Send to Boxes (0=manual, 1=automatic)
@@ -29,7 +29,7 @@ class PokemonSystem
     @runstyle      = 0     # Default movement speed (0=walk, 1=run)
     @bgmvolume     = 100   # Volume of background music and ME
     @sevolume      = 100   # Volume of sound effects
-    @textinput     = 0     # Text input mode (0=cursor, 1=keyboard)
+    @textinput     = 1     # Text input mode (0=cursor, 1=keyboard)
   end
 end
 
@@ -437,26 +437,6 @@ MenuHandlers.add(:options_menu, :text_speed, {
   }
 })
 
-MenuHandlers.add(:options_menu, :battle_animations, {
-  "name"        => _INTL("Battle Effects"),
-  "order"       => 40,
-  "type"        => EnumOption,
-  "parameters"  => [_INTL("On"), _INTL("Off")],
-  "description" => _INTL("Choose whether you wish to see move animations in battle."),
-  "get_proc"    => proc { next $PokemonSystem.battlescene },
-  "set_proc"    => proc { |value, _scene| $PokemonSystem.battlescene = value }
-})
-
-MenuHandlers.add(:options_menu, :battle_style, {
-  "name"        => _INTL("Battle Style"),
-  "order"       => 50,
-  "type"        => EnumOption,
-  "parameters"  => [_INTL("Switch"), _INTL("Set")],
-  "description" => _INTL("Choose whether you can switch Pokémon when an opponent's Pokémon faints."),
-  "get_proc"    => proc { next $PokemonSystem.battlestyle },
-  "set_proc"    => proc { |value, _scene| $PokemonSystem.battlestyle = value }
-})
-
 MenuHandlers.add(:options_menu, :movement_style, {
   "name"        => _INTL("Default Movement"),
   "order"       => 60,
@@ -466,27 +446,6 @@ MenuHandlers.add(:options_menu, :movement_style, {
   "condition"   => proc { next $player&.has_running_shoes },
   "get_proc"    => proc { next $PokemonSystem.runstyle },
   "set_proc"    => proc { |value, _sceme| $PokemonSystem.runstyle = value }
-})
-
-MenuHandlers.add(:options_menu, :send_to_boxes, {
-  "name"        => _INTL("Send to Boxes"),
-  "order"       => 70,
-  "type"        => EnumOption,
-  "parameters"  => [_INTL("Manual"), _INTL("Automatic")],
-  "description" => _INTL("Choose whether caught Pokémon are sent to your Boxes when your party is full."),
-  "condition"   => proc { next Settings::NEW_CAPTURE_CAN_REPLACE_PARTY_MEMBER },
-  "get_proc"    => proc { next $PokemonSystem.sendtoboxes },
-  "set_proc"    => proc { |value, _scene| $PokemonSystem.sendtoboxes = value }
-})
-
-MenuHandlers.add(:options_menu, :give_nicknames, {
-  "name"        => _INTL("Give Nicknames"),
-  "order"       => 80,
-  "type"        => EnumOption,
-  "parameters"  => [_INTL("Give"), _INTL("Don't give")],
-  "description" => _INTL("Choose whether you can give a nickname to a Pokémon when you obtain it."),
-  "get_proc"    => proc { next $PokemonSystem.givenicknames },
-  "set_proc"    => proc { |value, _scene| $PokemonSystem.givenicknames = value }
 })
 
 MenuHandlers.add(:options_menu, :speech_frame, {
@@ -517,16 +476,6 @@ MenuHandlers.add(:options_menu, :menu_frame, {
     # Change the windowskin of the options text box to selected one
     scene.sprites["option"].setSkin(MessageConfig.pbGetSystemFrame)
   }
-})
-
-MenuHandlers.add(:options_menu, :text_input_style, {
-  "name"        => _INTL("Text Entry"),
-  "order"       => 110,
-  "type"        => EnumOption,
-  "parameters"  => [_INTL("Cursor"), _INTL("Keyboard")],
-  "description" => _INTL("Choose how you want to enter text."),
-  "get_proc"    => proc { next $PokemonSystem.textinput },
-  "set_proc"    => proc { |value, _scene| $PokemonSystem.textinput = value }
 })
 
 MenuHandlers.add(:options_menu, :screen_size, {
