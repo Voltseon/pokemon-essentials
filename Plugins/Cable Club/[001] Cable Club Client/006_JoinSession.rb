@@ -132,6 +132,7 @@ def update_leader
 
   $Connection.update do |record|
     partner_map = record.int
+    $Partner_sprite.visible = true
     if partner_map != $game_map.map_id
       $Partner_sprite.visible = false
       MapFactoryHelper.eachConnectionForMap($game_map.map_id) do |conn|
