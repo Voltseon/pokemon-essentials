@@ -133,23 +133,17 @@ def update_leader
   end
 
   $Connection.update do |record|
-    partner_map = record.int
+    $Partner_sprite.partner_map = record.int
     $Partner_sprite.partner_x = record.int
     $Partner_sprite.partner_y = record.int
-    dist = $map_factory.getRelativePos($game_map.map_id, $game_player.x, $game_player.y, partner_map, $Partner_sprite.partner_x, $Partner_sprite.partner_y)
-    dist_normal = (dist[0] != 0 ? dist[1] / dist[0] : 0).abs
-    if dist_normal < 10
-      $Partner_sprite.visible = true
-      if partner_map != $game_map.map_id
-        $Partner_sprite.visible = false
-        MapFactoryHelper.eachConnectionForMap($game_map.map_id) do |conn|
-          next unless conn[0] == partner_map
-          $Partner_sprite.visible = true
-          break
-        end
-      end
-    else
+    $Partner_sprite.visible = true
+    if $Partner_sprite.partner_map != $game_map.map_id
       $Partner_sprite.visible = false
+      MapFactoryHelper.eachConnectionForMap($game_map.map_id) do |conn|
+        next unless conn[0] == $Partner_sprite.partner_map
+        $Partner_sprite.visible = true
+        break
+      end
     end
     x = (((record.int/10).to_f - $map_factory.getMap(partner_map).display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
     y = record.int
@@ -193,4 +187,11 @@ module Graphics
     g_update
     update_leader
   end
+end
+
+def tpp
+  $game_temp.player_transferring = true
+  $game_temp.player_new_map_id    = $Partner_sprite.partner_map
+  $game_temp.player_new_x         = $Partner_sprite.partner_x
+  $game_temp.player_new_y         = $Partner_sprite.partner_y
 end
