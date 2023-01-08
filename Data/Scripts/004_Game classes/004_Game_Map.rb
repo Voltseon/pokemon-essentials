@@ -223,7 +223,7 @@ class Game_Map
 
   def playerPassable?(x, y, d, self_event = nil)
     bit = (1 << ((d / 2) - 1)) & 0x0f
-    return false if x == $Partner.partner_x && y == $Partner.partner_y
+    #return false if x == $Partner.partner_x && y == $Partner.partner_y
     [2, 1, 0].each do |i|
       tile_id = data[x, y, i]
       next if tile_id == 0
