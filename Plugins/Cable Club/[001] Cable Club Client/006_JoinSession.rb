@@ -131,15 +131,20 @@ def update_leader
   end
 
   $Connection.update do |record|
-    if record.int != $game_map.map_id
+    partner_map = record.int
+    mapinfo = pbLoadMapInfos
+    if partner_map != $game_map.map_id
       $Partner_sprite.visible = false
-      break
+      MapFactoryHelper.eachConnectionForMap($game_map.map_id) do |conn|
+        next unless conn[0] == partner_map
+        $Partner_sprite.visible = true
+        break
+      end
     end
-    $Partner_sprite.visible = true
-    x = (((record.int/10).to_f - $game_map.display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
+    x = (((record.int/10).to_f - mapinfo[partner_map].display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
     y = record.int
-    z = (((y/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
-    y = (((y/10).to_f - $game_map.display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
+    z = (((y/10).to_f - mapinfo[partner_map].display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
+    y = (((y/10).to_f - mapinfo[partner_map].display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
     x += record.int
     y += record.int
     $Partner_sprite.x = x

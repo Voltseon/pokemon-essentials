@@ -1,12 +1,11 @@
-def pbListPokemon
-  # Post method that gets read by the PHP
-  check_listed = {
-    :GTS_METHOD => "check_listed"
-  }
-
+def pbGTSCheckIfListedPokemon
   # Check if the webserver returns whether you already have a pokemon listed
-  check_list = pbWebRequest(check_listed)
-  if check_list != '0'
+  return pbWebRequest({:GTS_METHOD => "check_listed"})
+end
+
+def pbListPokemon
+  # Check if you already have a Pokémon listed
+  if pbGTSCheckIfListedPokemon != '0'
     pbMessage("You already have a Pokémon listed!")
     return false
   end
@@ -66,7 +65,7 @@ def pbListPokemon
   # Make a web request to the server to list the request
   list_pokemon = {
     :GTS_METHOD => "list_pokemon",
-    :POKEMON_TO_LIST => [Zlib::Deflate.deflate(Marshal.dump(chosen_pokemon))].pack("m").gsub!("\n","Ö"),
+    :POKEMON_TO_LIST => chosen_pokemon.encrypt,
     :WANTED_POKEMON => seen_pokemon[pkmn_choice],
     :WANTED_GENDER => gender_options[gender_choice],
     :WANTED_LEVEL => "#{level_options[level_choice]}"
@@ -89,15 +88,9 @@ def pbListPokemon
 end
 
 def pbCheckListed
-  # Post method that gets read by the PHP
-  check_listed = {
-    :GTS_METHOD => "check_listed"
-  }
-
-  # Check if the webserver returns whether you already have a pokemon listed
-  check_list = pbWebRequest(check_listed)
+  check_list = pbGTSCheckIfListedPokemon
   if check_list == '0'
-    pbMessage("You don't have a Pokémon listed!")
+    pbMessage("You don't have any Pokémon listed.")
     return false
   end
 
@@ -106,12 +99,73 @@ def pbCheckListed
 
   # Get seperate values from array
   player_id = result_array[0]
-  pokemon = result_array[1].gsub!("Ö","\n")
-  pokemon = pbMysteryGiftDecrypt(pokemon)
+  pokemon = result_array[1]
+  pokemon = decryptPokemon(pokemon)
   wanted_pkmn = result_array[2].to_sym
   wanted_gender = result_array[3]
   wanted_level = result_array[4]
 
   # Show the player the listed Pokémon
-  pbMessage("#{pokemon.name} : #{wanted_pkmn} : #{wanted_gender} : #{wanted_level}")
+  pbMessage("#{wanted_pkmn} : #{wanted_gender} : #{wanted_level}")
+  scene = PokemonSummary_Scene.new
+  screen = PokemonSummaryScreen.new(scene)
+  screen.pbStartScreen([pokemon], 0)
+  if pbConfirmMessage("Would you like to get your Pokémon back?")
+    if pbGTSCheckIfListedPokemon == '0'
+      pbMessage('Your Pokémon was taken from the GTS.')
+      return false
+    end
+    check_deletion = pbWebRequest({:GTS_METHOD => "remove_listed"}) == "success"
+    if check_deletion
+      pbAddPokemon(pokemon)
+    else
+      echoln check_deletion
+      pbMessage("Something went wrong with taking the Pokémon")
+    end
+  end
+end
+
+def pbGetList(pokemon=nil)
+  # Make request for the list
+  pokemon_check = (pokemon.nil? ? "None" : pokemon.to_s)
+  raw_list = pbWebRequest({
+    :GTS_METHOD => "get_list",
+    :POKEMON_TO_LIST => pokemon_check
+    }
+  )
+
+  # Check if there was a returned list; A successful response adds the 'ö' character at the start of the result
+  if raw_list[0] != "ö"
+    echoln raw_list
+    pbMessage("There are nö Pokémon listed with these settings.")
+    return false
+  end
+
+  # Remove the ö character at the start
+  raw_list = raw_list[1..-1] 
+
+  # Convert return data to usable variables
+  gts_list = raw_list.split(":::") # Each listing is seperated by a ':::'
+  gts_list.each do |listing| # Iterate each single listing
+    # Each element in the listing is seperated by a '^^^'
+    listing.split("^^^")
+    # Pokémon
+    listing[0] = decryptPokemon(listing[0])
+    # Wanted Pokémon
+    listing[1] = listing[1].to_sym
+    # Wanted Gender
+    listing[2] = listing[2]
+    # Wanted Level
+    listing[3] = listing[3]
+  end
+
+  # Check if there actually was a list (fail save)
+  if gts_list.length == 0
+    echoln gts_list
+    pbMessage("There are no Pokémon listed with these settings.")
+    return false
+  end
+
+  # Return the list
+  return gts_list
 end
