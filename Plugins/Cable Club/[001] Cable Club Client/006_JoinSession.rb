@@ -155,7 +155,7 @@ def update_leader
     x = (((record.int/10).to_f - $map_factory.getMap($Partner_sprite.partner_map,false).display_x) / Game_Map::X_SUBPIXELS).round + 1.5 * Game_Map::TILE_WIDTH
     y = record.int
     z = (((y/10).to_f - $map_factory.getMap($Partner_sprite.partner_map,false).display_y) / Game_Map::Y_SUBPIXELS).round + Game_Map::TILE_HEIGHT
-    y = (((y/10).to_f - $map_factory.getMap($Partner_sprite.partner_map).display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
+    y = (((y/10).to_f - $map_factory.getMap($Partner_sprite.partner_map,false).display_y) / Game_Map::Y_SUBPIXELS).round - Game_Map::TILE_HEIGHT / 2
     x += record.int
     y += record.int
     $Partner_sprite.x = x
