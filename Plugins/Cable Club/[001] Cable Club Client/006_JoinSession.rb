@@ -136,7 +136,7 @@ def update_leader
     partner_map = record.int
     $Partner_sprite.partner_x = record.int
     $Partner_sprite.partner_y = record.int
-    if getRelativePos($game_map.map_id, $game_player.x, $game_player.y, partner_map, $Partner_sprite.partner_x, $Partner_sprite.partner_y) > 10
+    if $map_factory.getRelativePos($game_map.map_id, $game_player.x, $game_player.y, partner_map, $Partner_sprite.partner_x, $Partner_sprite.partner_y) > 10
       $Partner_sprite.visible = true
       if partner_map != $game_map.map_id
         $Partner_sprite.visible = false
