@@ -347,6 +347,12 @@ class Game_Character
         raise "Event's graphic is an out-of-range tile (event #{@id}, map #{self.map.map_id})"
       end
     end
+    # Set z relative to the player if event allows it
+    unless self.is_a?(Game_Player)
+      if self.name[/zpos\((\d+),(\d+)\)/i]
+        return ($~[2].to_i == 1) ? $game_player.screen_z+$~[1].to_i : $game_player.screen_z-$~[1].to_i
+      end
+    end
     # Add z if height exceeds 32
     return z + ((height > Game_Map::TILE_HEIGHT) ? Game_Map::TILE_HEIGHT - 1 : 0)
   end
