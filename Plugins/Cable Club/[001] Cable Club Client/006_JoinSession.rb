@@ -127,6 +127,8 @@ def update_leader
 
       writer.bool($game_temp.player_transferring)
 
+      writer.int($game_variables[75])
+
       if $Client_id == 0
         (101..125).each do |i|
           writer.bool($game_switches[i])
@@ -146,7 +148,7 @@ def update_leader
     $Partner.partner_map = record.int
     $Partner.partner_x = record.int
     $Partner.partner_y = record.int
-    $Partner.visible = $Partner.partner_map == $game_map.map_id || $game_map.map_id == 43 || $game_map.map_id == 48
+    $Partner.visible = $Partner.partner_map == $game_map.map_id || ($game_map.map_id == 43 && $Partner.partner_map == 48) || ($game_map.map_id == 48 && $Partner.partner_map == 43)
 =begin
     #dist = $map_factory.getRelativePos($game_map.map_id, $game_player.x, $game_player.y, $Partner.partner_map, $Partner.partner_x, $Partner.partner_y)
     #dist_normal = (dist[0] != 0 ? dist[1] / dist[0] : 0).abs
@@ -181,6 +183,9 @@ def update_leader
     $Partner.src_rect.set(src_x*$Partner.bitmap.width/4,((direction/2)-1)*$Partner.bitmap.height/4,$Partner.bitmap.width/4,$Partner.bitmap.height/4)
 
     $Partner.visible = false if record.bool
+
+    shared_var = record.int
+    $game_variables[75] = shared_var if shared_var > $game_variables[75]
 
     if $Client_id == 0
       (76..100).each do |i|
