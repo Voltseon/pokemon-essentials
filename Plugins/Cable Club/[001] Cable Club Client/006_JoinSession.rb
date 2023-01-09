@@ -146,7 +146,7 @@ def update_leader
     $Partner.partner_map = record.int
     $Partner.partner_x = record.int
     $Partner.partner_y = record.int
-    $Partner.visible = $Partner.partner_map == $game_map.map_id
+    $Partner.visible = $Partner.partner_map == $game_map.map_id || $game_map.map_id == 43 || $game_map.map_id == 48
 =begin
     #dist = $map_factory.getRelativePos($game_map.map_id, $game_player.x, $game_player.y, $Partner.partner_map, $Partner.partner_x, $Partner.partner_y)
     #dist_normal = (dist[0] != 0 ? dist[1] / dist[0] : 0).abs

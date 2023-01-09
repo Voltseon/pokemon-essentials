@@ -37,3 +37,16 @@ end
 def check_solution
   $game_switches[108] = true if $game_switches[102] && $game_switches[103] && $game_switches[104] && $game_switches[105]
 end
+
+def puzzle_three
+  $game_map.events.each_value do |event|
+    pbSetSelfSwitch(event.id, "A", false)
+  end
+  (-1..1).each do |x|
+    (-1..1).each do |y|
+      id = $game_map.check_event($Partner.partner_x+x,$Partner.partner_y+y)
+      next unless id
+      pbSetSelfSwitch(id, "A", true)
+    end
+  end
+end
