@@ -146,6 +146,17 @@ MenuHandlers.add(:pause_menu, :options, {
   }
 })
 
+MenuHandlers.add(:pause_menu, :unstuck, {
+  "name"      => _INTL("Unstuck"),
+  "order"     => 75,
+  "effect"    => proc { |menu|
+    if pbConfirmMessage("Are you sure you want to go back to the start?")
+      pbCommonEvent(5)
+    end
+    next false
+  }
+})
+
 MenuHandlers.add(:pause_menu, :debug, {
   "name"      => _INTL("Debug"),
   "order"     => 80,
