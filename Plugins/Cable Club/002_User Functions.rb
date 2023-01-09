@@ -102,7 +102,6 @@ def pbCableClub(joinsession=false)
   rescue
     pbPrintException($!)
     pbMessageDisplay(msgwindow, _INTL("I'm sorry, the server has malfunctioned!"))
-    $scene = nil
     return false
   ensure
     pbDisposeMessageWindow(msgwindow)

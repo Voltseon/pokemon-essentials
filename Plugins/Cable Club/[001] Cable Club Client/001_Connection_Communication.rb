@@ -43,8 +43,9 @@ class Connection
         $Client_id = 0
         pbMessage("Your partner has disconnected.")
         $game_temp.title_screen_calling = true
-        reason = record.str() rescue "peer disconnected"
-        raise Disconnected.new(reason)
+        dispose
+        #reason = record.str() rescue "peer disconnected"
+        #raise Disconnected.new(reason)
       end
       if @discard_records == 0
         begin
