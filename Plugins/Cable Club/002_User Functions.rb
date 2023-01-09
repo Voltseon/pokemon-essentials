@@ -86,7 +86,9 @@ def pbCableClub(joinsession=false)
       return false
     when "peer disconnected"
       pbMessageDisplay(msgwindow, _INTL("I'm sorry, the other trainer has disconnected."))
-      $scene = nil
+      $Connection = nil
+      $Partner = nil
+      $Client_id = 0
       return true
     else
       pbMessageDisplay(msgwindow, _INTL("I'm sorry, the server has malfunctioned!"))

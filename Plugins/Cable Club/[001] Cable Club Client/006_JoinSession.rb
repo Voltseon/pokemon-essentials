@@ -98,6 +98,10 @@ module CableClub
           end
         end
       end
+    rescue Connection::Disconnected => e
+      $Connection = nil
+      $Partner = nil
+      $Client_id = 0
     rescue
       $Connection = nil
       $Partner = nil

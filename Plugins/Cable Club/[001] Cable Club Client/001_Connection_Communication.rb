@@ -38,7 +38,12 @@ class Connection
         record = @recv_records.shift
       end
       if record.disconnect?
-        reason = record.str() rescue "unknown error"
+        $Connection = nil
+        $Partner = nil
+        $Client_id = 0
+        pbMessage("Your partner has disconnected.")
+        $game_temp.title_screen_calling = true
+        reason = record.str() rescue "peer disconnected"
         raise Disconnected.new(reason)
       end
       if @discard_records == 0
