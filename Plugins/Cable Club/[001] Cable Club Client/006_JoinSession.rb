@@ -177,7 +177,7 @@ def update_leader
     $Partner.z = z
     direction = record.int
 
-    $Partner.setBitmap("Graphics/Characters/#{record.str}")
+    $Partner.setBitmap("Graphics/Characters/#{record.str}_#{($Client_id-1).abs+1}")
     pattern = record.int
     src_x = record.bool ? pattern : 0
     $Partner.src_rect.set(src_x*$Partner.bitmap.width/4,((direction/2)-1)*$Partner.bitmap.height/4,$Partner.bitmap.width/4,$Partner.bitmap.height/4)
