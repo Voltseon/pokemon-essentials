@@ -4,8 +4,8 @@
 class PokemonLoadPanel < Sprite
   attr_reader :selected
 
-  TEXTCOLOR             = Color.new(232, 232, 232)
-  TEXTSHADOWCOLOR       = Color.new(136, 136, 136)
+  TEXTCOLOR             = Color.new(76, 34, 0)
+  TEXTSHADOWCOLOR       = Color.new(209, 191, 126)
   MALETEXTCOLOR         = Color.new(56, 160, 248)
   MALETEXTSHADOWCOLOR   = Color.new(56, 104, 168)
   FEMALETEXTCOLOR       = Color.new(240, 72, 88)

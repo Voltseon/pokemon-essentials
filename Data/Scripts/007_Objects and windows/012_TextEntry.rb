@@ -93,8 +93,8 @@ class Window_TextEntry < SpriteWindow_Base
     @baseColor = colors[0]
     @shadowColor = colors[1]
     if usedarkercolor
-      @baseColor = Color.new(16, 24, 32)
-      @shadowColor = Color.new(168, 184, 184)
+      @baseColor = Color.new(76, 34, 0)
+      @shadowColor = Color.new(209, 191, 126)
     end
     @helper = CharacterEntryHelper.new(text)
     @heading = heading
@@ -185,7 +185,7 @@ class Window_TextEntry < SpriteWindow_Base
     end
     x += 4
     width = self.width - self.borderX
-    cursorcolor = Color.new(16, 24, 32)
+    cursorcolor = Color.new(76, 34, 0)
     textscan = self.text.scan(/./m)
     scanlength = textscan.length
     @helper.cursor = scanlength if @helper.cursor > scanlength

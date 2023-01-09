@@ -116,8 +116,8 @@ class PokemonEntryScene
     @sprites["helpwindow"].letterbyletter = false
     @sprites["helpwindow"].viewport = @viewport
     @sprites["helpwindow"].visible = USEKEYBOARD
-    @sprites["helpwindow"].baseColor = Color.new(16, 24, 32)
-    @sprites["helpwindow"].shadowColor = Color.new(168, 184, 184)
+    @sprites["helpwindow"].baseColor = Color.new(76, 34, 0)
+    @sprites["helpwindow"].shadowColor = Color.new(209, 191, 126)
     addBackgroundPlane(@sprites, "background", "Naming/bg_2", @viewport)
     case subject
     when 1   # Player
@@ -151,9 +151,9 @@ class PokemonEntryScene
         pbSetSystemFont(@sprites["gender"].bitmap)
         textpos = []
         if pokemon.male?
-          textpos.push([_INTL("♂"), 0, 6, false, Color.new(0, 128, 248), Color.new(168, 184, 184)])
+          textpos.push([_INTL("♂"), 0, 6, false, Color.new(209, 191, 126), Color.new(76, 34, 0)])
         elsif pokemon.female?
-          textpos.push([_INTL("♀"), 0, 6, false, Color.new(248, 24, 24), Color.new(168, 184, 184)])
+          textpos.push([_INTL("♀"), 0, 6, false, Color.new(209, 191, 126), Color.new(76, 34, 0)])
         end
         pbDrawTextPositions(@sprites["gender"].bitmap, textpos)
       end
@@ -390,15 +390,15 @@ class PokemonEntryScene2
         ROWS.times do |x|
           pos = (y * ROWS) + x
           textPos.push([@@Characters[i][0][pos], 44 + (x * 32), 24 + (y * 38), 2,
-                        Color.new(16, 24, 32), Color.new(160, 160, 160)])
+          Color.new(76, 34, 0), Color.new(209, 191, 126)])
         end
       end
       pbDrawTextPositions(b, textPos)
       @bitmaps[@@Characters.length + i] = b
     end
     underline_bitmap = BitmapWrapper.new(24, 6)
-    underline_bitmap.fill_rect(2, 2, 22, 4, Color.new(168, 184, 184))
-    underline_bitmap.fill_rect(0, 0, 22, 4, Color.new(16, 24, 32))
+    underline_bitmap.fill_rect(2, 2, 22, 4, Color.new(209, 191, 126))
+    underline_bitmap.fill_rect(0, 0, 22, 4, Color.new(76, 34, 0))
     @bitmaps.push(underline_bitmap)
     # Create sprites
     @sprites = {}
@@ -513,12 +513,12 @@ class PokemonEntryScene2
     bgoverlay.clear
     pbSetSystemFont(bgoverlay)
     textPositions = [
-      [@helptext, 160, 18, false, Color.new(16, 24, 32), Color.new(168, 184, 184)]
+      [@helptext, 160, 18, false, Color.new(76, 34, 0), Color.new(209, 191, 126)]
     ]
     chars = @helper.textChars
     x = 172
     chars.each do |ch|
-      textPositions.push([ch, x, 54, 2, Color.new(16, 24, 32), Color.new(168, 184, 184)])
+      textPositions.push([ch, x, 54, 2, Color.new(76, 34, 0), Color.new(209, 191, 126)])
       x += 24
     end
     pbDrawTextPositions(bgoverlay, textPositions)

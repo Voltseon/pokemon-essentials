@@ -150,10 +150,10 @@ end
 class Window_PokemonOption < Window_DrawableCommand
   attr_reader :value_changed
 
-  SEL_NAME_BASE_COLOR    = Color.new(192, 120, 0)
-  SEL_NAME_SHADOW_COLOR  = Color.new(248, 176, 80)
-  SEL_VALUE_BASE_COLOR   = Color.new(248, 48, 24)
-  SEL_VALUE_SHADOW_COLOR = Color.new(248, 136, 128)
+  SEL_NAME_BASE_COLOR    = Color.new(76, 34, 0)
+  SEL_NAME_SHADOW_COLOR  = Color.new(123, 74, 13)
+  SEL_VALUE_BASE_COLOR   = Color.new(76, 34, 0)
+  SEL_VALUE_SHADOW_COLOR = Color.new(123, 74, 13)
 
   def initialize(options, x, y, width, height)
     @options = options
@@ -284,7 +284,7 @@ class PokemonOption_Scene
     @viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
     @viewport.z = 99999
     @sprites = {}
-    addBackgroundOrColoredPlane(@sprites, "bg", "optionsbg", Color.new(192, 200, 208), @viewport)
+    addBackgroundOrColoredPlane(@sprites, "bg", "optionsbg", Color.new(209, 191, 126), @viewport)
     @sprites["title"] = Window_UnformattedTextPokemon.newWithSize(
       _INTL("Options"), 0, -16, Graphics.width, 64, @viewport
     )
@@ -443,40 +443,10 @@ MenuHandlers.add(:options_menu, :movement_style, {
   "type"        => EnumOption,
   "parameters"  => [_INTL("Walking"), _INTL("Running")],
   "description" => _INTL("Choose your movement speed. Hold Back while moving to move at the other speed."),
-  "condition"   => proc { next $player&.has_running_shoes },
   "get_proc"    => proc { next $PokemonSystem.runstyle },
   "set_proc"    => proc { |value, _sceme| $PokemonSystem.runstyle = value }
 })
 
-MenuHandlers.add(:options_menu, :speech_frame, {
-  "name"        => _INTL("Speech Frame"),
-  "order"       => 90,
-  "type"        => NumberOption,
-  "parameters"  => 1..Settings::SPEECH_WINDOWSKINS.length,
-  "description" => _INTL("Choose the appearance of dialogue boxes."),
-  "get_proc"    => proc { next $PokemonSystem.textskin },
-  "set_proc"    => proc { |value, scene|
-    $PokemonSystem.textskin = value
-    MessageConfig.pbSetSpeechFrame("Graphics/Windowskins/" + Settings::SPEECH_WINDOWSKINS[value])
-    # Change the windowskin of the options text box to selected one
-    scene.sprites["textbox"].setSkin(MessageConfig.pbGetSpeechFrame)
-  }
-})
-
-MenuHandlers.add(:options_menu, :menu_frame, {
-  "name"        => _INTL("Menu Frame"),
-  "order"       => 100,
-  "type"        => NumberOption,
-  "parameters"  => 1..Settings::MENU_WINDOWSKINS.length,
-  "description" => _INTL("Choose the appearance of menu boxes."),
-  "get_proc"    => proc { next $PokemonSystem.frame },
-  "set_proc"    => proc { |value, scene|
-    $PokemonSystem.frame = value
-    MessageConfig.pbSetSystemFrame("Graphics/Windowskins/" + Settings::MENU_WINDOWSKINS[value])
-    # Change the windowskin of the options text box to selected one
-    scene.sprites["option"].setSkin(MessageConfig.pbGetSystemFrame)
-  }
-})
 
 MenuHandlers.add(:options_menu, :screen_size, {
   "name"        => _INTL("Screen Size"),

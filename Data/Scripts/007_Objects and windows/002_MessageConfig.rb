@@ -553,13 +553,13 @@ end
 # Fades out the screen before a block is run and fades it back in after the
 # block exits.  z indicates the z-coordinate of the viewport used for this effect
 def pbFadeOutIn(z = 99999, nofadeout = false)
-  col = Color.new(0, 0, 0, 0)
+  col = Color.new(76, 34, 0, 0)
   viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
   viewport.z = z
   numFrames = (Graphics.frame_rate * 0.4).floor
   alphaDiff = (255.0 / numFrames).ceil
   (0..numFrames).each do |j|
-    col.set(0, 0, 0, j * alphaDiff)
+    col.set(76, 34, 0, j * alphaDiff)
     viewport.color = col
     Graphics.update
     Input.update
@@ -573,7 +573,7 @@ def pbFadeOutIn(z = 99999, nofadeout = false)
     pbPopFade
     if !nofadeout
       (0..numFrames).each do |j|
-        col.set(0, 0, 0, (numFrames - j) * alphaDiff)
+        col.set(76, 34, 0, (numFrames - j) * alphaDiff)
         viewport.color = col
         Graphics.update
         Input.update
@@ -584,13 +584,13 @@ def pbFadeOutIn(z = 99999, nofadeout = false)
 end
 
 def pbFadeOutInWithUpdate(z, sprites, nofadeout = false)
-  col = Color.new(0, 0, 0, 0)
+  col = Color.new(76, 34, 0, 0)
   viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
   viewport.z = z
   numFrames = (Graphics.frame_rate * 0.4).floor
   alphaDiff = (255.0 / numFrames).ceil
   (0..numFrames).each do |j|
-    col.set(0, 0, 0, j * alphaDiff)
+    col.set(76, 34, 0, j * alphaDiff)
     viewport.color = col
     pbUpdateSpriteHash(sprites)
     Graphics.update
@@ -603,7 +603,7 @@ def pbFadeOutInWithUpdate(z, sprites, nofadeout = false)
     pbPopFade
     if !nofadeout
       (0..numFrames).each do |j|
-        col.set(0, 0, 0, (numFrames - j) * alphaDiff)
+        col.set(76, 34, 0, (numFrames - j) * alphaDiff)
         viewport.color = col
         pbUpdateSpriteHash(sprites)
         Graphics.update
@@ -636,7 +636,7 @@ def pbFadeOutAndHide(sprites)
   alphaDiff = (255.0 / numFrames).ceil
   pbDeactivateWindows(sprites) {
     (0..numFrames).each do |j|
-      pbSetSpritesToColor(sprites, Color.new(0, 0, 0, j * alphaDiff))
+      pbSetSpritesToColor(sprites, Color.new(76, 34, 0, j * alphaDiff))
       (block_given?) ? yield : pbUpdateSpriteHash(sprites)
     end
   }
@@ -661,7 +661,7 @@ def pbFadeInAndShow(sprites, visiblesprites = nil)
   alphaDiff = (255.0 / numFrames).ceil
   pbDeactivateWindows(sprites) {
     (0..numFrames).each do |j|
-      pbSetSpritesToColor(sprites, Color.new(0, 0, 0, ((numFrames - j) * alphaDiff)))
+      pbSetSpritesToColor(sprites, Color.new(76, 34, 0, ((numFrames - j) * alphaDiff)))
       (block_given?) ? yield : pbUpdateSpriteHash(sprites)
     end
   }
