@@ -35,9 +35,8 @@
 #==============================================================================
 class Scene_Credits
   # Backgrounds to show in credits. Found in Graphics/Titles/ folder
-  BACKGROUNDS_LIST       = ["credits1", "credits2", "credits3", "credits4", "credits5"]
   BGM                    = "Credits"
-  SCROLL_SPEED           = 40   # Pixels per second
+  SCROLL_SPEED           = 120   # Pixels per second
   SECONDS_PER_BACKGROUND = 11
   TEXT_OUTLINE_COLOR     = Color.new(0, 0, 128, 255)
   TEXT_BASE_COLOR        = Color.new(255, 255, 255, 255)
@@ -47,15 +46,9 @@ class Scene_Credits
   # Start Editing
   CREDIT = <<_END_
 
-Your credits go here.
+OMP
 
-Your credits go here.
-
-Your credits go here.
-
-Your credits go here.
-
-Your credits go here.
+Made by Voltseon and ENLS
 
 {INSERTS_PLUGIN_CREDITS_DO_NOT_REMOVE}
 
@@ -105,7 +98,6 @@ _END_
     # Animated Background Setup
     #-------------------------------
     @counter = 0.0   # Counts time elapsed since the background image changed
-    @bg_index = 0
     @bitmap_height = Graphics.height   # For a single credits text bitmap
     @trim = Graphics.height / 10
     # Number of game frames per background frame
@@ -138,8 +130,6 @@ _END_
     viewport.z = 99999
     text_viewport = Viewport.new(0, @trim, Graphics.width, Graphics.height - (@trim * 2))
     text_viewport.z = 99999
-    @background_sprite = IconSprite.new(0, 0)
-    @background_sprite.setBitmap("Graphics/Titles/" + BACKGROUNDS_LIST[0])
     @credit_sprites = []
     @total_height = credit_lines.size * 32
     lines_per_bitmap = @bitmap_height / 32
@@ -196,7 +186,6 @@ _END_
       Graphics.update
       Input.update
       update
-      break if $scene != self
     end
     pbBGMFade(2.0)
     $game_temp.background_bitmap = Graphics.snap_to_bitmap
@@ -204,7 +193,6 @@ _END_
     viewport.color = Color.black   # Ensure screen is black
     Graphics.transition(8, "fadetoblack")
     $game_temp.background_bitmap.dispose
-    @background_sprite.dispose
     @credit_sprites.each { |s| s&.dispose }
     text_viewport.dispose
     viewport.dispose
@@ -238,9 +226,6 @@ _END_
     # Go to next slide
     if @counter >= SECONDS_PER_BACKGROUND
       @counter -= SECONDS_PER_BACKGROUND
-      @bg_index += 1
-      @bg_index = 0 if @bg_index >= BACKGROUNDS_LIST.length
-      @background_sprite.setBitmap("Graphics/Titles/" + BACKGROUNDS_LIST[@bg_index])
     end
     return if cancel?
     return if last?

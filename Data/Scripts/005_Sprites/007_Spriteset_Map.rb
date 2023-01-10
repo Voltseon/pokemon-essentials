@@ -108,7 +108,7 @@ class Spriteset_Map
     @@viewport1.ox = 0
     @@viewport1.oy = 0
     @@viewport1.ox += $game_screen.shake
-    @panorama.ox = tmox / 2
+    @panorama.ox = tmox + @map.fog_ox
     @panorama.oy = tmoy / 2
     @fog.ox         = tmox + @map.fog_ox
     @fog.oy         = tmoy + @map.fog_oy

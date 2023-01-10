@@ -65,7 +65,7 @@ class Sprite_Character < RPG::Sprite
     @character    = character
     @oldbushdepth = 0
     @spriteoffset = false
-    if !character || character == $game_player || (character.name[/reflection/i] rescue false)
+    if false #!character || character == $game_player || (character.name[/reflection/i] rescue false)
       @reflection = Sprite_Reflection.new(self, character, viewport)
     end
     @surfbase = Sprite_SurfBase.new(self, character, viewport) if character == $game_player
