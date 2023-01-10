@@ -35,7 +35,7 @@
 #==============================================================================
 class Scene_Credits
   # Backgrounds to show in credits. Found in Graphics/Titles/ folder
-  BGM                    = "Credits"
+  BGM                    = "Conquest 36 Credits"
   SCROLL_SPEED           = 120   # Pixels per second
   SECONDS_PER_BACKGROUND = 11
   TEXT_OUTLINE_COLOR     = Color.new(0, 0, 128, 255)
@@ -48,7 +48,43 @@ class Scene_Credits
 
 OMP
 
-Made by Voltseon and ENLS
+
+Made by 
+Voltseon and ENLS
+
+We just took the tileset
+from Last Wish 2 and edited
+it, so we'll just credit the
+people we credited in LW2...
+
+Gen 4 Outside Tileset by:
+Magiscarf<s>WesleyFG
+SailorVicious<s>Shawn Frost
+NSora-96<s>PeekyChew
+Kyle-Dove<s>Claisprojects.com
+Minorthreat0987<s>The-Red-Ex
+UltimoSpriter<s>TyranitarDark
+DarkDragonn<s>rafa-cac
+Phyromatical<s>Alucus
+Newtiteuf<s>ChaoticCherryCake
+moca<s>Heavy-Metal-Lover
+Dewitty<s>Zetavares852
+XDinky<s>Erma96
+Hydrargirium<s>Poison-Master
+Thedeadheroalistair<s>Shutwig
+Asdsimone<s>Xxdevil
+Steinnaples<s>Hek-el-grande
+sylver1984<s>NikNak93
+TeaAddiction<s>Cuddlesthefatcat
+Gigatom<s>
+
+Gen 4 Inside Tileset by:
+MewTheMega<s>Kyle-Dove
+Magiscarf<s>Pablus94
+Princess Phoenix<s>Zeo254
+
+Pokémon Conquest OST looped by:
+ENLS's Pre-Looped Music Library
 
 {INSERTS_PLUGIN_CREDITS_DO_NOT_REMOVE}
 
@@ -89,6 +125,14 @@ Affiliated with Game Freak
 This is a non-profit fan-made game.
 No copyright infringements intended.
 Please support the official games!
+
+Thanks for playing OMP!
+
+
+it stands for Online Multiplayer Puzzle
+
+
+or something
 
 _END_
 # Stop Editing
