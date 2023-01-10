@@ -12,6 +12,7 @@ class IntroEventScene < EventScene
 
   def initialize(viewport = nil)
     super(viewport)
+    @bg = addImage(0,0,"Graphics/Titles/splash0")
     @pic = addImage(0, 0, "")
     @pic.setOpacity(0, 0)        # set opacity to 0 after waiting 0 frames
     @pic2 = addImage(0, 0, "")   # flashing "Press Enter" picture

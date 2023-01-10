@@ -36,7 +36,7 @@
 class Scene_Credits
   # Backgrounds to show in credits. Found in Graphics/Titles/ folder
   BGM                    = "Conquest 36 Credits"
-  SCROLL_SPEED           = 120   # Pixels per second
+  SCROLL_SPEED           = 60   # Pixels per second
   SECONDS_PER_BACKGROUND = 11
   TEXT_OUTLINE_COLOR     = Color.new(0, 0, 128, 255)
   TEXT_BASE_COLOR        = Color.new(255, 255, 255, 255)

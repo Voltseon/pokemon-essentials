@@ -42,7 +42,7 @@ def puzzle_three
   $game_map.events.each_value do |event|
     pbSetSelfSwitch(event.id, "A", false)
   end
-  return unless $Partner.map_id != $game_map.map_id
+  return unless $Partner.partner_map != $game_map.map_id
   (-1..1).each do |x|
     (-1..1).each do |y|
       id = $game_map.check_event($Partner.partner_x+x,$Partner.partner_y+y)
